@@ -12,7 +12,7 @@ namespace GamlaSDK.Scripts
     public class ClientManager : MonoBehaviour
     {
         public static int gameId = 0;
-        public static readonly string version = "0.9.9";
+        public static readonly string version = "0.9.10";
         private readonly string _uri = "https://gamla.io/api";
 
         private static ClientManager _instance;
