@@ -1,0 +1,18 @@
+{
+  "name": "io.gamla.sdk",
+  "version": "0.9.9",
+  "displayName": "Gamla SDK",
+  "unity": "2019.4",
+  "description": "This package defines common components used by multiple Game Service packages.\nThese are standardized and aim to unify the overall experience of working with Game Services packages.",
+  "dependencies": {
+    "com.unity.modules.unitywebrequest": "1.0.0"
+  },
+  "upmCi": {
+    "footprint": "fb8ebee079043c97e3617511765813ac0ccd8016"
+  },
+  "repository": {
+    "url": "https://github.com/Armiki/Gamla.io-SDK.git",
+    "type": "git",
+    "revision": "fb8ebee079043c97e3617511765813ac0ccd8016"
+  }
+}
