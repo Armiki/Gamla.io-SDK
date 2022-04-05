@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e7efcc20a204959ad7ffc2f68ff2a02, type: 3}
+  m_Name: GUISettings
+  m_EditorClassIdentifier: 
+  soft_icon: {fileID: 21300000, guid: 853af1e2293c54ae59fd16c52b800757, type: 3}
+  hard_icon: {fileID: 21300000, guid: 67d4120d9c38c42aca838ff8a6e5005f, type: 3}
+  ticket_icon: {fileID: 21300000, guid: a755a8db095ca4ec9acff151737d4ba5, type: 3}
+  avatars:
+  - {fileID: 21300000, guid: 7dedf653f1edd4ad890587e4fddd4552, type: 3}
+  - {fileID: 21300000, guid: 9270294fb354640678bbc19f0edebaab, type: 3}
+  - {fileID: 21300000, guid: f2fff556569ff4ef69c45db2e04b41d9, type: 3}
+  - {fileID: 21300000, guid: b91d02c95446840b0b23fab2355f1bd6, type: 3}
+  - {fileID: 21300000, guid: f7c92136a3faa45929639c12f185bb82, type: 3}
+  - {fileID: 21300000, guid: 82e7a44027b7f46e09ca31dfb0fa2f61, type: 3}
+  - {fileID: 21300000, guid: cf9126d15f38346a0932d5dcb7f3924b, type: 3}
+  - {fileID: 21300000, guid: ba8016f011c854592ad57e7178890a34, type: 3}
+  - {fileID: 21300000, guid: b5b95c45a601e4cec85a236a0f1913cd, type: 3}
+  - {fileID: 21300000, guid: cc0f4b8aa0f554d548ecee3c2b665ba3, type: 3}
+  - {fileID: 21300000, guid: c219c09d46fc44a67bebb1228ec0b050, type: 3}
+  - {fileID: 21300000, guid: efb5b59831b0748f79cc3ed101cd861c, type: 3}
+  - {fileID: 21300000, guid: b84a97e56c778411490df4b1d07d3e61, type: 3}
+  storeIcons:
+  - name: hard_2
+    flag: {fileID: 21300000, guid: f1bb780e2b37a4d65a71f3805e60eabb, type: 3}
+  - name: hard_5
+    flag: {fileID: 21300000, guid: f1bb780e2b37a4d65a71f3805e60eabb, type: 3}
+  - name: hard_10
+    flag: {fileID: 21300000, guid: 67596447425134006ab822788ccf1a66, type: 3}
+  - name: hard_15
+    flag: {fileID: 21300000, guid: 67596447425134006ab822788ccf1a66, type: 3}
+  - name: soft_30
+    flag: {fileID: 21300000, guid: 5a55c13ed62764d7da061342f5d82c7b, type: 3}
+  - name: soft_50
+    flag: {fileID: 21300000, guid: 31012ba379196491d8c6e25de12a73cb, type: 3}
+  flags:
+  - name: ru-RU
+    flag: {fileID: 21300000, guid: 6e66934f1b6004beca0b7033483001d8, type: 3}
+  - name: en-US
+    flag: {fileID: 21300000, guid: f642f60d78f41473daed83fb30b1c632, type: 3}
