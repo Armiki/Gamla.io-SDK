@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using Gamla.GUI.ImageCropper;
 using Gamla.Scripts.Common.UI;
 using Gamla.Scripts.Data;
@@ -9,7 +8,6 @@ using Gamla.Scripts.Logic;
 using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
 namespace Gamla.Scripts.UI.Profile

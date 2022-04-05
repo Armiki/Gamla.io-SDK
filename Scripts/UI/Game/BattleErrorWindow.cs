@@ -1,6 +1,5 @@
 using Gamla.Scripts.Common.UI;
 using Gamla.Scripts.UI.Main;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

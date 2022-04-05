@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Linq;
 using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Gamla.Scripts.UI.Main
 {

@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Gamla.Scripts.Common.Carousel.ScrollElements;
+﻿using Gamla.Scripts.Common.Carousel.ScrollElements;
 using Gamla.Scripts.Data;
 using Gamla.Scripts.UI.Main;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

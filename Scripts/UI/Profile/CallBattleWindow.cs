@@ -1,11 +1,7 @@
 using System;
-using System.Linq;
 using Gamla.Scripts.Common.UI;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
 using Gamla.Scripts.UI.Main;
 
 

@@ -3,7 +3,6 @@ using System.Linq;
 using DG.Tweening;
 using Gamla.GUI;
 using Gamla.Scripts.Data;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common;
 using Gamla.Scripts.Common.Carousel;
 using Gamla.Scripts.Common.Carousel.DataSource;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
 using Gamla.Scripts.Common.UI;
 using Gamla.Scripts.Data;
 using Gamla.Scripts.Logic;
 using Gamla.Scripts.UI.Main;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using Random = UnityEngine.Random;
 
 namespace Gamla.Scripts.UI.Ladder
 {
