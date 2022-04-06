@@ -27,7 +27,7 @@ namespace Gamla.Scripts.UI
         {
             _itemName.text = item.name;
             _itemLogo.Load(item.imageUrl);
-            onClickItem += () => { ServerCommand.BuyItem(item.id + ""); };
+            onClickItem += () => { ServerCommand.BuyItem(item); };
             _itemPriceBadge.Init(CurrencyType.TICKETS, 1);
             _itemPrice.text = item.price + "";
         }

@@ -669,7 +669,7 @@ namespace Gamla.Scripts.Data
     [Serializable]
     public class TicketShop
     {
-        public ServerResultPage<TicketShopItemModel> items;
+        public List<TicketShopItemModel> items;
     }
     
     [Serializable]

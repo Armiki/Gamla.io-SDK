@@ -1160,21 +1160,31 @@ namespace Gamla.Scripts.Logic
         {
             ClientManager.GetData<TicketShop>(LocalState.token, "shop/items", callback =>
             {
-                LocalState.ticketShop = callback.items.data;
+                LocalState.ticketShop = callback.items;
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);
             });
         }
 
-        public static void BuyItem(string id)
+        public static void BuyItem(TicketShopItemModel item)
         {
-            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, $"shop/item/{id}/buy", "",
+            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, $"shop/item/{item.id}/buy", "",
                 resultJson =>
                 {
-                    Debug.Log($"Success buy {id}");
+                    Debug.Log($"Success buy {item.id}");
+                    UIMapController.OpenNotification(new ServerNotification()
+                    {
+                        id = -1,
+                        notification_id = -1,
+                        short_text = $"You buy {item.name}"
+                    });
+                    GetOrUpdateProfile(LocalState.token);
                 },
-                e => {});
+                e =>
+                {
+                    UIMapController.OpenSimpleErrorWindow(e.message);
+                });
         }
     }
 

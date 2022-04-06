@@ -429,7 +429,6 @@ GameObject:
   - component: {fileID: 6724915798014055604}
   - component: {fileID: 2189828051969927635}
   - component: {fileID: 1464586845880518704}
-  - component: {fileID: 225187242089608156}
   m_Layer: 31
   m_Name: Text
   m_TagString: Untagged
@@ -518,20 +517,6 @@ MonoBehaviour:
   animRect: {fileID: 0}
   angelMultiply: 1
   rawImage: {fileID: 0}
---- !u!114 &225187242089608156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6528232515192155626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 2189828051969927635}
-  _localeKey: gamla.main.play.btn
 --- !u!1 &8061117175208886752
 GameObject:
   m_ObjectHideFlags: 0

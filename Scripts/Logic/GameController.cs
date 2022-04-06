@@ -43,12 +43,18 @@ namespace Gamla.Scripts.Logic
         void Open(string pushToken)
         {
             LocalState.pushToken = pushToken;
-            LocalizationManager.Init(PlayerPrefs.GetString("locale", "english"), () => { Load(); });
-            
-            if (EventSystem.current == null)
+            try
             {
-                Debug.LogWarning("EventSystem not find! Create some one");
-                var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+                LocalizationManager.Init(PlayerPrefs.GetString("locale", "english"), () => { Load(); });
+                if (EventSystem.current == null)
+                {
+                    Debug.LogWarning("EventSystem not find! Create some one");
+                    var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
             }
             Application.targetFrameRate = 60;
         }
