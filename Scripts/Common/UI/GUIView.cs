@@ -31,8 +31,6 @@ namespace Gamla.Scripts.Common.UI
                 _close.onClick.AddListener(Close);
             }
 
-            InitSafeArea();
-            
             GamlaService.OnMatchStarted.Subscribe(OnMatchStart);
         }
 
@@ -59,7 +57,6 @@ namespace Gamla.Scripts.Common.UI
         {
             onClosed?.Invoke(this);
             onClosed = null;
-            GamlaResourceManager.safeAreaManager.IndentChange -= ChangeScreen;
             
             Destroy(gameObject);
         }
@@ -68,7 +65,6 @@ namespace Gamla.Scripts.Common.UI
         {
             onClosed?.Invoke(this);
             onClosed = null;
-            GamlaResourceManager.safeAreaManager.IndentChange -= ChangeScreen;
             if (_windowMode == WindowMode.None)
             {
                 Destroy(gameObject);
@@ -86,22 +82,6 @@ namespace Gamla.Scripts.Common.UI
             }
         }
         
-        void InitSafeArea() {
-            if (!_fitSafeArea) {
-                return;
-            }
-            GamlaResourceManager.safeAreaManager.IndentChange += ChangeScreen;
-            ChangeScreen( GamlaResourceManager.safeAreaManager.Indent);
-        }
-        
-        void ChangeScreen(int indentSize) {
-            GamlaResourceManager.topBar.RefreshSafeZone(indentSize);
-            GamlaResourceManager.tabBar.RefreshSafeZone(indentSize);
-            if (this == null || gameObject == null) {
-                return;
-            }
-            RefreshSafeZone(indentSize);
-        }
         protected virtual void RefreshSafeZone(int indentSize)
         {
             var root = GetComponent<RectTransform>();

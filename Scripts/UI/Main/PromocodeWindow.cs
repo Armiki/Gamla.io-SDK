@@ -38,12 +38,8 @@ namespace Gamla.Scripts.UI.Main
 
         void RefreshKeyboardSafeZone(int indentSize)
         {
-            if (indentSize <= 0) {
-                RefreshSafeZone(GamlaResourceManager.safeAreaManager.Indent);
-            } else {
-                var root = GetComponent<RectTransform>();
-                root.anchoredPosition = new Vector2(0, indentSize);
-            }
+            var root = GetComponent<RectTransform>();
+            root.anchoredPosition = new Vector2(0, indentSize);
         }
     }
 }

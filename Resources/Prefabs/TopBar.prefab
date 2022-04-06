@@ -485,6 +485,7 @@ MonoBehaviour:
   _soft: {fileID: 8083674939457722319}
   _hard: {fileID: 8622821965329974490}
   _tickets: {fileID: 7951879409127720207}
+  _addCurrencyBtn: {fileID: 5994171147343812744}
 --- !u!114 &7983373262350626131
 MonoBehaviour:
   m_ObjectHideFlags: 0

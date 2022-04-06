@@ -120,7 +120,7 @@ namespace Gamla.Scripts.Logic
             });
 
             GamlaResourceManager.topBar.onProfileClick +=  GamlaResourceManager.tabBar.SelectProfile;
-            GamlaResourceManager.topBar.onAddCurrencyClick += GamlaResourceManager.tabBar.SelectStore;
+            GamlaResourceManager.topBar.onAddCurrencyClick += OpenTicketShop;
             
             GamlaResourceManager.tabBar.onGamesClick += OpenGameList;
             GamlaResourceManager.tabBar.onPlayClick += OpenGameMain;
@@ -221,6 +221,16 @@ namespace Gamla.Scripts.Logic
             CheckStack(window);
             window.ChangePublishName(LocalState.currentUser.name);
             window.onChangeProfileItem += ServerCommand.ResetPublishName;
+            window.Show();
+        }
+        
+        static void OpenTicketShop()
+        {
+            var window =
+                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TicketShopWindow"),
+                    GamlaResourceManager.windowsContainer).GetComponent<TicketShopWindow>();
+            CheckStack(window);
+            
             window.Show();
         }
         

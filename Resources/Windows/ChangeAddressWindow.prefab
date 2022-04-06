@@ -191,6 +191,7 @@ MonoBehaviour:
   _state2: {fileID: 2592773493759500909}
   _cancelBtn: {fileID: 8664841293446869223}
   _sendBtn: {fileID: 6323842697976626619}
+  _content: {fileID: 2086067073119082511}
 --- !u!1 &1825387392844975632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,11 +1775,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
---- !u!224 &1670117333852964061 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8549514068457969984, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
-  m_PrefabInstance: {fileID: 7028020474439474589}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6323842697976626619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3912016256856432678, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
@@ -1790,6 +1786,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &1670117333852964061 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8549514068457969984, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+  m_PrefabInstance: {fileID: 7028020474439474589}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7706688330255666946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1935,9 +1936,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4435fffc7237414f936070365712e12, type: 3}
---- !u!224 &2543462547953960142 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5314134870988409804, guid: e4435fffc7237414f936070365712e12, type: 3}
+--- !u!1 &2110577647191382252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8627189362942105582, guid: e4435fffc7237414f936070365712e12, type: 3}
   m_PrefabInstance: {fileID: 7706688330255666946}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &8328302079216603399 stripped
@@ -1951,9 +1952,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7465964fde043fe8412b9cdd6adf68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2110577647191382252 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8627189362942105582, guid: e4435fffc7237414f936070365712e12, type: 3}
+--- !u!224 &2543462547953960142 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5314134870988409804, guid: e4435fffc7237414f936070365712e12, type: 3}
   m_PrefabInstance: {fileID: 7706688330255666946}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8265647573776991388

@@ -1,6 +1,5 @@
 using System;
 using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Logic;
 using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,26 +19,32 @@ namespace Gamla.Scripts.UI.Profile
         
         [SerializeField] private Button _cancelBtn;
         [SerializeField] private Button _sendBtn;
+
+        [SerializeField] private RectTransform _content;
+
+        private float _defaultContentHeight;
         
         public void Start()
         {
+            _defaultContentHeight = _content.sizeDelta.y;
+            
             _street1.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _street1.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _street1.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _street2.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _street2.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _street2.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _country.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _country.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _country.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _city.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _city.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _city.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _state1.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _state1.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _state1.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _state2.keyboardChecker.onKeyboardChange.RemoveAllListeners();
-            _state2.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
+            _state2.keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
 
             _cancelBtn.onClick.RemoveAllListeners();
             _cancelBtn.onClick.AddListener(Close);
@@ -70,6 +75,12 @@ namespace Gamla.Scripts.UI.Profile
             _city.SimpleSet(splitData[3]);
             _state1.SimpleSet(splitData[4]);
             _state2.SimpleSet(splitData[5]);
+        }
+
+        void RefreshKeyboardSafeZone(int indentSize)
+        {
+            _content.sizeDelta = new Vector2(_content.sizeDelta.x, _defaultContentHeight + indentSize);
+            base.RefreshSafeZone(indentSize);
         }
     }
 }

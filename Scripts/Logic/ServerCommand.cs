@@ -1166,6 +1166,16 @@ namespace Gamla.Scripts.Logic
                 UIMapController.OpenSimpleErrorWindow(e.message);
             });
         }
+
+        public static void BuyItem(string id)
+        {
+            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, $"shop/item/{id}/buy", "",
+                resultJson =>
+                {
+                    Debug.Log($"Success buy {id}");
+                },
+                e => {});
+        }
     }
 
 }

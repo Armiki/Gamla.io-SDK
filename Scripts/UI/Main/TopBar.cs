@@ -1,6 +1,7 @@
 ﻿using System;
 using Gamla.Scripts.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Gamla.Scripts.UI.Main
 {
@@ -17,14 +18,14 @@ namespace Gamla.Scripts.UI.Main
         [SerializeField] private TopBarCurrency _tickets;
         
         //[SerializeField] private Button _profileBtn;
-        //[SerializeField] private Button _addCurrencyBtn;
+        [SerializeField] private Button _addCurrencyBtn;
 
         public void Start()
         {
             //_profileBtn.onClick.RemoveAllListeners();
             //_profileBtn.onClick.AddListener(() => onProfileClick?.Invoke());
-            //_addCurrencyBtn.onClick.RemoveAllListeners();
-            //_addCurrencyBtn.onClick.AddListener(() => onAddCurrencyClick?.Invoke());
+            _addCurrencyBtn.onClick.RemoveAllListeners();
+            _addCurrencyBtn.onClick.AddListener(() => onAddCurrencyClick?.Invoke());
         }
 
         public void Init(UserInfo current_user)

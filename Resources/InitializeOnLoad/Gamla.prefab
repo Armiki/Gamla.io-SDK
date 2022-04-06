@@ -1,5 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4090981517305919934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062663429061193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.store.btn
+--- !u!114 &5021759691340408340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062664173848938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.profile.btn
+--- !u!114 &4032789969432915553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062664191630723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.top.btn
 --- !u!1 &1042114864860323578
 GameObject:
   m_ObjectHideFlags: 0
@@ -23,19 +65,32 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1042114864860323578}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2904479077766937526}
-  m_RootOrder: 4
+  m_Father: {fileID: 1392351765448387585}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &8958310308998687393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904479077211493335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.play.btn
 --- !u!1 &2904479077702352291
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +119,6 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2904479077766937526}
   m_RootOrder: 0
@@ -142,7 +196,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 2
@@ -225,13 +278,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479077702352300}
-  - {fileID: 2904479078748559144}
-  - {fileID: 2904479077698246035}
+  - {fileID: 1392351765448387585}
   - {fileID: 2904479077843725181}
-  - {fileID: 456523432499677848}
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -340,7 +390,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 1
@@ -381,13 +430,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2904479078748559151}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2904479077766937526}
-  m_RootOrder: 1
+  m_Father: {fileID: 1392351765448387585}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -429,7 +477,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2904479078945684410}
   m_RootOrder: 0
@@ -473,7 +520,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479078804879470}
   m_Father: {fileID: 5536422123587124023}
@@ -578,7 +624,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1000, y: -1000, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479077766937526}
   - {fileID: 2904479078716918849}
@@ -599,6 +644,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b75033f9cc848d4ab4fee1f390e60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &7490265636213027885
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1392351765448387585}
+  - component: {fileID: 5500059367516392673}
+  - component: {fileID: 8100242074375430993}
+  m_Layer: 31
+  m_Name: SafeContent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1392351765448387585
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490265636213027885}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2904479078748559144}
+  - {fileID: 2904479077698246035}
+  - {fileID: 456523432499677848}
+  m_Father: {fileID: 2904479077766937526}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5500059367516392673
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490265636213027885}
+  m_CullTransparentMesh: 1
+--- !u!114 &8100242074375430993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7490265636213027885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c97afc556caea1c44969477eb7ddec74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConformX: 1
+  ConformY: 1
+  Logging: 1
 --- !u!1001 &1101771370363980465
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -836,7 +944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
       propertyPath: m_AnchorMax.x
@@ -896,7 +1004,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 79
+      value: 95.5
       objectReference: {fileID: 0}
     - target: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1024,82 +1132,26 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7c5a0b9f0c3644b65bd0e7e4bf40af44, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
---- !u!1 &71062663429061193 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1132145291672613112, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
-  m_PrefabInstance: {fileID: 1101771370363980465}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4090981517305919934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062663429061193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.store.btn
---- !u!1 &71062664173848938 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1132145289736324059, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
-  m_PrefabInstance: {fileID: 1101771370363980465}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &5021759691340408340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062664173848938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.profile.btn
 --- !u!1 &71062664191630723 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1132145289752401714, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
   m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4032789969432915553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &71062663429061193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1132145291672613112, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
+  m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062664191630723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.top.btn
 --- !u!1 &2904479077211493335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2811529762823166310, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
   m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8958310308998687393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &71062664173848938 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1132145289736324059, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
+  m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2904479077211493335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.play.btn
 --- !u!224 &2904479077843725181 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
@@ -1121,7 +1173,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 2904479077766937526}
+    m_TransformParent: {fileID: 1392351765448387585}
     m_Modifications:
     - target: {fileID: 2410780375119277883, guid: b2f5db6ea591844cc8c42c7c1486b0d7, type: 3}
       propertyPath: m_Layer
@@ -1173,7 +1225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4440674299700154420, guid: b2f5db6ea591844cc8c42c7c1486b0d7, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4440674299700154420, guid: b2f5db6ea591844cc8c42c7c1486b0d7, type: 3}
       propertyPath: m_AnchorMax.x

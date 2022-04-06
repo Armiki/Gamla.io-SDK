@@ -10,7 +10,6 @@ namespace Gamla.Scripts.Logic
 {
     public class GamlaResourceManager : MonoBehaviour
     {
-        [SerializeField] private UISafeAreaManager _safeAreaManager;
         [SerializeField] private TopBar _topBar;
         [SerializeField] private TabBar _tabBar;
         [SerializeField] private Image _backWindow;
@@ -29,7 +28,6 @@ namespace Gamla.Scripts.Logic
 
         public static TopBar topBar => _gamlaResources._topBar;
         public static TabBar tabBar => _gamlaResources._tabBar;
-        public static UISafeAreaManager safeAreaManager => _gamlaResources._safeAreaManager;
         public static Texture RematchIcon => _gamlaResources._rematchIcon;
 
         public static bool BackView

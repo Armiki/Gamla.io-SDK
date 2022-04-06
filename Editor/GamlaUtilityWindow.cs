@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using Gamla.Core;
 using GamlaSDK.Scripts;
 using UnityEditor;
@@ -136,3 +137,4 @@ namespace Gamla.Editor
         }
     }
 }
+#endif
