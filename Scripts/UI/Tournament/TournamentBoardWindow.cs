@@ -184,9 +184,9 @@ namespace GamlaSDK.Scripts.UI.Game
             if (_tournament != null)
             {
                 var match = _tournament.matches.Find(m =>
-                    m.status == "waiting" && m.players != null &&
-                    m.players.Any(p => p.user_id == LocalState.currentUser.uid)
-                    );
+                    //m.status == "waiting" && 
+                    m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score))
+                );
                 if (match != null)
                 {
                     LocalState.currentTournament = _tournament;
