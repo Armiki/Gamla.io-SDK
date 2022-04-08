@@ -139,12 +139,16 @@ namespace GamlaSDK.Scripts.UI.Game
             int playersInRound = tournament.players_count / 2;
             for (int i = 0; i < _roundColumns.Count; i++)
             {
-                for (int j = 0; j < playersInRound - i - 1; j++)
+                for(int j = 0; j < playersInRound; j++)
                 {
-                    var pair = Instantiate(_userPairPref, _roundColumns[i]);
-                    pair.name = "pair_" + i + "_" + _roundColumns[i].childCount;
-                    pair.Clear();
+                    if (_roundColumns[i].childCount < playersInRound)
+                    {
+                        var pair = Instantiate(_userPairPref, _roundColumns[i]);
+                        pair.name = "pair_" + i + "_" + _roundColumns[i].childCount;
+                        pair.Clear();
+                    }
                 }
+                playersInRound /= 2;
             }
 
             for (int i = 0; i < _roundColumns.Count - 1; i++)

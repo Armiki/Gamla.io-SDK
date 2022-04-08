@@ -880,6 +880,7 @@ namespace Gamla.Scripts.Logic
             CheckStack(window);
             window.Init(winBattles);
             window.Show();
+            CloseSpinner();
         }
 
         public static void Clear()
