@@ -58,7 +58,7 @@ namespace Gamla.Scripts.UI.Main
                 : GUIConstants.guiSettings.hard_icon;
             
             _statusGo.gameObject.SetActive(tournamentInfo.isJoined);
-            bool isCanPlay = tournamentInfo.matches.Any(m => m.players.Any(p => p.id == LocalState.currentUser.uid && p.score == 0));
+            bool isCanPlay = tournamentInfo.matches.Any(m => m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
             _statusGo.color = isCanPlay
                 ? GUIConstants.colorTemplate.colors.First(x => x.use).textColorHardSpecial
                 : GUIConstants.colorTemplate.colors.First(x => x.use).textColorSoftSpecial;

@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using Gamla.Scripts.Common;
 using Gamla.Scripts.Common.UI;
 using Gamla.Scripts.Data;
 using Gamla.Scripts.Logic;
 using Gamla.Scripts.UI.Main;
-using GamlaSDK;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +23,7 @@ namespace Gamla.Scripts.UI.Friends
         private List<MessageWidget> _messages = new List<MessageWidget>();
         private float _lastUpdateTime = 0;
         private long _chatId;
-
+        
         public void Start()
         {
             _sendMessage.onClick.RemoveAllListeners();
@@ -41,15 +36,15 @@ namespace Gamla.Scripts.UI.Friends
         public void InitMessages(long chatId, List<ServerChatMessage> messages)
         {
             _chatId = chatId;
-            _messageContent.ClearChilds();
-            _messages.Clear();
-
-            _messageContent.sizeDelta = new Vector2(_messageContent.sizeDelta.x, (messages.Count * 170));
             foreach (var data in messages)
             {
+                if (_messages.Any(m => m.Id == data.id)) {
+                    continue;
+                }
+                
                 var widget = data.user_id == LocalState.currentUser.uid ? _messageWidgetMy : _messageWidgetUser;
                 var item = Instantiate(widget, _messageContent);
-                item.Init(data.text, data.created_at);
+                item.Init(data.id, data.text, data.created_at);
                 _messages.Add(item);
             }
 
@@ -73,9 +68,10 @@ namespace Gamla.Scripts.UI.Friends
         {
             ServerCommand.SendFriendChat(_chatId, _inputField.text);
             _inputField.text = "";
-//            var item = Instantiate(_messageWidgetMy, _messageContent);
-//            item.Init(Utils.GenerateRandomStr(), DateTime.Now.ToString());
-//            _messages.Add(item);
+            
+            //var item = Instantiate(_messageWidgetMy, _messageContent);
+            //item.Init( UnityEngine.Random.Range(0, int.MaxValue),Utils.GenerateRandomStr(), DateTime.Now.ToString());
+            //_messages.Add(item);
         }
 
         void RefreshKeyboardSafeZone(int indentSize)

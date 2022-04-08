@@ -83,7 +83,6 @@ namespace Gamla.Scripts.Logic
                     PlayerPrefs.SetString("email", email);
                     PlayerPrefs.SetString("password", password);
                     LoginProfile(token.token);
-                    spinner.CloseInvoke();
                 }, 
                 e =>
             {
@@ -98,6 +97,7 @@ namespace Gamla.Scripts.Logic
 
         public static void SignUp(string name, string email, string password)
         {
+            var spinner = UIMapController.OpenValidateWindow();
             string data = JsonUtility.ToJson(new ServerSignUpModel()
             {
                 game_id = ClientManager.gameId,
@@ -123,6 +123,7 @@ namespace Gamla.Scripts.Logic
                 PlayerPrefs.DeleteKey("email");
                 PlayerPrefs.DeleteKey("password");
                 UIMapController.OpenSimpleErrorWindow(e.message);
+                spinner.ClosePublic();
             });
         }
         
@@ -144,6 +145,7 @@ namespace Gamla.Scripts.Logic
                 GetOrUpdateFriends(token);
             }, e =>
             {
+                UIMapController.CloseSpinner();
                 UIMapController.OpenSignUp();
                 UIMapController.OpenSimpleErrorWindow(e.message);
             });
@@ -1011,7 +1013,10 @@ namespace Gamla.Scripts.Logic
             ClientManager.InvokeEvent<ServerJoinTournament>(LocalState.token, "tournaments/join", data, result =>
                 {
                     PlayTournament(result.match.tournament);
-                }, error => {});
+                }, error =>
+            {
+                UIMapController.OpenSimpleErrorWindow(error.message, UIMapController.OpenGameMain);
+            });
         }
         public static void JoinPrivateTournament(string code)
         {

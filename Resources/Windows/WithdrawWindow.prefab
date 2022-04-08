@@ -4440,6 +4440,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1968548401515096310}
     m_Modifications:
+    - target: {fileID: 669022182969888217, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
+      propertyPath: _localeKey
+      value: gamla.window.accountbalance.withdraw.btn
+      objectReference: {fileID: 0}
     - target: {fileID: 1459901970401160543, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
       propertyPath: m_Pivot.y
       value: 1

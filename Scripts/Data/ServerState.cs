@@ -106,7 +106,7 @@ namespace Gamla.Scripts.Data
         public string name;
         public string surname;
         public long trophie;
-        public long score;
+        public string score;
         public string flag;
         
         public ServerPublicUser(){}
@@ -260,7 +260,7 @@ namespace Gamla.Scripts.Data
         public long id;
         public long user_id = -1;
         public long match_id;
-        public long score;
+        public string score;
         public string nickname = "wait user";
         public string image;
     }

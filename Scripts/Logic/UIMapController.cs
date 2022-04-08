@@ -103,12 +103,19 @@ namespace Gamla.Scripts.Logic
         public static void CloseExtraWindows()
         {
             var find = GamlaResourceManager.windowsContainer.Find("FinishWindow(Clone)");
-            if (find != null)
-            {
+            if (find != null) {
                 find.GetComponent<FinishWindow>().ClosePublic();
             }
         }
 
+        public static void CloseSpinner()
+        {
+            var spinner = GamlaResourceManager.windowsContainer.Find("ValidateWindow(Clone)");
+            if (spinner != null) {
+                spinner.GetComponent<ValidateWindow>().ClosePublic();
+            }
+        }
+        
         public static void SubscribeBar()
         {
             EventManager.OnProfileUpdate.Subscribe(() => GamlaResourceManager.topBar.Init(LocalState.currentUser));
@@ -327,7 +334,7 @@ namespace Gamla.Scripts.Logic
             window.onOpenTournamentList += OpenTournamentList;
             CheckStack(window);
             window.Init(LocalState.currentGame);
-
+            CloseSpinner();
             //OpenNotification("Hey! Hey! Play the game!");
         }
 

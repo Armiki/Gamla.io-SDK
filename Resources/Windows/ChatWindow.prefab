@@ -600,11 +600,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40cc5fe12a635433ba9d036049752e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  input: {fileID: 1513963588311283036}
   onKeyboardChange:
     m_PersistentCalls:
       m_Calls: []
-  resetToSafeArea: 1
+  input: {fileID: 1513963588311283036}
 --- !u!1 &4836678555271477966
 GameObject:
   m_ObjectHideFlags: 0
@@ -1012,6 +1011,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7011230699002428359}
   - component: {fileID: 7057464645971277752}
+  - component: {fileID: 2935103259044887370}
   m_Layer: 31
   m_Name: Content
   m_TagString: Untagged
@@ -1038,7 +1038,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 2333.1985}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &7057464645971277752
 MonoBehaviour:
@@ -1066,6 +1066,20 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2935103259044887370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113408782595248627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalFit: 0
+  m_VerticalFit: 2
 --- !u!1 &9212155424578807429
 GameObject:
   m_ObjectHideFlags: 0

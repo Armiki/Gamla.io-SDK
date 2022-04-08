@@ -2258,6 +2258,7 @@ GameObject:
   - component: {fileID: 4486226661396155434}
   - component: {fileID: 5353124095358676171}
   - component: {fileID: 154546442126083481}
+  - component: {fileID: 3875693928601673562}
   m_Layer: 31
   m_Name: UserName
   m_TagString: Untagged
@@ -2345,6 +2346,20 @@ MonoBehaviour:
   animRect: {fileID: 0}
   angelMultiply: 1
   rawImage: {fileID: 0}
+--- !u!114 &3875693928601673562
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6666753311803597170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 5353124095358676171}
+  _localeKey: 
 --- !u!1 &7271020493378643488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,6 +3005,16 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7c5a0b9f0c3644b65bd0e7e4bf40af44, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
+--- !u!224 &4384088397716405286 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1459901970401160543, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
+  m_PrefabInstance: {fileID: 2924512020200640889}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5450427806682751591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7148966357103014686, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
+  m_PrefabInstance: {fileID: 2924512020200640889}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8060072087742322327 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5138278335432312814, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
@@ -3006,16 +3031,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &5450427806682751591 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7148966357103014686, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
-  m_PrefabInstance: {fileID: 2924512020200640889}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &4384088397716405286 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1459901970401160543, guid: c9b31cd77f101445a93ba4ea6fcddb50, type: 3}
-  m_PrefabInstance: {fileID: 2924512020200640889}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8212399558812087529
 PrefabInstance:
   m_ObjectHideFlags: 0

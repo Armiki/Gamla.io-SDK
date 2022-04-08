@@ -27,12 +27,12 @@ namespace GamlaSDK.Scripts.UI.Game
         private Transform _to;
         private RectTransform _rootCanvas;
 
-        public void Init(ServerPlayerMatch user1, long user1Points, ServerPlayerMatch user2, long user2Points, long winId)
+        public void Init(ServerPlayerMatch user1, string user1Points, ServerPlayerMatch user2, string user2Points, long winId)
         {
             _user1.Init(user1);
             _user2.Init(user2);
-            _user1Points.text = user1Points.ToString();
-            _user2Points.text = user2Points.ToString();
+            _user1Points.text = string.IsNullOrEmpty(user1Points) ? "Not played" : user1Points.ToString();
+            _user2Points.text = string.IsNullOrEmpty(user2Points) ? "Not played" : user2Points.ToString();
             long currentUserId = LocalState.currentUser.uid;
             _recolorUser1Name.recolorFilter = user1.id == currentUserId ? "textColorPrize" : "textColorPrimary";
             _recolorUser2Name.recolorFilter = user2.id == currentUserId ? "textColorPrize" : "textColorPrimary";

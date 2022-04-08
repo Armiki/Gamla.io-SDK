@@ -87,7 +87,7 @@ namespace Gamla.Scripts.UI.Game
                                historyBattleInfo.date.ToShortTimeString();
 
             _restart.gameObject.SetActive(historyBattleInfo.status == BattleStatus.Lost);
-            _play.gameObject.SetActive(historyBattleInfo.status == BattleStatus.Waiting && historyBattleInfo.me.score == 0);
+            _play.gameObject.SetActive(historyBattleInfo.status == BattleStatus.Waiting && string.IsNullOrEmpty(historyBattleInfo.me.score));
 
             switch (historyBattleInfo.status)
             {
@@ -101,7 +101,7 @@ namespace Gamla.Scripts.UI.Game
                     break;
                 case BattleStatus.Waiting:
                     _resultImage.sprite = _waitSmile;
-                    _resultStatus.text = LocalizationManager.Text( historyBattleInfo.me.score == 0 ? "gamla.battle.waityou.status" : "gamla.battle.waitopp.status");
+                    _resultStatus.text = LocalizationManager.Text( string.IsNullOrEmpty(historyBattleInfo.me.score) ? "gamla.battle.waityou.status" : "gamla.battle.waitopp.status");
                     break;
             }
             

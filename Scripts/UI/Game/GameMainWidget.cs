@@ -138,7 +138,7 @@ namespace Gamla.Scripts.UI.Game
                     _returnGO.SetActive(false);
                     _winGO.SetActive(false);
                     _rematch.gameObject.SetActive(false);
-                    if (data.me.score == 0)
+                    if (string.IsNullOrEmpty(data.me.score))
                     {
                         _winLbl.SetActive(true);
                         _winLblColor.SetNewRecolor("textColorLink");

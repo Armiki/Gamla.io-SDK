@@ -152,7 +152,7 @@ namespace Gamla.Scripts.UI.Game
                     _battleWidgets.Clear();
                     var size = 0f;
 
-                    var sortedData = LocalState.currentGame.history.OrderByDescending(x => x.me.score == 0 && x.status == BattleStatus.Waiting).ThenByDescending(x => x.date).ToList();
+                    var sortedData = LocalState.currentGame.history.OrderByDescending(x => string.IsNullOrEmpty(x.me.score) && x.status == BattleStatus.Waiting).ThenByDescending(x => x.date).ToList();
 
                     foreach (var data in sortedData)
                     {

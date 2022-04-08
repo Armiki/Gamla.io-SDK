@@ -95,13 +95,16 @@ namespace GamlaSDK.Scripts.UI.Game
             var currentAwards = new List<ServerTournamentAward>();
             foreach (var award in tournament.awards)
             {
-                if (currentAwards.Any(a => a.currency == award.currency && a.amount == award.amount)) continue;
-                var head = Instantiate(_headPref, _headRect);
-                head.SetData(award);
-                var column = Instantiate(_roundColumnPref, _contentRect);
-                column.sizeDelta = new Vector2(994, tournament.players_count * 240);
-                _roundColumns.Add(column);
-                currentAwards.Add(award);
+                if (award.place != 1)
+                {
+                    if (currentAwards.Any(a => a.currency == award.currency && a.amount == award.amount)) continue;
+                    var head = Instantiate(_headPref, _headRect);
+                    head.SetData(award);
+                    var column = Instantiate(_roundColumnPref, _contentRect);
+                    column.sizeDelta = new Vector2(994, tournament.players_count * 240);
+                    _roundColumns.Add(column);
+                    currentAwards.Add(award);
+                }
             }
             
             var headWinner = Instantiate(_headPref, _headRect);
@@ -133,22 +136,14 @@ namespace GamlaSDK.Scripts.UI.Game
                     pair.Clear();
             }
 
-            int playersInRound = tournament.players_count;
+            int playersInRound = tournament.players_count / 2;
             for (int i = 0; i < _roundColumns.Count; i++)
             {
-                if(i > 0)
-                    playersInRound /= 2;
-                
-                Debug.Log("playersInRound " + playersInRound);
-
-                if (_roundColumns[i].childCount < playersInRound)
+                for (int j = 0; j < playersInRound - i - 1; j++)
                 {
-                    for (int j = 0; j < playersInRound - _roundColumns[i].childCount - 1; j++)
-                    {
-                        var pair = Instantiate(_userPairPref, _roundColumns[i]);
-                        pair.name = "pair_" + i + "_" + _roundColumns[i].childCount;
-                        pair.Clear();
-                    }
+                    var pair = Instantiate(_userPairPref, _roundColumns[i]);
+                    pair.name = "pair_" + i + "_" + _roundColumns[i].childCount;
+                    pair.Clear();
                 }
             }
 
@@ -177,10 +172,10 @@ namespace GamlaSDK.Scripts.UI.Game
                 }
             }
             
-            _contentRect.sizeDelta = new Vector2(1044 * (currentAwards.Count + 1), (tournament.players_count + 2) * 240);
+            _contentRect.sizeDelta = new Vector2(1044 * (currentAwards.Count + 1), (tournament.players_count+2) * 240);
 
             bool isCanPlay =
-                tournament.matches.Any(m => m.players.Any(p => p.id == LocalState.currentUser.uid && p.score == 0));
+                tournament.matches.Any(m => m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
             _play.gameObject.SetActive(isCanPlay);
         }
 
@@ -189,8 +184,8 @@ namespace GamlaSDK.Scripts.UI.Game
             if (_tournament != null)
             {
                 var match = _tournament.matches.Find(m =>
-                    m.status == "waiting" //&& m.players != null &&
-                    //m.players.Any(p => p.id == LocalState.currentUser.uid)
+                    m.status == "waiting" && m.players != null &&
+                    m.players.Any(p => p.user_id == LocalState.currentUser.uid)
                     );
                 if (match != null)
                 {
