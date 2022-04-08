@@ -76,6 +76,7 @@ namespace Gamla.Scripts.Logic
             {
                 HomeThreadHelper.homeThread.ExecuteCoroutine(Step1(window, 0.1f));
             }
+
         }
 
         IEnumerator Step1(LoadingWindow loading, float amount)
@@ -126,6 +127,19 @@ namespace Gamla.Scripts.Logic
                             var notif = _notifications[i];
                             List<Currency> reward = Currency.parse(notif.long_text);
                             UIMapController.OpenRewardWindow(reward);
+                        }
+                        else if (_notifications[i].notification_id == 7)
+                        {
+                            var notif = _notifications[i];
+                            ServerTournamentEndModel model = JsonUtility.FromJson<ServerTournamentEndModel>(notif.long_text);
+                            UIMapController.OpenTournamentEndWindow(model);
+                        }
+                        else if (_notifications[i].notification_id == 5)
+                        {
+                            var notif = _notifications[i];
+                            ServerLeagueEndModel model = JsonUtility.FromJson<ServerLeagueEndModel>(notif.long_text);
+                            UIMapController.OpenLeagueEndWindow(model, false);
+                            UIMapController.OpenLeagueEndWindow(model, true);
                         }
                         else
                         {

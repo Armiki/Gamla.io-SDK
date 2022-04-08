@@ -548,6 +548,41 @@ namespace Gamla.Scripts.Data
     }
 
     [Serializable]
+    public class ServerTournamentEndModel
+    {
+        public long id;
+        public string type;
+        public string name;
+        public string start_at;
+        public string end_at;
+        public long game_id;
+        public List<ServerLeagueTournamentEndPlace> places;
+    }
+    
+    [Serializable]
+    public class ServerLeagueEndModel
+    {
+        public long id;
+        public string type;
+        public string name;
+        public string start_at;
+        public string end_at;
+        public long game_id;
+        public List<ServerLeagueTournamentEndPlace> places_gold;
+        public List<ServerLeagueTournamentEndPlace> places_silver;
+    }
+
+    [Serializable]
+    public class ServerLeagueTournamentEndPlace
+    {
+        public long place;
+        public float reward_amount;
+        public string reward_currency;
+        public ServerPublicUser user;
+        public string score;
+    }
+
+    [Serializable]
     public class ServerTournament
     {
         public ServerResultPage<ServerTournamentModel> all_tournaments;

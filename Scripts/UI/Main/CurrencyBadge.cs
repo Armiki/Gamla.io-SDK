@@ -9,7 +9,14 @@ namespace Gamla.Scripts.UI.Main
         [SerializeField] private Image _currencyImage;
         [SerializeField] private RecolorItem _currencyRecolorImage;
         [SerializeField] private RecolorItem _currencyRecolorBackImage;
-        
+
+        public void Init(string type)
+        {
+            if (CurrencyType.TryParse(type, true, out CurrencyType _type))
+            {
+                Init(_type);
+            }
+        }
         public void Init(CurrencyType type, int q = 1)
         {
             switch (type)

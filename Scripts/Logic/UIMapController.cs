@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gamla.Scripts.Common.UI;
 using Gamla.Scripts.Data;
+using Gamla.Scripts.UI;
 using Gamla.Scripts.UI.Friends;
 using Gamla.Scripts.UI.Game;
 using Gamla.Scripts.UI.Ladder;
@@ -853,6 +854,28 @@ namespace Gamla.Scripts.Logic
             
             var bonusCount = rewards.Count > 0 ? rewards[0].amount : 0;
             window.Init(bonusCount, rewards.Count > 0 ? rewards[0].type : CurrencyType.Z);
+            window.Show();
+        }
+
+        public static void OpenTournamentEndWindow(ServerTournamentEndModel model)
+        {
+            var window =
+                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentEndWindow"),
+                    GamlaResourceManager.windowsContainer).GetComponent<TournamentEndWindow>();
+            CheckStack(window);
+            
+            window.Init(model);
+            window.Show();
+        }
+        
+        public static void OpenLeagueEndWindow(ServerLeagueEndModel model, bool gold)
+        {
+            var window =
+                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentEndWindow"),
+                    GamlaResourceManager.windowsContainer).GetComponent<TournamentEndWindow>();
+            CheckStack(window);
+            
+            window.Init(model, gold);
             window.Show();
         }
 
