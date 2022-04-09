@@ -121,8 +121,14 @@ namespace GamlaSDK.Scripts.UI.Game
             {
                 if(match.stage == 0)
                     return;
+
+                var lastStage = match.stage - 1;
+                if (_roundColumns.Count <= lastStage) {
+                    Debug.LogError($"Cant get stage {lastStage} in match {match.game_id}");
+                    continue;
+                }
                 
-                var column = _roundColumns[match.stage - 1];
+                var column = _roundColumns[lastStage];
                 var pair = Instantiate(_userPairPref, column);
                 int i = match.stage - 1;
                 pair.name = "pair_" + i + "_" + _roundColumns[i].childCount;

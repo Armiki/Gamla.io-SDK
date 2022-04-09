@@ -11,7 +11,9 @@ namespace GamlaSDK.Scripts
 {
     public class LocalizationManager
     {
-        private static readonly string LOCALE_CONFIG_URL = "https://static-gurii.fra1.cdn.digitaloceanspaces.com/gamla/localeconfig.json";
+        private static readonly string LOCALE_CONFIG_URL =
+            "https://static-gurii.fra1.cdn.digitaloceanspaces.com/gamla/localeconfig.json";
+
         private static readonly string DEFAULT_LANGUAGE = "english";
         public static LocaleConfig Config;
 
@@ -24,20 +26,21 @@ namespace GamlaSDK.Scripts
             using (UnityWebRequest webRequest = UnityWebRequest.Get(LOCALE_CONFIG_URL))
             {
                 yield return webRequest.SendWebRequest();
-                while(!webRequest.isDone) {}
-                
+                while (!webRequest.isDone)
+                {
+                }
+
                 if (!string.IsNullOrEmpty(webRequest.error))
                 {
-                    UIMapController.OpenSimpleErrorWindow("NO INTERNET CONNECTION", () =>
-                    {
-                        Debug.Log("do re load config");
-                    });
+                    UIMapController.OpenSimpleErrorWindow("NO INTERNET CONNECTION",
+                        () => { Debug.Log("do re load config"); });
                     callback?.Invoke(false);
                     yield break;
                 }
 
+                yield return new WaitForSeconds(1);
+
                 string data = webRequest.downloadHandler.text;
-                Debug.Log(data);
                 LocaleConfig localeConfig = JsonUtility.FromJson<LocaleConfig>(data);
                 Config = localeConfig;
 
@@ -46,14 +49,17 @@ namespace GamlaSDK.Scripts
                     var cacheFilePath = Path.Combine(GetPath(), localeConfigValue.Filename);
                     if (!File.Exists(cacheFilePath))
                     {
-                        yield return HomeThreadHelper.homeThread.ExecuteCoroutine(LoadSaveContent(localeConfigValue.Url, localeConfigValue.Filename));
+                        yield return new WaitForSeconds(1);
+                        yield return HomeThreadHelper.homeThread.ExecuteCoroutine(
+                            LoadSaveContent(localeConfigValue.Url, localeConfigValue.Filename));
                     }
                 }
+
                 Debug.Log("locale inited");
                 callback?.Invoke(true);
             }
         }
-        
+
         private static IEnumerator LoadSaveContent(string url, string fileName)
         {
             using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
@@ -65,7 +71,7 @@ namespace GamlaSDK.Scripts
                 }
 
                 yield return webRequest.downloadHandler.isDone;
-
+                yield return new WaitForSeconds(1);
                 if (string.IsNullOrEmpty(webRequest.error))
                 {
                     string result = webRequest.downloadHandler.text;
@@ -74,6 +80,7 @@ namespace GamlaSDK.Scripts
                     {
                         var cacheFilePath = Path.Combine(GetPath(), fileName);
                         File.WriteAllText(cacheFilePath, result);
+                        yield return new WaitForSeconds(1.5f);
                     }
                 }
                 else
@@ -82,14 +89,14 @@ namespace GamlaSDK.Scripts
                 }
             }
         }
-        
+
 
         public static void Init(string language, Action callback)
         {
-            if (!Directory.Exists(GetPath())) 
+            if (!Directory.Exists(GetPath()))
                 //Directory.Delete(GetPath(), true);
                 Directory.CreateDirectory(GetPath());
-            
+
             HomeThreadHelper.homeThread.ExecuteCoroutine(LoadVersion(b =>
             {
                 ChangeLanguage(language);
@@ -106,17 +113,25 @@ namespace GamlaSDK.Scripts
 
             UpdateLocale(CurrentLanguage);
         }
-        
+
         private static void UpdateLocale(string language)
         {
-            PlayerPrefs.SetString("locale", language);
-            _textBd.Clear();
-            var cacheFilePath = Path.Combine(GetPath(), Config.Locales.Find(v => v.Locale == language).Filename);
-            if (File.Exists(cacheFilePath))
+            try
             {
-                AddKeys(_textBd, File.ReadAllText(cacheFilePath));
+                PlayerPrefs.SetString("locale", language);
+                _textBd.Clear();
+                var cacheFilePath = Path.Combine(GetPath(), Config.Locales.Find(v => v.Locale == language).Filename);
+                if (File.Exists(cacheFilePath))
+                {
+                    AddKeys(_textBd, File.ReadAllText(cacheFilePath));
+                }
+
+                EventManager.OnLanguageChange.Push();
             }
-            EventManager.OnLanguageChange.Push();
+            catch (Exception e)
+            {
+                
+            }
         }
 
         private static void AddKeys(Dictionary<string, string> textBd, string localeJson)
@@ -130,12 +145,14 @@ namespace GamlaSDK.Scripts
                 }
             }
         }
-        
-        public static string Text(string code){
-            if (code != null && _textBd != null && _textBd.TryGetValue(code, out var result)){
+
+        public static string Text(string code)
+        {
+            if (code != null && _textBd != null && _textBd.TryGetValue(code, out var result))
+            {
                 return result;
             }
-            
+
             return $"{code}";
         }
 
@@ -148,7 +165,7 @@ namespace GamlaSDK.Scripts
 #endif
         }
     }
-    
+
     [Serializable]
     public class LocaleData
     {
@@ -161,13 +178,13 @@ namespace GamlaSDK.Scripts
         public string Key;
         public string Value;
     }
-    
+
     [Serializable]
     public class LocaleConfig
     {
         public List<LocaleConfigValue> Locales = new List<LocaleConfigValue>();
     }
-    
+
     [Serializable]
     public class LocaleConfigValue
     {

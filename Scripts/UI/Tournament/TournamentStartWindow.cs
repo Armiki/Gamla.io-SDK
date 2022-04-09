@@ -32,8 +32,10 @@ namespace Gamla.Scripts.UI.Tournament
             _winnerCurrencyValue.text = "" + _winner.amount;
             
             var _finalist = tournament.awards.Find(a => a.place == 2);
-            _finalistCurrencyBadge.Init(_finalist.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
-            _finalistCurrencyValue.text = "" + _finalist.amount;
+            if (_finalist != null) {
+                _finalistCurrencyBadge.Init(_finalist.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
+                _finalistCurrencyValue.text = "" + _finalist.amount;
+            }
 
             _playerCount.text = tournament.players_count + "";
             
