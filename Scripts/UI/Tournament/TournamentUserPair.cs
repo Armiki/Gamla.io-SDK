@@ -1,12 +1,11 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 using JetBrains.Annotations;
 using UnityEngine.UI.Extensions;
 
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class TournamentUserPair : MonoBehaviour
     {
@@ -31,8 +30,8 @@ namespace GamlaSDK.Scripts.UI.Game
         {
             _user1.Init(user1);
             _user2.Init(user2);
-            _user1Points.text = string.IsNullOrEmpty(user1Points) ? "Not played" : user1Points.ToString();
-            _user2Points.text = string.IsNullOrEmpty(user2Points) ? "Not played" : user2Points.ToString();
+            _user1Points.text = string.IsNullOrEmpty(user1Points) ? GetNotPlayed() : user1Points.ToString();
+            _user2Points.text = string.IsNullOrEmpty(user2Points) ? GetNotPlayed() : user2Points.ToString();
             long currentUserId = LocalState.currentUser.uid;
             _recolorUser1Name.recolorFilter = user1.id == currentUserId ? "textColorPrize" : "textColorPrimary";
             _recolorUser2Name.recolorFilter = user2.id == currentUserId ? "textColorPrize" : "textColorPrimary";
@@ -43,6 +42,11 @@ namespace GamlaSDK.Scripts.UI.Game
 //            _rightLine.SetActive(false);
         }
 
+        string GetNotPlayed()
+        {
+            return LocalizationManager.Text("gamla.tournament.widget.notplayed");
+        }
+        
         public void DrawLines([CanBeNull] Transform from, [CanBeNull] Transform to, RectTransform rootCanvas)
         {
             _to = to;

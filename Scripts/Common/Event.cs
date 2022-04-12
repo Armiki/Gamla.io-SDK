@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 
-namespace Gamla.Core
+namespace Gamla
 {
     public class EventTrigger
     {

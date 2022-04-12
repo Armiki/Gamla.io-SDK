@@ -1,6 +1,6 @@
 using System;
 
-namespace Gamla.Scripts.Common.UI
+namespace Gamla.UI
 {
     public interface IGUIView
     {

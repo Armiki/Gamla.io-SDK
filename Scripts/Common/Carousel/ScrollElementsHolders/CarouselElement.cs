@@ -1,4 +1,4 @@
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsHolders
+namespace Gamla.UI.Carousel
 {
 	public class CarouselElement
 	{

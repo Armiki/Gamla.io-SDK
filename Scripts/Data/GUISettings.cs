@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     [CreateAssetMenu(fileName = "ColorTemplate", menuName = "ScriptableObjects/GUISettings", order = 0)]
     public class GUISettings : ScriptableObject

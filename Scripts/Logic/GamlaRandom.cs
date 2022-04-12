@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gamla
+namespace Gamla.Logic
 {
     public static class GamlaRandom
     {

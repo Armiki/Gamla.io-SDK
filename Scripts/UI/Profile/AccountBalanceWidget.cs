@@ -1,10 +1,10 @@
-﻿using Gamla.Scripts.Common.Carousel.ScrollElements;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+﻿using Gamla.Data;
+using Gamla.Logic;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class AccountBalanceWidget : BaseScrollElement
     {
@@ -24,8 +24,8 @@ namespace Gamla.Scripts.UI.Profile
 
         public void Init(AccountBalanceData data)
         {
-            _name.text = data.game.name;
-            _status.text = data.status.ToString();
+            _name.text = LocaliseName(data.game.name);
+            _status.text = data.status;
             _date.text = data.date;
             _id.text = data.battleId;
             _amount.text = data.currency.amount.ToString();
@@ -47,6 +47,21 @@ namespace Gamla.Scripts.UI.Profile
                 ? "hardBackColor" : "softBackColor";
             _currencyRecolorBackLogo.Recolor();
 
+        }
+
+        string LocaliseName(string status)
+        {
+            switch (status)
+            {
+                case "replenishment":
+                    return LocalizationManager.Text("gamla.withdraw.replenishment");
+                case "commission":
+                    return LocalizationManager.Text("gamla.withdraw.commission");
+                case "debit":
+                    return LocalizationManager.Text("gamla.withdraw.debit");
+                default :
+                    return status;
+            }
         }
     }
 }

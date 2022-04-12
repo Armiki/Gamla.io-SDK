@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.PoolObjects
+namespace Gamla.Logic
 {
     public class PoolObject : MonoBehaviour
     {

@@ -1,14 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using Gamla.GUI.Common.Carousel;
-using Gamla.Scripts.Common.Carousel.Core;
-using Gamla.Scripts.Common.Carousel.ScrollElements;
-using Gamla.Scripts.Common.GeneralPool;
 using UnityEngine;
-using Gamla.Scripts.Logic;
+using Gamla.Logic;
 
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsFactories
+namespace Gamla.UI.Carousel
 {
     public class SimpleScrollElementFactory : IScrollElementFactory, IPoolObjectInitializer<BaseScrollElement>
     {

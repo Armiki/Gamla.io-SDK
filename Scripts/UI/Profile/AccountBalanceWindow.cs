@@ -1,19 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Common.Carousel;
-using Gamla.Scripts.Common.Carousel.DataSource;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK;
+using Gamla.Data;
+using Gamla.Logic;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class AccountBalanceWindow : GUIView, ICarouselRootView
     {

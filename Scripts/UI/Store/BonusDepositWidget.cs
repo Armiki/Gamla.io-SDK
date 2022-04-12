@@ -1,9 +1,8 @@
 using System;
-using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamlaSDK.Scripts.UI.Store
+namespace Gamla.UI
 {
     public class BonusDepositWidget : MonoBehaviour
     {

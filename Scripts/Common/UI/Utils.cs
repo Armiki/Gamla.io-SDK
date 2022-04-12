@@ -2,13 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using Gamla.Scripts.Common.Carousel;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
-using Gamla.Scripts.Common.UI;
+using Gamla.UI;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using Random = System.Random;
 
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
     public static class Utils
     {

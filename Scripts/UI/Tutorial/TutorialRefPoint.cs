@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Gamla.Scripts.UI.Tutorial
+namespace Gamla.UI
 {
     public class TutorialRefPoint : MonoBehaviour
     {

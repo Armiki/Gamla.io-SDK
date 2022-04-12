@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using GamlaSDK;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class TrophiesWindow : GUIView
     {

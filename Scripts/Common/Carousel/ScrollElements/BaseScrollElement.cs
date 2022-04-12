@@ -1,9 +1,6 @@
-using Gamla.GUI.Common.Carousel;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Common.Carousel.Core;
 using UnityEngine;
 
-namespace Gamla.Scripts.Common.Carousel.ScrollElements
+namespace Gamla.UI.Carousel
 {
     public abstract class BaseScrollElement : GUIView, IScrollElement
     {

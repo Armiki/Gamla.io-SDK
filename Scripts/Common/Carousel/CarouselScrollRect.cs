@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.Common.Carousel
+namespace Gamla.UI.Carousel
 {
     /// <summary>
     /// стандартный ScrollRect не позволяет одновременно изменять позицию content

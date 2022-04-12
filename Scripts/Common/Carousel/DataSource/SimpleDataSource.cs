@@ -1,7 +1,6 @@
 using System;
-using Gamla.Scripts.Common.Carousel.Core;
 
-namespace Gamla.Scripts.Common.Carousel.DataSource
+namespace Gamla.UI.Carousel
 {
     public abstract class SimpleDataSource : IScrollElementsDataSource
     {

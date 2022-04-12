@@ -1,4 +1,4 @@
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
 	public interface ITicktackable
 	{

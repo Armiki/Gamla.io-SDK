@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class BackButton : MonoBehaviour
     {

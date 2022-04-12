@@ -1,11 +1,10 @@
 using System;
 using System.Collections;
-using Gamla.GUI.Common.Carousel;
-using Gamla.Scripts.Common.UI;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.Common.Carousel
+namespace Gamla.UI.Carousel
 {
     public class ScrollRectCarouselView : GUIView, ICarouselView
     {

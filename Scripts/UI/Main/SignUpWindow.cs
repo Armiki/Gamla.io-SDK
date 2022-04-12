@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections;
 using DG.Tweening;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
 
     [Serializable]

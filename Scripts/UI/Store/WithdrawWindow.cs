@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK;
 
-namespace Gamla.Scripts.UI.Store
+namespace Gamla.UI
 {
     public class WithdrawWindow  : GUIView
     {

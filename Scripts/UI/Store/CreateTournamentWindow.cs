@@ -1,18 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Common.Carousel;
-using Gamla.Scripts.Common.Carousel.DataSource;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class CreateTournamentWindow : GUIView
     {
@@ -129,7 +121,7 @@ namespace GamlaSDK.Scripts.UI.Game
                 {
                     id = -1,
                     notification_id = -1,
-                    short_text = "code copied"
+                    short_text = LocalizationManager.Text("gamla.codecopied.notification")
                 });
             });
             

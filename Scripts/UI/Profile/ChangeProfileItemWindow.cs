@@ -1,11 +1,9 @@
 using System;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK.Scripts;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class ChangeProfileItemWindow : GUIView
     {

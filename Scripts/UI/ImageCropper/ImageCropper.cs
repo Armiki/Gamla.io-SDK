@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using Gamla.GUI.ImageCropper;
 using System.Collections;
 
 // ===

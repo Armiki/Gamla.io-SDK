@@ -1,8 +1,7 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class ActionButtonAnim : MonoBehaviour
     {

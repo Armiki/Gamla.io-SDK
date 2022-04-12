@@ -1,17 +1,12 @@
 using System;
 using System.Linq;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Profile;
-using Gamla.Scripts.UI.Store;
-using Gamla.Scripts.UI.Game;
-using Gamla.Scripts.UI.Ladder;
-using Gamla.Scripts.Logic;
+using Gamla.UI;
 
-namespace Project.Scripts.UI
+namespace Demo
 {
     public class DemoWindow : GUIView
     {

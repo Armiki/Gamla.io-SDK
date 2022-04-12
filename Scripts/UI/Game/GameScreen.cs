@@ -1,10 +1,9 @@
 using System;
 using System.Collections;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 using UnityEngine;
 
-namespace Gamla.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class GameScreen : GUIView
     {

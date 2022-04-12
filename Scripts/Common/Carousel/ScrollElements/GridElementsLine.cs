@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.Common.Carousel.ScrollElements
+namespace Gamla.UI.Carousel
 {
     [RequireComponent(typeof(HorizontalLayoutGroup))]
     public class GridElementsLine : BaseScrollElement

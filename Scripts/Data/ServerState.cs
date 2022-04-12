@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     public class ServerState
     {

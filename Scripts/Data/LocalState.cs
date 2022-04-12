@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     public static class LocalState
     {

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.Carousel.Core;
 
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsHolders
+namespace Gamla.UI.Carousel
 {
     public class CarouselElementsHolder : IScrollElementsHolder
     {

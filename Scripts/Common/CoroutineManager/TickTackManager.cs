@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
 	public static class TickTackManager
 	{

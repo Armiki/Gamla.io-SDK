@@ -1,13 +1,11 @@
 using System;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
-  
     public class WarningWindow : GUIView
     {
         public event Action onActionClick;

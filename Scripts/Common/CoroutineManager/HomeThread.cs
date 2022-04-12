@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
     public class HomeThread : IHomeThreadHelper
     {

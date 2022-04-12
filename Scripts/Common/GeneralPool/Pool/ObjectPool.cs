@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.GeneralPool;
 
-namespace Gamla.Scripts.Common.GeneralPool
+namespace Gamla.Logic
 {
 	public sealed class ObjectPool< TObject > : IObjectPool< TObject > where TObject : class
 	{

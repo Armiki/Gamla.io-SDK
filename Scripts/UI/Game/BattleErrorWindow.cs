@@ -1,9 +1,7 @@
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class BattleErrorWindow : GUIView
     {
@@ -14,11 +12,6 @@ namespace Gamla.Scripts.UI.Game
         [SerializeField] private Button _watchVideo;
         [SerializeField] private Text _watchVideoCount;
         [SerializeField] private CurrencyBadge _watchVideoCurrency;
-
-        public void Start()
-        {
-         
-        }
 
         public void Init(bool isRewardActive, bool isLowBalance)
         {

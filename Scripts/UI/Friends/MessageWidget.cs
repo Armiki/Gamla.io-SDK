@@ -1,8 +1,7 @@
-using Gamla.Scripts.Common.Carousel.ScrollElements;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Friends
+namespace Gamla.UI
 {
     public class MessageWidget : MonoBehaviour
     {

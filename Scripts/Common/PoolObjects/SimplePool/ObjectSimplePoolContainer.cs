@@ -1,5 +1,5 @@
 ﻿
-namespace Game.PoolObjects
+namespace Gamla.Logic
 {
 	public class ObjectSimplePoolContainer<T>
 	{

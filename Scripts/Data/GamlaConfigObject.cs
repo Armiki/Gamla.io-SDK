@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gamla.Core
+namespace Gamla.Data
 {
     public class GamlaConfigObject : ScriptableObject
     {

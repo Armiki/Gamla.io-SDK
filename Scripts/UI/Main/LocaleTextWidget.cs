@@ -1,8 +1,8 @@
-using Gamla.Scripts.Logic;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamlaSDK.Scripts.UI
+namespace Gamla.UI
 {
     public class LocaleTextWidget : MonoBehaviour
     {

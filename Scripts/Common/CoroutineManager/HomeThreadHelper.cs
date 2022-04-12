@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
 	public class HomeThreadHelper : MonoBehaviour
 	{

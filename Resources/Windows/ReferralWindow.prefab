@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 1825387393286698732}
   - component: {fileID: 8130728799618434237}
   - component: {fileID: 6282792655394376193}
+  - component: {fileID: 7632809698874826755}
   m_Layer: 31
   m_Name: Title
   m_TagString: Untagged
@@ -323,6 +324,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Ooooops
+--- !u!114 &7632809698874826755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825387393286698731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 6282792655394376193}
+  _localeKey: gamla.redeemreferralcode.title
 --- !u!1 &1825387394069846845
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,6 +500,7 @@ GameObject:
   - component: {fileID: 1825387394448425420}
   - component: {fileID: 1983185660613579976}
   - component: {fileID: 2496245726041408783}
+  - component: {fileID: 627718804253737150}
   m_Layer: 31
   m_Name: Description
   m_TagString: Untagged
@@ -572,6 +588,20 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Increase your $ balance
+--- !u!114 &627718804253737150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825387394448425419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 2496245726041408783}
+  _localeKey: gamla.referralcodesuccess.description
 --- !u!1 &2592019637823274517
 GameObject:
   m_ObjectHideFlags: 0
@@ -650,7 +680,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: erferf
+  m_Text: erferferferf
 --- !u!1 &4586111380458658836
 GameObject:
   m_ObjectHideFlags: 0
@@ -941,7 +971,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   input: {fileID: 6400730868391252801}
-  resetToSafeArea: 0
 --- !u!114 &6400730868391252801
 MonoBehaviour:
   m_ObjectHideFlags: 0

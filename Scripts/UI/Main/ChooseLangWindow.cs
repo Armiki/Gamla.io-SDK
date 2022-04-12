@@ -1,8 +1,7 @@
-﻿using Gamla.Scripts.Common.UI;
+﻿using Gamla.Logic;
 using UnityEngine;
 
-
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class ChooseLangWindow : GUIView
     {
@@ -11,12 +10,11 @@ namespace Gamla.Scripts.UI.Main
 
         public void Start()
         {
-            foreach (var locale in GamlaSDK.Scripts.LocalizationManager.Config.Locales)
+            foreach (var locale in LocalizationManager.Config.Locales)
             {
                 var item = Instantiate(_langItmPref, _content).GetComponent<LangItem>();
                 item.Init(locale.Locale);
             }
         }
-        
     }
 }

@@ -1,11 +1,9 @@
 using System;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
 
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class CallBattleWindow : GUIView
     {

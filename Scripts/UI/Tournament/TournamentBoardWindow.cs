@@ -1,17 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.GUI.Common;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using UnityEditor;
+using Gamla.Data;
+using Gamla.GUI;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class TournamentBoardWindow : GUIView//, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerDownHandler, IPointerUpHandler
     {

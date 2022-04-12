@@ -1,4 +1,4 @@
-﻿namespace Gamla.Scripts.Common.Carousel.Core
+﻿namespace Gamla.UI.Carousel
 {
 	public enum ElementChangeReason
 	{

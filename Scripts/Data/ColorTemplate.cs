@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     [CreateAssetMenu(fileName = "ColorTemplate", menuName = "ScriptableObjects/ColorTemplate", order = 1)]
     public class ColorTemplate : ScriptableObject

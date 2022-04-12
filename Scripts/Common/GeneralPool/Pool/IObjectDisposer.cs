@@ -1,4 +1,4 @@
-﻿namespace Gamla.Scripts.Common.GeneralPool
+﻿namespace Gamla.Logic
 {
 	public interface IObjectDisposer< in TObjectType >
 	{

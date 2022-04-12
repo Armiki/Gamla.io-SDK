@@ -1,14 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Friends
+namespace Gamla.UI
 {
     public class AddFriendsWindow : GUIView
     {

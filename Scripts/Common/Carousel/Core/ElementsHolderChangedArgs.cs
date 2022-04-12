@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gamla.Scripts.Common.Carousel.Core
+namespace Gamla.UI.Carousel
 {
 	public sealed class ElementsHolderChangedArgs : EventArgs
 	{

@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Gamla.Scripts.Common.Carousel.Core;
 
-namespace Gamla.Scripts.Common.Carousel.DataSource
+namespace Gamla.UI.Carousel
 {
     public class ListDataSource<T> : SimpleDataSource
     {

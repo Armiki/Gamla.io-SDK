@@ -1,9 +1,8 @@
 ﻿using System;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class SignUpAccountWindow : GUIView
     {

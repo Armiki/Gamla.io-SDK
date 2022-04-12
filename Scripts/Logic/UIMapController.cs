@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 using Gamla.Scripts.UI;
-using Gamla.Scripts.UI.Friends;
-using Gamla.Scripts.UI.Game;
-using Gamla.Scripts.UI.Ladder;
-using Gamla.Scripts.UI.Main;
-using Gamla.Scripts.UI.Profile;
-using Gamla.Scripts.UI.Store;
-using Gamla.Scripts.UI.Tournament;
-using GamlaSDK.Scripts;
-using GamlaSDK.Scripts.UI.Game;
-using GamlaSDK.Scripts.UI.Tournament;
+using Gamla.UI;
 using UnityEngine;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
     public static class UIMapController
     {
@@ -648,7 +638,7 @@ namespace Gamla.Scripts.Logic
                     {
                         id = -1,
                         notification_id = -1,
-                        short_text = "Rematch request sended"
+                        short_text = LocalizationManager.Text("gamla.widget.rematch.sended.notification")
                     });
                     window.ClosePublic();
                 });

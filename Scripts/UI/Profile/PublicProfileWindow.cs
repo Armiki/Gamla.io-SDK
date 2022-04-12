@@ -1,15 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
-using Random = UnityEngine.Random;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class PublicProfileWindow : GUIView
     {
@@ -73,7 +69,7 @@ namespace Gamla.Scripts.UI.Profile
                     {
                         id = -1,
                         notification_id = -1,
-                        short_text = "User is not your friend"
+                        short_text =  LocalizationManager.Text("gamla.friend.notfriend")
                     });
                 }
             });

@@ -1,10 +1,9 @@
-﻿using Gamla.Scripts.Common.Carousel.ScrollElements;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+﻿using Gamla.Data;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Ladder
+namespace Gamla.UI
 {
     public class LadderWidget : BaseScrollElement
     {

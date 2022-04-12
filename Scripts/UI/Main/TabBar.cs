@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class TabBar : MonoBehaviour
     {

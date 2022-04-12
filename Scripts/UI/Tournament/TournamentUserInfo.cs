@@ -1,5 +1,5 @@
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.UI;
 using UnityEngine;
 using UnityEngine.UI;
 

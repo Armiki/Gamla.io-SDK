@@ -3,11 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Gamla.Core;
-using Gamla.Scripts.Common;
 using UnityEngine;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
 	public class RemoteResourceManager
 	{

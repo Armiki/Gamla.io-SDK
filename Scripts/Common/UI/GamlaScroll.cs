@@ -1,7 +1,6 @@
-using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamlaSDK.Scripts.UI
+namespace Gamla.UI
 {
     public class GamlaScroll : ScrollRect
     {

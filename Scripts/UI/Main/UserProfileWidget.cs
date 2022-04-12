@@ -1,11 +1,9 @@
-using System;
-using System.Linq;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class UserProfileWidget : MonoBehaviour
     {
@@ -37,7 +35,7 @@ namespace Gamla.Scripts.UI.Main
             if (user != null)
             {
                 _id = user.id;
-                _nameUser.text = user.nickname;
+                _nameUser.text = LocaliseName(user.nickname);
                 _avatarUser.Load(user.image);
                 _avatarUser.gameObject.SetActive(true);
                 //_avatarUser.sprite = GUIConstants.guiSettings.avatars.FirstOrDefault(x => x.name == user.avatar);
@@ -47,7 +45,7 @@ namespace Gamla.Scripts.UI.Main
         public void Init(ServerPublicProfile profile)
         {
             _id = profile.id;
-            _nameUser.text = profile.nickname;
+            _nameUser.text = LocaliseName(profile.nickname);
             _avatarUser.Load(profile.image);
             _avatarUser.gameObject.SetActive(true);
         }
@@ -57,7 +55,7 @@ namespace Gamla.Scripts.UI.Main
             if (user != null)
             {
                 _id = user.id;
-                _nameUser.text = user.nickname;
+                _nameUser.text = LocaliseName(user.nickname);
                 _avatarUser.Load(user.image);
                 _avatarUser.gameObject.SetActive(true);
                 //_avatarUser.sprite = GUIConstants.guiSettings.avatars.FirstOrDefault(x => x.name == user.avatar);
@@ -68,15 +66,28 @@ namespace Gamla.Scripts.UI.Main
         {
             _user = null;
             _id = -1;
-            _nameUser.text = "To Be Determined";
+            _nameUser.text = LocaliseName("To Be Determined");
         }
         
         public void Init(UserInfo user)
         {
             if (user != null)
             {
-                _nameUser.text = user.name;
+                _nameUser.text = LocaliseName(user.name);
                 _avatarUser.Load(user.avatarUrl);
+            }
+        }
+        
+        string LocaliseName(string userName)
+        {
+            switch (userName)
+            {
+                case "wait user":
+                    return LocalizationManager.Text("gamla.window.tournamentboard.waituser");
+                case "To Be Determined":
+                    return LocalizationManager.Text("gamla.window.tournamentboard.determined");
+                default :
+                    return userName;
             }
         }
     }

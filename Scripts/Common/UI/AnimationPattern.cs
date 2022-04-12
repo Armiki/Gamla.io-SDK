@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-namespace Gamla.Scripts.Common.UI
+namespace Gamla.UI
 { 
     public enum AnimationPatternType
     {

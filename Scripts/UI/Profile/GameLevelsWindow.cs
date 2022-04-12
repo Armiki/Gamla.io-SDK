@@ -1,14 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using DG.Tweening;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 using UnityEngine;
-using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class GameLevelsWindow : GUIView
     {

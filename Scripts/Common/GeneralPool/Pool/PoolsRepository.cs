@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.Repository;
 
-namespace Gamla.Scripts.Common.GeneralPool
+namespace Gamla.Logic
 {
 	public sealed class PoolsRepository<TKey> : IPoolsRepository<TKey>
 	{

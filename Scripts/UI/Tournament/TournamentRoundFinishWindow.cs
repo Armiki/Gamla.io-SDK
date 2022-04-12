@@ -1,9 +1,7 @@
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Tournament
+namespace Gamla.UI
 {
     public class TournamentRoundFinishWindow : GUIView
     {

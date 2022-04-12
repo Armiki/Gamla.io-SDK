@@ -1,11 +1,9 @@
 using System;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Tournament
+namespace Gamla.UI
 {
     public class TournamentStartWindow : GUIView
     {

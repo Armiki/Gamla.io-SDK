@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Gamla.Scripts.Common.Repository
+namespace Gamla.Logic
 {
 	public class BaseRepository< TData, TKey > : IRepository< TData, TKey >
 	{

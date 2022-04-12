@@ -1,14 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK.Scripts;
+using Gamla.Data;
+using Gamla.UI;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
     public static class ServerCommand
     {
@@ -1182,7 +1179,7 @@ namespace Gamla.Scripts.Logic
                     {
                         id = -1,
                         notification_id = -1,
-                        short_text = $"You buy {item.name}"
+                        short_text = $"{LocalizationManager.Text("gamla.window.successfulpayment.youbuy")} {item.name}"   
                     });
                     GetOrUpdateProfile(LocalState.token);
                 },

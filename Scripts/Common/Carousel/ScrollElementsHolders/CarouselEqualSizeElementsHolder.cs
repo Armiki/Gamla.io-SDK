@@ -1,8 +1,7 @@
 using System;
-using Gamla.Scripts.Common.Carousel.Core;
 using UnityEngine;
 
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsHolders
+namespace Gamla.UI.Carousel
 {
     public class CarouselEqualSizeElementsHolder : IUpdatableScrollElementsHolder
     {

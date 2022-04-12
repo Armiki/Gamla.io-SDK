@@ -1,10 +1,8 @@
 using System;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class ForgotPasswordWindow : GUIView
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Tutorial
+namespace Gamla.UI
 {
     public class TutorialElement : MonoBehaviour
     {

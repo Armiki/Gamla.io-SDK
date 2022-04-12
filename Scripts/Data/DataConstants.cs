@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using GamlaSDK.Scripts;
+﻿using System.Collections.Generic;
+using Gamla.Logic;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     public enum GUIWarningType
     {

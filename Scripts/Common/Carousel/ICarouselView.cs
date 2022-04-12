@@ -1,8 +1,7 @@
 using System;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 
-namespace Gamla.GUI.Common.Carousel
+namespace Gamla.UI.Carousel
 {
     public interface ICarouselView : IGUIView
     {

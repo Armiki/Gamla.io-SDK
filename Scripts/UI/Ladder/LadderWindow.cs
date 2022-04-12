@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common.Carousel;
-using Gamla.Scripts.Common.Carousel.DataSource;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Ladder
+namespace Gamla.UI
 {
     public class LadderWindow : GUIView//, ICarouselRootView
     {
@@ -89,7 +86,7 @@ namespace Gamla.Scripts.UI.Ladder
         private void LateUpdate()
         {
             var delta = time - DateTime.Now;
-            _timeLeft.text = delta.Days + " Days " + delta.Hours + ":" + delta.Minutes + ":" + delta.Seconds;
+            _timeLeft.text = $"{delta.Days} {LocalizationManager.Text("gamla.main.time.days")} {delta.Hours}:{delta.Minutes}:{delta.Seconds}";
         }
 
         void InitLadderWidget(GUIView view, int row, int col)

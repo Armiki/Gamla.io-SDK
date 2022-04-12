@@ -2,12 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Logic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace GamlaSDK.Scripts
+namespace Gamla.Logic
 {
     public class LocalizationManager
     {

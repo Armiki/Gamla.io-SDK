@@ -1,10 +1,10 @@
 using UnityEngine;
 using System;
 using System.Collections;
-using Gamla.Scripts.Logic;
+using Gamla.Logic;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.Common.UI
+namespace Gamla.UI
 {
     public class GUIView : MonoBehaviour, IGUIView
     {

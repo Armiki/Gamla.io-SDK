@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textField: {fileID: 1814096222972535601}
-  _localeKey: gamla.window.profile.promocode.title
+  _localeKey: gamla.window.promocode.entercode.placeholder
 --- !u!1 &1825387394270637924
 GameObject:
   m_ObjectHideFlags: 0

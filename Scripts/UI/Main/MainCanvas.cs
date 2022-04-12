@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class MainCanvas : MonoBehaviour
     {

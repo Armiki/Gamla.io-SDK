@@ -1,6 +1,6 @@
 #if UNITY_EDITOR
-using Gamla.Core;
-using GamlaSDK.Scripts;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEditor;
 using UnityEngine;
 

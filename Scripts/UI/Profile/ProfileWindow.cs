@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
 using Random = UnityEngine.Random;
+using Toggle = UnityEngine.UI.Toggle;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
     public class ProfileWindow : GUIView
     {

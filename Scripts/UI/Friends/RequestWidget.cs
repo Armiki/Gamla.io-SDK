@@ -1,9 +1,9 @@
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
-namespace Gamla.Scripts.UI.Friends
+
+namespace Gamla.UI
 {
     public class RequestWidget : MonoBehaviour
     {

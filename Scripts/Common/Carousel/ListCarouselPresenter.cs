@@ -1,17 +1,19 @@
 using System.Collections.Generic;
-using Gamla.Scripts.Common.Carousel.DataSource;
-using Gamla.Scripts.Common.Carousel.ScrollElements;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
+using Gamla.Logic;
 
-public sealed class ListCarouselPresenter : CarouselPresenter
+namespace Gamla.UI.Carousel
 {
-    public IReadOnlyDictionary<int, BaseScrollElement> visibleViews => _elementsFactory.visibleViews;
-
-    
-    readonly SimpleScrollElementFactory _elementsFactory;
-
-    public ListCarouselPresenter(IScrollElementsDataSource elementsHolder, SimpleScrollElementFactory elementsFactory) : base(elementsHolder, elementsFactory)
+    public sealed class ListCarouselPresenter : CarouselPresenter
     {
-        _elementsFactory = elementsFactory;
+        public IReadOnlyDictionary<int, BaseScrollElement> visibleViews => _elementsFactory.visibleViews;
+
+
+        readonly SimpleScrollElementFactory _elementsFactory;
+
+        public ListCarouselPresenter(IScrollElementsDataSource elementsHolder,
+            SimpleScrollElementFactory elementsFactory) : base(elementsHolder, elementsFactory)
+        {
+            _elementsFactory = elementsFactory;
+        }
     }
 }

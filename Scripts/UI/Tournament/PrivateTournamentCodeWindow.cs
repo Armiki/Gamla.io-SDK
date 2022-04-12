@@ -1,10 +1,8 @@
 using System;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.UI.Main;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamlaSDK.Scripts.UI.Tournament
+namespace Gamla.UI
 {
     public class PrivateTournamentCodeWindow : GUIView
     {

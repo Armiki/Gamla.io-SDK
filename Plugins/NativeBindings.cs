@@ -1,5 +1,3 @@
-using System.Runtime.InteropServices;
-
 public class NativeBindings
 {
 #if UNITY_IPHONE

@@ -1,9 +1,9 @@
 using System;
-using Gamla.Scripts.Common;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public enum ValidateInputType
     {

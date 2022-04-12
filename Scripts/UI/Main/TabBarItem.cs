@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class TabBarItem : MonoBehaviour
     {

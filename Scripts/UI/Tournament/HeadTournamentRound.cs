@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class HeadTournamentRound : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace GamlaSDK.Scripts.UI.Game
 
         public void SetData(ServerTournamentAward model)
         {
-            _roundNum.text = "Place " + model.place;
+            _roundNum.text = LocalizationManager.Text("gamla.window.tournamentboard.place") + " " + model.place;
             _currency.text = model.amount + "";
             if (Enum.TryParse(model.currency.ToUpper(), out CurrencyType type))
             {
@@ -26,7 +26,7 @@ namespace GamlaSDK.Scripts.UI.Game
         
         public void SetDataWinner(ServerTournamentAward model)
         {
-            _roundNum.text = "WINNER!";
+            _roundNum.text = LocalizationManager.Text("gamla.widget.tournamentwinner.title");
             _currency.text = model.amount + "";
             if (Enum.TryParse(model.currency.ToUpper(), out CurrencyType type))
             {

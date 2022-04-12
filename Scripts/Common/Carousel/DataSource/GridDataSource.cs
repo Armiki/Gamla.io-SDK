@@ -1,10 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using Gamla.Scripts.Common.Carousel.Core;
-using Gamla.Scripts.Common.Carousel.ScrollElementsFactories;
-using Gamla.Scripts.Common.Carousel.ScrollElementsHolders;
 
-namespace Gamla.Scripts.Common.Carousel.DataSource
+namespace Gamla.UI.Carousel
 {
     public class GridDataSource<T> : SimpleDataSource, IGridDataSource
     {

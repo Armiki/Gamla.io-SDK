@@ -1,8 +1,8 @@
-﻿using Gamla.Scripts.Logic;
+﻿using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class LangItem : MonoBehaviour
     {
@@ -16,21 +16,21 @@ namespace Gamla.Scripts.UI.Main
         {
             _language = lang;
             _title.text = lang;
-            _selected.SetActive(GamlaSDK.Scripts.LocalizationManager.CurrentLanguage == _language);
+            _selected.SetActive(LocalizationManager.CurrentLanguage == _language);
             
             EventManager.OnLanguageChange.Subscribe(UpdateViewState);
             
             _btn.onClick.RemoveAllListeners();
             _btn.onClick.AddListener(() =>
             {
-                if(GamlaSDK.Scripts.LocalizationManager.CurrentLanguage != _language)
-                    GamlaSDK.Scripts.LocalizationManager.ChangeLanguage(_language);
+                if(LocalizationManager.CurrentLanguage != _language)
+                    LocalizationManager.ChangeLanguage(_language);
             });
         }
 
         private void UpdateViewState()
         {
-            _selected.SetActive(GamlaSDK.Scripts.LocalizationManager.CurrentLanguage == _language);
+            _selected.SetActive(LocalizationManager.CurrentLanguage == _language);
         }
 
         private void OnDestroy()

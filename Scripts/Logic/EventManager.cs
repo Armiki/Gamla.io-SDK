@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Gamla.Core;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
     public class EventManager
     {

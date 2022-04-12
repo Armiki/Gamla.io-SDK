@@ -1,6 +1,4 @@
-using Gamla.Scripts.Common.UI;
-
-namespace Gamla.Scripts.Common.Carousel
+namespace Gamla.UI.Carousel
 {
     public interface ICarouselRootView
     {

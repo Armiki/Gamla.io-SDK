@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace Gamla.GUI.Common
+namespace Gamla.GUI
 {
     public class BoundsContent : UIBehaviour
     {

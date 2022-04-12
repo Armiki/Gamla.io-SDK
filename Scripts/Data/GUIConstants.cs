@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     public static class GUIConstants
     {

@@ -1,9 +1,7 @@
-﻿using Gamla.Scripts.Common.UI;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class LoadingWindow : GUIView
     {

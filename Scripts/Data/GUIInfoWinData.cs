@@ -1,10 +1,11 @@
-﻿using System;
-
-public class GUIInfoWinData
+﻿namespace Gamla.Data
 {
-    public string logo;
-    public string title;
-    public string description;
-    public string actionTitle;
-    public string closeTitle;
+    public class GUIInfoWinData
+    {
+        public string logo;
+        public string title;
+        public string description;
+        public string actionTitle;
+        public string closeTitle;
+    }
 }

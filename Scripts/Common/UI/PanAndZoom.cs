@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
-namespace Gamla.GUI.Common
+namespace Gamla.GUI
 {
     /// <summary> A modular and easily customisable Unity MonoBehaviour for handling swipe and pinch motions on mobile. </summary>
 public class PanAndZoom : MonoBehaviour {

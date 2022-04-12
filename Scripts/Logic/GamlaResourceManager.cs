@@ -1,12 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.UI;
+using Gamla.Data;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
     public class GamlaResourceManager : MonoBehaviour
     {

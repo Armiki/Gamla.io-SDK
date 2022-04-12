@@ -1,10 +1,9 @@
 using System;
-using Gamla.Scripts.Data;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
 
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class NewGameWidget : MonoBehaviour
     {

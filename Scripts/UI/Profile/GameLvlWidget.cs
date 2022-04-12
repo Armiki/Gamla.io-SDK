@@ -1,9 +1,9 @@
-﻿using Gamla.Scripts.Data;
-using GamlaSDK.Scripts;
+﻿using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Profile
+namespace Gamla.UI
 {
 
     public class GameLvlWidget : MonoBehaviour

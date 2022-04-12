@@ -1,6 +1,4 @@
-using Gamla.Scripts.Common.Carousel.DataSource;
-
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsFactories
+namespace Gamla.UI.Carousel
 {
     public interface IGridDataSource : IScrollElementsDataSource
     {

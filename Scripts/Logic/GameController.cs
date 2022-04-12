@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Gamla.Scripts.Common;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK.Scripts;
+using Gamla.Data;
+using Gamla.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Gamla.Scripts.Logic
+namespace Gamla.Logic
 {
     public class GameController : MonoBehaviour
     {
         private bool _isInMatch = true;
         private List<ServerNotification> _notifications = new List<ServerNotification>();
+        private List<long> _readNotifications = new List<long>();
         
         
         public void Start()
@@ -107,7 +106,7 @@ namespace Gamla.Scripts.Logic
                 {
                     ServerCommand.GetNotification(result =>
                     {
-                        _notifications = result.FindAll(notif => notif.read == 0);
+                        _notifications = result.FindAll(notif => notif.read == 0 && !_readNotifications.Contains(notif.id));
                     });
                 }
                 yield return new WaitForSecondsRealtime(10f);
@@ -132,25 +131,49 @@ namespace Gamla.Scripts.Logic
                         {
                             var notif = _notifications[i];
                             ServerTournamentEndModel model = JsonUtility.FromJson<ServerTournamentEndModel>(notif.long_text);
+                            if (model == null) {
+                                Debug.LogError($"Failed parse TournamentEndModel: {notif.long_text}");
+                                ShowSimpleNotification(i);
+                                continue;
+                            }
                             UIMapController.OpenTournamentEndWindow(model);
+                            _readNotifications.Add(_notifications[i].id);
+                            _notifications.RemoveAt(i);
                         }
                         else if (_notifications[i].notification_id == 5)
                         {
                             var notif = _notifications[i];
                             ServerLeagueEndModel model = JsonUtility.FromJson<ServerLeagueEndModel>(notif.long_text);
+                            if (model == null) {
+                                Debug.LogError($"Failed parse LeagueEndModel: {notif.long_text}");
+                                ShowSimpleNotification(i);
+                                continue;
+                            }
                             UIMapController.OpenLeagueEndWindow(model, false);
                             UIMapController.OpenLeagueEndWindow(model, true);
+                            _readNotifications.Add(_notifications[i].id);
+                            _notifications.RemoveAt(i);
                         }
                         else
                         {
-                            UIMapController.OpenNotification(_notifications[i]);
-                            _notifications.RemoveAt(i);
+                            ShowSimpleNotification(i);
                         }
                         yield return new WaitForSecondsRealtime(2f);
                     }
                 }
                 yield return new WaitForSecondsRealtime(1f);
             }
+        }
+
+        void ShowSimpleNotification(int index)
+        {
+            if (index < 0 || index >= _notifications.Count) {
+                Debug.LogError($"Wrong index notification index:{index}");
+                return;
+            }
+            
+            UIMapController.OpenNotification(_notifications[index]);
+            _notifications.RemoveAt(index);
         }
 
         void LoadComplete()

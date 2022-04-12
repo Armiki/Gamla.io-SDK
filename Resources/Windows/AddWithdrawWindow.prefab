@@ -1761,6 +1761,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4938133115526184497, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+      propertyPath: _localeKey
+      value: gamla.main.action.btn
+      objectReference: {fileID: 0}
     - target: {fileID: 7664335683942827084, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
       propertyPath: m_Name
       value: ActionBtn (1)

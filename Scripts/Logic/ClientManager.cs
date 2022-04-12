@@ -1,18 +1,16 @@
 using System;
 using System.Collections;
 using System.Text;
-using Gamla.Core;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace GamlaSDK.Scripts
+namespace Gamla.Logic
 {
     public class ClientManager : MonoBehaviour
     {
         public static int gameId = 0;
-        public static readonly string version = "0.9.14";
+        public static readonly string version = "0.9.15";
         private readonly string _uri = "https://gamla.io/api";
 
         private static ClientManager _instance;

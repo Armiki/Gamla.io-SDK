@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,7 +27,7 @@ namespace Gamla.Scripts.UI
 
             for (int i = 0; i < model.places.Count; i++)
             {
-                if (_places.Count < i)
+                if (i  < _places.Count )
                 {
                     _places[i].Init(model.places[i]);
                 }
@@ -50,7 +48,7 @@ namespace Gamla.Scripts.UI
 
             for (int i = 0; i < places.Count; i++)
             {
-                if (_places.Count < i)
+                if (i < _places.Count)
                 {
                     _places[i].Init(places[i]);
                 }

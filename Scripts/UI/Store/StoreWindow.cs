@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK.Scripts.UI.Store;
 
-namespace Gamla.Scripts.UI.Store
+namespace Gamla.UI
 {
     public class StoreWindow : GUIView
     {
@@ -51,17 +48,18 @@ namespace Gamla.Scripts.UI.Store
                 {
                     id = -1,
                     notification_id = -1,
-                    short_text = "referral code copied"
+                    short_text = LocalizationManager.Text( "gamla.redeemreferralcode.notification")
                 });
-                UIMapController.OpenPopupWindow("REFERRAL", 
-                    $"You code copied in buffer", "Copy", _generatePromocode, () =>
+                UIMapController.OpenPopupWindow(LocalizationManager.Text("gamla.redeemreferralcode.title"), 
+                    LocalizationManager.Text("gamla.redeemreferralcode.copied"), 
+                    LocalizationManager.Text("gamla.main.copy"), _generatePromocode, () =>
                 {
                     GUIUtility.systemCopyBuffer = _generatePromocode;
                     UIMapController.OpenNotification(new ServerNotification()
                     {
                         id = -1,
                         notification_id = -1,
-                        short_text = "referral code copied"
+                        short_text = LocalizationManager.Text( "gamla.redeemreferralcode.notification")
                     });
                 });
             });

@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using Gamla.Scripts.Common.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using GamlaSDK;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class HoldFinishWindow : GUIView
     {

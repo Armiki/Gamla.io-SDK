@@ -1,4 +1,4 @@
-namespace Gamla.Scripts.Common.Carousel.ScrollElementsFactories
+namespace Gamla.UI.Carousel
 {
     public class GridLineParams
     {

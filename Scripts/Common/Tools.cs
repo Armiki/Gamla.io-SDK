@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-namespace GamlaSDK
+namespace Gamla
 {
     public static class Tools
     {

@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using GamlaSDK.Scripts;
-using JetBrains.Annotations;
+using Gamla.Logic;
 
-namespace Gamla.Scripts.Data
+namespace Gamla.Data
 {
     public enum Language
     {

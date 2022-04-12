@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
+using Gamla.Data;
+using Gamla.Logic;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class NotificationWidget : MonoBehaviour
     {

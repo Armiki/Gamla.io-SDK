@@ -1,13 +1,11 @@
 using System;
-using Gamla.Scripts.Common.Carousel.ScrollElements;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
-using GamlaSDK.Scripts;
+using Gamla.Data;
+using Gamla.Logic;
+using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class GameMainWidget : BaseScrollElement
     {

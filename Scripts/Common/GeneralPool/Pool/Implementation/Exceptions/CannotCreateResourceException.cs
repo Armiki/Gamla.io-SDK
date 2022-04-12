@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Gamla.Scripts.Common.GeneralPool
+namespace Gamla.Logic
 {
 	public sealed class CannotCreateResourceException : Exception
 	{

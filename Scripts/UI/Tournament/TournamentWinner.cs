@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.UI.Main;
 
-namespace GamlaSDK.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class TournamentWinner : MonoBehaviour
     {

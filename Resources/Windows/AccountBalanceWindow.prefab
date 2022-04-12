@@ -1962,6 +1962,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2956502212262814742, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
+      propertyPath: _textField
+      value: 
+      objectReference: {fileID: 501378929318916320}
     - target: {fileID: 3001670039971844180, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2144,6 +2148,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
+--- !u!114 &501378929318916320 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4921851259723761720, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
+  m_PrefabInstance: {fileID: 4807782672083433688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &802528286354721833 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5303986812034741489, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}

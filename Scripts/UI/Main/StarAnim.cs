@@ -1,9 +1,8 @@
-using System;
 using DG.Tweening;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class StarAnim : MonoBehaviour
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Game.PoolObjects
+namespace Gamla.Logic
 {
 	public class ObjectSimplePool<T>
 	{

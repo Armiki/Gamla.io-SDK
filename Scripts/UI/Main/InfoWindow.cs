@@ -1,11 +1,9 @@
-using Gamla.Scripts.Common.UI;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
-  
     public class InfoWindow : GUIView
     {
 
@@ -14,11 +12,6 @@ namespace Gamla.Scripts.UI.Main
         [SerializeField] private Text _actionTitle;
         [SerializeField] private Button _actionBtn;
         [SerializeField] private Text _cancelTitle;
-
-        public void Start()
-        {
-          
-        }
 
         public void Init(GUIInfoType type)
         {

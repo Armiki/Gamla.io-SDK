@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gamla.Scripts.UI
+namespace Gamla.UI
 {
     /// <summary>
     /// Safe area implementation for notched mobile devices. Usage:

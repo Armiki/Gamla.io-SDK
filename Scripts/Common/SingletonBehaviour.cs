@@ -1,4 +1,4 @@
-﻿namespace Gamla.Core
+﻿namespace Gamla
 {
     using UnityEngine;
 

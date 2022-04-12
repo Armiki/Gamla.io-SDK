@@ -1,4 +1,4 @@
-﻿namespace Gamla.Scripts.Common.GeneralPool
+﻿namespace Gamla.Logic
 {
 	/// <summary>
 	/// Injectable marker interface

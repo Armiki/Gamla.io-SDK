@@ -1,4 +1,4 @@
-﻿namespace Gamla.Scripts.Common.GeneralPool
+﻿namespace Gamla.Logic
 {
 	public interface IPoolObjectInitializer< in TObject > where TObject : class
 	{

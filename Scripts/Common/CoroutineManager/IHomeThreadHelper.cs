@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Gamla.Scripts.Common
+namespace Gamla.Logic
 {
     public interface ISessionTickProvider : ITickProvider
     {

@@ -1,11 +1,10 @@
 using System;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.Logic;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI
+namespace Gamla.UI
 {
     public class TicketShopItemWidget : MonoBehaviour
     {

@@ -2359,7 +2359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textField: {fileID: 5353124095358676171}
-  _localeKey: 
+  _localeKey: gamla.window.searchingopponents.opponentsplaceholder
 --- !u!1 &7271020493378643488
 GameObject:
   m_ObjectHideFlags: 0

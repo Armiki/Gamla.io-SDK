@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Gamla.Core
+namespace Gamla
 {
     public class DontDestroyOnLoad : MonoBehaviour
     {

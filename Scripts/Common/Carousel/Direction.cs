@@ -1,4 +1,4 @@
-namespace Gamla.Scripts.Common.Carousel
+namespace Gamla.UI.Carousel
 {
     public enum Direction
     {

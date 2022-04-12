@@ -1,11 +1,9 @@
 ﻿using System;
-using Gamla.Scripts.Common.UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Gamla.Scripts.Data;
-using Gamla.Scripts.UI.Main;
+using Gamla.Data;
 
-namespace Gamla.Scripts.UI.Game
+namespace Gamla.UI
 {
     public class SearchingOpponentsWindow : GUIView
     {

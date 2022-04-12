@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Gamla.Scripts.Common.Repository
+namespace Gamla.Logic
 {
 	public sealed class ItemAlreadyExistException : Exception
 	{

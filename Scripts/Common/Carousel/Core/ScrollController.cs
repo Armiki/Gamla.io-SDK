@@ -4,7 +4,7 @@ using System.Linq;
 using Gamla.Collections;
 using UnityEngine;
 
-namespace Gamla.Scripts.Common.Carousel.Core
+namespace Gamla.UI.Carousel
 {
 	public sealed class ScrollController : IScrollController
 	{

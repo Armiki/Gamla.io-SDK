@@ -1,8 +1,7 @@
-﻿using Gamla.Scripts.Common.UI;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Gamla.Scripts.UI.Main
+namespace Gamla.UI
 {
     public class HelpWindow : GUIView
     {
@@ -12,10 +11,5 @@ namespace Gamla.Scripts.UI.Main
         [SerializeField] private Button _findMathcIdLink;
         
         [SerializeField] private Button _send;
-
-        public void Start()
-        {
-           
-        }
     }
 }

@@ -1,41 +1,44 @@
 using System;
-using Gamla.Scripts.Logic;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AvatarComponent : MonoBehaviour
+namespace Gamla.UI
 {
-    [SerializeField] public RawImage avatar;
-    private Texture2D _temp;
-    private string _tempUrl;
-
-    public void Load(string url)
+    public class AvatarComponent : MonoBehaviour
     {
-        if(url == String.Empty) return;
+        [SerializeField] public RawImage avatar;
+        private Texture2D _temp;
+        private string _tempUrl;
 
-        _tempUrl = url;
-        
-        LoadAva();
-    }
-
-    private void OnEnable()
-    {
-        LoadAva();
-    }
-
-    private void LoadAva()
-    {
-        if (_tempUrl != String.Empty)
+        public void Load(string url)
         {
-            RemoteResourceManager.GetContent(_tempUrl, texture2D =>
+            if (url == String.Empty) return;
+
+            _tempUrl = url;
+
+            LoadAva();
+        }
+
+        private void OnEnable()
+        {
+            LoadAva();
+        }
+
+        private void LoadAva()
+        {
+            if (_tempUrl != String.Empty)
             {
-                if (texture2D != null)
+                RemoteResourceManager.GetContent(_tempUrl, texture2D =>
                 {
-                    _temp = texture2D;
-                    if(avatar != null && gameObject != null && this != null)
-                        avatar.texture = _temp;
-                }
-            }, gameObject);
+                    if (texture2D != null)
+                    {
+                        _temp = texture2D;
+                        if (avatar != null && gameObject != null && this != null)
+                            avatar.texture = _temp;
+                    }
+                }, gameObject);
+            }
         }
     }
 }
