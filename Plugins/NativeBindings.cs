@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
+
 public class NativeBindings
 {
-#if UNITY_IPHONE
+        #if UNITY_IPHONE
         [DllImport ("__Internal")]
         public static extern string GetSettingsURL();
 
