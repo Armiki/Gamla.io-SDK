@@ -12,9 +12,7 @@ namespace Gamla.Logic
     {
         private bool _isInMatch = true;
         private List<ServerNotification> _notifications = new List<ServerNotification>();
-        private List<long> _readNotifications = new List<long>();
-        
-        
+
         public void Start()
         {
             Application.targetFrameRate = 60;
@@ -106,7 +104,7 @@ namespace Gamla.Logic
                 {
                     ServerCommand.GetNotification(result =>
                     {
-                        _notifications = result.FindAll(notif => notif.read == 0 && !_readNotifications.Contains(notif.id));
+                        _notifications = result.FindAll(notif => notif.read == 0);
                     });
                 }
                 yield return new WaitForSecondsRealtime(10f);
@@ -137,7 +135,7 @@ namespace Gamla.Logic
                                 continue;
                             }
                             UIMapController.OpenTournamentEndWindow(model);
-                            _readNotifications.Add(_notifications[i].id);
+                            ServerCommand.ReadNotification(_notifications[i].id);
                             _notifications.RemoveAt(i);
                         }
                         else if (_notifications[i].notification_id == 5)
@@ -151,7 +149,7 @@ namespace Gamla.Logic
                             }
                             UIMapController.OpenLeagueEndWindow(model, false);
                             UIMapController.OpenLeagueEndWindow(model, true);
-                            _readNotifications.Add(_notifications[i].id);
+                            ServerCommand.ReadNotification(_notifications[i].id);
                             _notifications.RemoveAt(i);
                         }
                         else
