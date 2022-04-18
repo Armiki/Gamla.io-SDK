@@ -109,7 +109,7 @@ namespace Gamla.UI
                 item.Init(pack);
                 item.onBuyClick += (pack) =>
                 {
-                    var validateWindow = UIMapController.OpenValidateWindow();
+                    var validateWindow = UIMapController.OpenValidateWindow(true);
                     validateWindow.onCloseAction += GamlaResourceManager.tabBar.SelectPlay;
                     ServerCommand.AddPack(pack, validateWindow);
                 };

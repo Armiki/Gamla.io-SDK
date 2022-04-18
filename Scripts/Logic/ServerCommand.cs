@@ -59,7 +59,7 @@ namespace Gamla.Logic
         
         public static void SendLogin(string email, string password, bool isNew)
         {
-            var spinner = UIMapController.OpenValidateWindow();
+            var spinner = UIMapController.OpenValidateWindow(false);
             string data = JsonUtility.ToJson(new ServerLoginModel()
             {
                 game_id = ClientManager.gameId,
@@ -94,7 +94,7 @@ namespace Gamla.Logic
 
         public static void SignUp(string name, string email, string password)
         {
-            var spinner = UIMapController.OpenValidateWindow();
+            var spinner = UIMapController.OpenValidateWindow(false); 
             string data = JsonUtility.ToJson(new ServerSignUpModel()
             {
                 game_id = ClientManager.gameId,
@@ -135,6 +135,7 @@ namespace Gamla.Logic
                 EventManager.OnProfileUpdate.Push();
                 GetOrUpdateMatches(result =>
                 {
+                    UIMapController.CloseSpinner();
                     if(!IsHaveBattleInPast())
                         GamlaResourceManager.tabBar.SelectPlay();
 

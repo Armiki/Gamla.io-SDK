@@ -40,10 +40,14 @@ namespace Gamla.UI
 
             Init(DataConstants.warningDict[type]);
             _actionBtn.gameObject.SetActive(withAction);
+
+            var descHeight = withAction ? 118 : 193;
+            _description.rectTransform.sizeDelta = new Vector2(_description.rectTransform.sizeDelta.x, descHeight);
         }
 
         public void Init(GUIInfoWinData data)
         {
+            _actionBtn.gameObject.SetActive(!string.IsNullOrEmpty(data.actionTitle));
             _title.text = data.title;
             _description.text = data.description;
             _actionTitle.text = data.actionTitle;

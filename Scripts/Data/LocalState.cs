@@ -20,6 +20,9 @@ namespace Gamla.Data
         public static SaveBattleModel saveBattleModel = new SaveBattleModel();
         public static GameAppListResult gameApplist = new GameAppListResult();
         
+        public static List<PendingWindow> pendingWindows = new List<PendingWindow>();
+        public static bool showingPendingWindow;
+        
         public static List<Pack> storePacks = new List<Pack>
         {
             new Pack
@@ -112,5 +115,20 @@ namespace Gamla.Data
 
         public static GameAppInfo gameAppInfo;
         public static GameInfo currentGame = new GameInfo();
+    }
+
+    public enum PendingWindowType
+    {
+        Tournament,
+        SilverLeague,
+        GoldLeague,
+        Reward
+    }
+    
+    public class PendingWindow
+    {
+        public long Id;
+        public PendingWindowType WindowType;
+        public object Context;
     }
 }

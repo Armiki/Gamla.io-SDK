@@ -103,7 +103,7 @@ namespace Gamla.Logic
         {
             var spinner = GamlaResourceManager.windowsContainer.Find("ValidateWindow(Clone)");
             if (spinner != null) {
-                spinner.GetComponent<ValidateWindow>().ClosePublic();
+                spinner.GetComponent<ValidateWindow>().CloseInvoke();
             }
         }
         
@@ -325,7 +325,6 @@ namespace Gamla.Logic
             window.onOpenTournamentList += OpenTournamentList;
             CheckStack(window);
             window.Init(LocalState.currentGame);
-            CloseSpinner();
             //OpenNotification("Hey! Hey! Play the game!");
         }
 
@@ -772,9 +771,9 @@ namespace Gamla.Logic
             window.Init(new GUIInfoWinData()
             {
                 actionTitle = "",
-                closeTitle = "Close",
+                closeTitle = LocalizationManager.Text("gamla.main.close.btn"),
                 description = error,
-                title = "ERROR"
+                title = LocalizationManager.Text("gamla.main.error")
             });
             CheckStack(window);
             window.Show();
@@ -814,13 +813,14 @@ namespace Gamla.Logic
             window.Show();
         }
 
-        public static ValidateWindow OpenValidateWindow()
+        public static ValidateWindow OpenValidateWindow(bool withCloseButton)
         {
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/ValidateWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<ValidateWindow>();
             CheckStack(window);
             window.Show();
+            window.ShowCloseButton(withCloseButton);
             return window;
         }
         
@@ -835,38 +835,115 @@ namespace Gamla.Logic
             window.Show();
         }
         
-        public static void OpenRewardWindow(List<Currency> rewards)
+        public static void OpenRewardWindow(long id, List<Currency> rewards)
         {
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/RewardWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<RewardWindow>();
-            CheckStack(window);
-            
-            var bonusCount = rewards.Count > 0 ? rewards[0].amount : 0;
-            window.Init(bonusCount, rewards.Count > 0 ? rewards[0].type : CurrencyType.Z);
-            window.Show();
+            AddPendingWindow(id, PendingWindowType.Reward, rewards);
         }
 
-        public static void OpenTournamentEndWindow(ServerTournamentEndModel model)
+        public static void OpenTournamentEndWindow(long id, ServerTournamentEndModel model)
         {
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentEndWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<TournamentEndWindow>();
-            CheckStack(window);
-            
-            window.Init(model);
-            window.Show();
+            AddPendingWindow(id, PendingWindowType.Tournament, model);
         }
         
-        public static void OpenLeagueEndWindow(ServerLeagueEndModel model, bool gold)
+        public static void OpenLeagueEndWindow(long id, ServerLeagueEndModel model, bool gold)
         {
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentEndWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<TournamentEndWindow>();
-            CheckStack(window);
+            AddPendingWindow(id, gold ? PendingWindowType.GoldLeague : PendingWindowType.SilverLeague, model);
+        }
+
+        static void AddPendingWindow(long id, PendingWindowType type, object context)
+        {
+            if (LocalState.pendingWindows.Exists(w => w.Id == id)) {
+                return;
+            }
             
-            window.Init(model, gold);
-            window.Show();
+            LocalState.pendingWindows.Add(new PendingWindow()
+            {
+                Id = id,
+                WindowType =  type,
+                Context = context
+            });
+        }
+
+        public static void TryShowingPendingWindow()
+        {
+            if (LocalState.showingPendingWindow) {
+                return;
+            }
+            
+            if (LocalState.pendingWindows.Count == 0) {
+                return;
+            }
+
+            if (GetWindow("TournamentEndWindow") != null) {
+                return;
+            }
+            
+            if (GetWindow("RewardWindow") != null) {
+                return;
+            }
+
+            var data = LocalState.pendingWindows.OrderBy(w=>w.WindowType).First();
+            LocalState.pendingWindows.Remove(data);
+
+            GUIView view;
+            switch (data.WindowType)
+            {
+                case PendingWindowType.Tournament: {
+                    var window = InstatiateWindow<TournamentEndWindow>();
+                    window.Init(data.Context as ServerTournamentEndModel);
+                    window.Show();
+                    view = window;
+                }
+                    break;
+                case PendingWindowType.SilverLeague: {
+                    var window = InstatiateWindow<TournamentEndWindow>();
+                    window.Init(data.Context as ServerLeagueEndModel, false);
+                    window.Show();
+                    view = window;
+                }
+                    break;
+                case PendingWindowType.GoldLeague: {
+                    var window = InstatiateWindow<TournamentEndWindow>();
+                    window.Init(data.Context as ServerLeagueEndModel, true);
+                    window.Show();
+                    view = window;
+                }
+                    break;
+                case PendingWindowType.Reward: {
+                    var window = InstatiateWindow<RewardWindow>();
+                    var rewards = data.Context as List<Currency>;
+                    var bonusCount = rewards.Count > 0 ? rewards[0].amount : 0;
+                    window.Init(bonusCount, rewards.Count > 0 ? rewards[0].type : CurrencyType.Z);
+                    window.Show();
+                    view = window;
+                }
+                    break;
+                default:
+                    Debug.LogError($"unsupported pending window type {data.WindowType}");
+                    return;
+            }
+
+            LocalState.showingPendingWindow = true;
+            ServerCommand.ReadNotification(data.Id);
+            view.onClosed += OnClosedPendingWindow;
+        }
+
+        private static void OnClosedPendingWindow(IGUIView view)
+        {
+            LocalState.showingPendingWindow = false;
+            view.onClosed -= OnClosedPendingWindow;
+            TryShowingPendingWindow();
+        }
+
+        static T InstatiateWindow<T>() where T : GUIView
+        {
+            var windowName = $"Windows/{typeof(T).Name}";
+            var window =
+                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource(windowName),
+                    GamlaResourceManager.windowsContainer).GetComponent<T>();
+            CheckStack(window);
+
+            return window;
         }
 
         static void OpenPublicProfile(long id)
@@ -893,7 +970,6 @@ namespace Gamla.Logic
             CheckStack(window);
             window.Init(winBattles);
             window.Show();
-            CloseSpinner();
         }
 
         public static void Clear()

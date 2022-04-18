@@ -22,9 +22,14 @@ namespace Gamla.UI
             });
         }
 
+        public void ShowCloseButton(bool show)
+        {
+            _actionBtn.gameObject.SetActive(show);
+        }
+
         public void CloseInvoke()
         {
-            if(transform == null || !gameObject.activeSelf) return;
+            if(this == null || transform == null || !gameObject.activeSelf) return;
             onActionClick?.Invoke();
             Close();
         }

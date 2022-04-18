@@ -92,16 +92,13 @@ namespace Gamla.UI
             var currentAwards = new List<ServerTournamentAward>();
             foreach (var award in tournament.awards)
             {
-                if (award.place != 1)
-                {
-                    if (currentAwards.Any(a => a.currency == award.currency && a.amount == award.amount)) continue;
-                    var head = Instantiate(_headPref, _headRect);
-                    head.SetData(award);
-                    var column = Instantiate(_roundColumnPref, _contentRect);
-                    column.sizeDelta = new Vector2(994, tournament.players_count * 240);
-                    _roundColumns.Add(column);
-                    currentAwards.Add(award);
-                }
+                if (currentAwards.Any(a => a.currency == award.currency && a.amount == award.amount)) continue;
+                var head = Instantiate(_headPref, _headRect);
+                head.SetData(award);
+                var column = Instantiate(_roundColumnPref, _contentRect);
+                column.sizeDelta = new Vector2(994, tournament.players_count * 240);
+                _roundColumns.Add(column);
+                currentAwards.Add(award);
             }
             
             var headWinner = Instantiate(_headPref, _headRect);

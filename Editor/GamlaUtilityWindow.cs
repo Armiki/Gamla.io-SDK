@@ -101,7 +101,8 @@ namespace Gamla.Editor
 
         void OnBodyGUI()
         {
-            
+            PlayerSettings.iOS.locationUsageDescription =
+                "Due to legal requirements we require your location in games that can be played for cash.";
         }
         
         void OnFooterGUI()

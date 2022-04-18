@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Gamla.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,9 +38,10 @@ namespace Gamla.UI
             if(_tickets != null)_tickets.onClick.AddListener(() => TicketClick());
         }
 
-        void Start()
+        IEnumerator Start()
         {
-            Invoke("HardClick", 0.1f);
+            yield return new WaitForSeconds(0.1f);
+            HardClick();
         }
 
         void SetInactiveBack(RecolorItem back)

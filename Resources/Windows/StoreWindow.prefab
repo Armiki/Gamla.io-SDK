@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 554, y: 0}
-  m_SizeDelta: {x: 1022, y: 0}
+  m_AnchoredPosition: {x: 531.5, y: 0}
+  m_SizeDelta: {x: 977, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1059215452292619011
 CanvasRenderer:
@@ -641,7 +641,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 554, y: 0}
+  m_AnchoredPosition: {x: 539, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1980613712322286902
@@ -2412,9 +2412,21 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 706774948642349182, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3497538847143726076, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
       propertyPath: m_Text
       value: Invite friend to get extra bonus
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497538847143726076, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3497538847143726076, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 49
       objectReference: {fileID: 0}
     - target: {fileID: 4938133115526184497, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
       propertyPath: _localeKey
@@ -2508,7 +2520,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4266856669376355108, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
 --- !u!114 &7040104771030671958 stripped
 MonoBehaviour:

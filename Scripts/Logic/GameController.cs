@@ -10,6 +10,10 @@ namespace Gamla.Logic
 {
     public class GameController : MonoBehaviour
     {
+        private const long RewardNotifId = 23;
+        private const long TournamentEndNotifId = 7;
+        private const long LeagueNotifId = 5;
+        
         private bool _isInMatch = true;
         private List<ServerNotification> _notifications = new List<ServerNotification>();
 
@@ -119,13 +123,14 @@ namespace Gamla.Logic
                 {
                     for(int i = _notifications.Count - 1; i >= 0; i --)
                     {
-                        if (_notifications[i].notification_id == 23)
+                        if (_notifications[i].notification_id == RewardNotifId)
                         {
                             var notif = _notifications[i];
                             List<Currency> reward = Currency.parse(notif.long_text);
-                            UIMapController.OpenRewardWindow(reward);
+                            UIMapController.OpenRewardWindow(_notifications[i].id, reward);
+                            _notifications.RemoveAt(i);
                         }
-                        else if (_notifications[i].notification_id == 7)
+                        else if (_notifications[i].notification_id == TournamentEndNotifId)
                         {
                             var notif = _notifications[i];
                             ServerTournamentEndModel model = JsonUtility.FromJson<ServerTournamentEndModel>(notif.long_text);
@@ -134,11 +139,10 @@ namespace Gamla.Logic
                                 ShowSimpleNotification(i);
                                 continue;
                             }
-                            UIMapController.OpenTournamentEndWindow(model);
-                            ServerCommand.ReadNotification(_notifications[i].id);
+                            UIMapController.OpenTournamentEndWindow(_notifications[i].id, model);
                             _notifications.RemoveAt(i);
                         }
-                        else if (_notifications[i].notification_id == 5)
+                        else if (_notifications[i].notification_id == LeagueNotifId)
                         {
                             var notif = _notifications[i];
                             ServerLeagueEndModel model = JsonUtility.FromJson<ServerLeagueEndModel>(notif.long_text);
@@ -147,12 +151,16 @@ namespace Gamla.Logic
                                 ShowSimpleNotification(i);
                                 continue;
                             }
-                            UIMapController.OpenLeagueEndWindow(model, false);
-                            UIMapController.OpenLeagueEndWindow(model, true);
-                            ServerCommand.ReadNotification(_notifications[i].id);
+                            UIMapController.OpenLeagueEndWindow(_notifications[i].id, model, false);
+                            UIMapController.OpenLeagueEndWindow(_notifications[i].id, model, true);
                             _notifications.RemoveAt(i);
                         }
-                        else
+                    }
+                    UIMapController.TryShowingPendingWindow();
+                    
+                    for (int i = _notifications.Count - 1; i >= 0; i--)
+                    {
+                        if (IsSimpleNotification(_notifications[i].notification_id))
                         {
                             ShowSimpleNotification(i);
                         }
@@ -161,6 +169,11 @@ namespace Gamla.Logic
                 }
                 yield return new WaitForSecondsRealtime(1f);
             }
+        }
+
+        bool IsSimpleNotification(long id)
+        {
+            return id != LeagueNotifId && id != TournamentEndNotifId && id != RewardNotifId;
         }
 
         void ShowSimpleNotification(int index)

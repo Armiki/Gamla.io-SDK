@@ -53,6 +53,7 @@ namespace Gamla.UI
             }
             
             InvokeRepeating("UpdateProfile", 10, 10);
+            UIMapController.CloseSpinner();
         }
 
         private void UpdateProfile()

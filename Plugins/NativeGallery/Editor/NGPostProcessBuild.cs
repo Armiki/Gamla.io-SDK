@@ -17,8 +17,8 @@ namespace NativeGalleryNamespace
 #if !UNITY_2018_1_OR_NEWER
 		public bool MinimumiOSTarget8OrAbove = false;
 #endif
-		public string PhotoLibraryUsageDescription = "The app requires access to Photos to interact with it.";
-		public string PhotoLibraryAdditionsUsageDescription = "The app requires access to Photos to save media to it.";
+		public string PhotoLibraryUsageDescription = "Gamla.io uses access to your photo album to customize your profile picture.";
+		public string PhotoLibraryAdditionsUsageDescription = "Gamla.io uses access to your photo album to customize your profile picture.";
 		public bool DontAskLimitedPhotosPermissionAutomaticallyOnIos14 = true; // See: https://mackuba.eu/2020/07/07/photo-library-changes-ios-14/
 
 		private static Settings m_instance = null;
@@ -76,8 +76,8 @@ namespace NativeGalleryNamespace
 #if !UNITY_2018_1_OR_NEWER
 			Instance.MinimumiOSTarget8OrAbove = EditorGUILayout.Toggle( "Deployment Target Is 8.0 Or Above", Instance.MinimumiOSTarget8OrAbove );
 #endif
-			Instance.PhotoLibraryUsageDescription = EditorGUILayout.DelayedTextField( "Photo Library Usage Description", Instance.PhotoLibraryUsageDescription );
-			Instance.PhotoLibraryAdditionsUsageDescription = EditorGUILayout.DelayedTextField( "Photo Library Additions Usage Description", Instance.PhotoLibraryAdditionsUsageDescription );
+			Instance.PhotoLibraryUsageDescription = EditorGUILayout.DelayedTextField( "Gamla.io uses access to your photo album to customize your profile picture.", Instance.PhotoLibraryUsageDescription );
+			Instance.PhotoLibraryAdditionsUsageDescription = EditorGUILayout.DelayedTextField( "Gamla.io uses access to your photo album to customize your profile picture.", Instance.PhotoLibraryAdditionsUsageDescription );
 			Instance.DontAskLimitedPhotosPermissionAutomaticallyOnIos14 = EditorGUILayout.Toggle( new GUIContent( "Don't Ask Limited Photos Permission Automatically", "See: https://mackuba.eu/2020/07/07/photo-library-changes-ios-14/. It's recommended to keep this setting enabled" ), Instance.DontAskLimitedPhotosPermissionAutomaticallyOnIos14 );
 			EditorGUI.EndDisabledGroup();
 

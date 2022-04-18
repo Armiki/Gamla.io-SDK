@@ -78,7 +78,8 @@ namespace Gamla.UI
             {
                 return true;
             }
-            ChangeCorrectStatus(false, "please fill in the input field");
+            
+            ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.simple.error"));
             return false;
         }
 
@@ -87,8 +88,8 @@ namespace Gamla.UI
             if (Utils.IsValidEmail(_input.text))
             {
                 return true;
-            }
-            ChangeCorrectStatus(false, "incorrect email");
+            } 
+            ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.incorrectemail.error"));
             return false;
         }
         
@@ -98,7 +99,7 @@ namespace Gamla.UI
             {
                 return true;
             }
-            ChangeCorrectStatus(false, "incorrect phone");
+            ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.incorrectphone.error"));
             return false;
         }
 
@@ -108,7 +109,7 @@ namespace Gamla.UI
             //{
             if(otherText.Length < 8)
             {
-                ChangeCorrectStatus(false, "Password must be at least 8 characters");
+                ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.shortpassword.error"));
             }
             else if (String.Compare(_input.text, otherText, StringComparison.Ordinal) == 0)
             {
@@ -116,7 +117,7 @@ namespace Gamla.UI
             }
             else
             {
-                ChangeCorrectStatus(false, "password mismatch");
+                ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.passwordmismatch.error"));
             }
             /*}
             else

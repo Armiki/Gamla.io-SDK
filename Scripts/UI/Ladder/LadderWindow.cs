@@ -111,6 +111,8 @@ namespace Gamla.UI
         void FilterData(CurrencyType type)
         {
             if(_current_game?.leagues?.leagues?.data == null) return;
+            if(_current_game?.leagues?.leagues?.data.Count == 0) return;
+            
             bool isGoldLeague = true;
             if (type == CurrencyType.USD)
             {
