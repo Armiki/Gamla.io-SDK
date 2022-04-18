@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recolorField: textColorTertiary
   image: {fileID: 0}
-  simpleText: {fileID: 0}
+  simpleText: {fileID: 8640694253162292842}
   gradient: {fileID: 0}
   animRect: {fileID: 0}
   angelMultiply: 1
@@ -296,6 +296,8 @@ MonoBehaviour:
   _bankCardBtn: {fileID: 5149110714128735186}
   _payPalBtn: {fileID: 578195405141894129}
   _saveBtn: {fileID: 1738857841034137409}
+  _bankRecolorTitle: {fileID: 4019048247791782578}
+  _payPalRecolorTitle: {fileID: 965178455619738597}
 --- !u!1 &1825387393155690218
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,8 +542,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5302472810089711281}
   - component: {fileID: 6609051856486581248}
-  - component: {fileID: 4019048247791782578}
   - component: {fileID: 6143319721146784543}
+  - component: {fileID: 4019048247791782578}
   - component: {fileID: 7590252723651823565}
   m_Layer: 31
   m_Name: Title
@@ -577,25 +579,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1833768501997289931}
   m_CullTransparentMesh: 1
---- !u!114 &4019048247791782578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1833768501997289931}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8eb6d63a4e2c40fa8b8097662fca438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  recolorField: textColorPrimary
-  image: {fileID: 0}
-  simpleText: {fileID: 6143319721146784543}
-  gradient: {fileID: 0}
-  animRect: {fileID: 0}
-  angelMultiply: 1
-  rawImage: {fileID: 0}
 --- !u!114 &6143319721146784543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,6 +613,25 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Bank card
+--- !u!114 &4019048247791782578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833768501997289931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8eb6d63a4e2c40fa8b8097662fca438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recolorField: textColorSecondary
+  image: {fileID: 0}
+  simpleText: {fileID: 6143319721146784543}
+  gradient: {fileID: 0}
+  animRect: {fileID: 0}
+  angelMultiply: 1
+  rawImage: {fileID: 0}
 --- !u!114 &7590252723651823565
 MonoBehaviour:
   m_ObjectHideFlags: 0

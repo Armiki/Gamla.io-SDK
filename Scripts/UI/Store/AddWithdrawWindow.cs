@@ -20,6 +20,9 @@ namespace Gamla.UI
         [SerializeField] private Button _payPalBtn;
         [SerializeField] private Button _saveBtn;
 
+        [SerializeField] private RecolorItem _bankRecolorTitle;
+        [SerializeField] private RecolorItem _payPalRecolorTitle;
+        
         private bool isCard = true;
         private CardHolderList _localData;
 
@@ -76,6 +79,8 @@ namespace Gamla.UI
             _payPalBtn.GetComponent<RecolorItem>().SetNewRecolor("filterOffColor");
             _bankCardRect.gameObject.SetActive(true);
             _payPalRect.gameObject.SetActive(false);
+            _bankRecolorTitle.SetNewRecolor("textColorSecondary");
+            _payPalRecolorTitle.SetNewRecolor("textColorTertiary");
             isCard = true;
         }
         
@@ -85,6 +90,8 @@ namespace Gamla.UI
             _payPalBtn.GetComponent<RecolorItem>().SetNewRecolor("filterOnColor");
             _bankCardRect.gameObject.SetActive(false);
             _payPalRect.gameObject.SetActive(true);
+            _bankRecolorTitle.SetNewRecolor("textColorTertiary");
+            _payPalRecolorTitle.SetNewRecolor("textColorSecondary");
             isCard = false;
         }
         
