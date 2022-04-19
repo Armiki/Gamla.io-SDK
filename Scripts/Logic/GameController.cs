@@ -46,6 +46,7 @@ namespace Gamla.Logic
             LocalState.pushToken = pushToken;
             try
             {
+                UIMapController.OpenLoading();
                 LocalizationManager.Init(PlayerPrefs.GetString("locale", "english"), () => { Load(); });
                 if (EventSystem.current == null)
                 {

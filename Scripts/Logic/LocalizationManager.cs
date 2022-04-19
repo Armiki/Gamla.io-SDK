@@ -36,12 +36,12 @@ namespace Gamla.Logic
                     yield break;
                 }
 
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSecondsRealtime(0.5f);
                 
                 if (!Directory.Exists(GetPath()))
                     Directory.CreateDirectory(GetPath());
                 
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSecondsRealtime(0.5f);
 
                 string data = webRequest.downloadHandler.text;
                 LocaleConfig localeConfig = JsonUtility.FromJson<LocaleConfig>(data);
@@ -52,7 +52,7 @@ namespace Gamla.Logic
                     var cacheFilePath = Path.Combine(GetPath(), localeConfigValue.Filename);
                     if (!File.Exists(cacheFilePath))
                     {
-                        yield return new WaitForSeconds(1);
+                        yield return new WaitForSecondsRealtime(1);
                         yield return HomeThreadHelper.homeThread.ExecuteCoroutine(
                             LoadSaveContent(localeConfigValue.Url, localeConfigValue.Filename));
                     }
@@ -70,11 +70,11 @@ namespace Gamla.Logic
                 yield return webRequest.SendWebRequest();
                 while (!webRequest.isDone)
                 {
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSecondsRealtime(0.5f);
                 }
 
                 yield return webRequest.downloadHandler.isDone;
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSecondsRealtime(0.5f);
                 if (string.IsNullOrEmpty(webRequest.error))
                 {
                     string result = webRequest.downloadHandler.text;
@@ -83,7 +83,7 @@ namespace Gamla.Logic
                     {
                         var cacheFilePath = Path.Combine(GetPath(), fileName);
                         File.WriteAllText(cacheFilePath, result);
-                        yield return new WaitForSeconds(1.5f);
+                        yield return new WaitForSecondsRealtime(0.5f);
                     }
                 }
                 else
