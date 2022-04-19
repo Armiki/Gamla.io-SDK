@@ -361,7 +361,10 @@ namespace Gamla.Logic
                     GameObject.Instantiate(
                         GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentBoardWindow"),
                         GamlaResourceManager.windowsContainer).GetComponent<TournamentBoardWindow>();
-                window.SetData(tournament);
+
+                //Workaround for update Play button in board
+                var currentTournament = LocalState.tournaments.Find(t => t.id == tournament.id);
+                window.SetData(currentTournament ?? tournament);
                 CheckStack(window);
                 window.Show();
             }

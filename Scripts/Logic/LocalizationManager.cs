@@ -37,6 +37,11 @@ namespace Gamla.Logic
                 }
 
                 yield return new WaitForSeconds(1);
+                
+                if (!Directory.Exists(GetPath()))
+                    Directory.CreateDirectory(GetPath());
+                
+                yield return new WaitForSeconds(1);
 
                 string data = webRequest.downloadHandler.text;
                 LocaleConfig localeConfig = JsonUtility.FromJson<LocaleConfig>(data);
@@ -91,10 +96,6 @@ namespace Gamla.Logic
 
         public static void Init(string language, Action callback)
         {
-            if (!Directory.Exists(GetPath()))
-                //Directory.Delete(GetPath(), true);
-                Directory.CreateDirectory(GetPath());
-
             HomeThreadHelper.homeThread.ExecuteCoroutine(LoadVersion(b =>
             {
                 ChangeLanguage(language);

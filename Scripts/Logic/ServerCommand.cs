@@ -750,12 +750,12 @@ namespace Gamla.Logic
                 score = score
             });
             
-            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "tournaments/play", data, matches =>
+            ClientManager.InvokeEvent<ServerMatchInfo>(LocalState.token, "tournaments/play", data, matches =>
             {
 
             }, e =>
             {
-
+                Debug.LogError($"Error on finish turnir game: {e.error}");
             });
             
         }
@@ -963,6 +963,7 @@ namespace Gamla.Logic
                 }
                 
                 callback?.Invoke(result);
+                EventManager.OnTournamentsUpdated.Push();
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);

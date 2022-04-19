@@ -178,8 +178,32 @@ namespace Gamla.UI
             
             _contentRect.sizeDelta = new Vector2(1044 * (currentAwards.Count + 1), (tournament.players_count+2) * 240);
 
-            bool isCanPlay =
-                tournament.matches.Any(m => m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
+            UpdatePlayButton();
+            EventManager.OnTournamentsUpdated.Del(OnUpdateTournaments);
+            EventManager.OnTournamentsUpdated.Subscribe(OnUpdateTournaments);
+        }
+
+        private void OnUpdateTournaments()
+        {
+            if (_play.gameObject.activeSelf) {
+                UpdatePlayButton();
+            }
+        }
+
+        void UpdatePlayButton()
+        {
+            if (_tournament == null) {
+                _play.gameObject.SetActive(false);
+                return;
+            }
+            var updatedTournament = LocalState.tournaments.Find(t => t.id == _tournament.id);
+            if (updatedTournament == null) {
+                _play.gameObject.SetActive(false);
+                return;
+            }
+            
+            bool isCanPlay = updatedTournament.matches.Any(m =>
+                m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
             _play.gameObject.SetActive(isCanPlay);
         }
 
@@ -196,6 +220,7 @@ namespace Gamla.UI
                     LocalState.currentTournament = _tournament;
                     LocalState.currentMatch = new ServerMatchStart {match = match};
                     ServerCommand.TryPlayTournament(match.id, _tournament);
+                    _play.gameObject.SetActive(false);
                 }
             }
         }
@@ -344,6 +369,12 @@ namespace Gamla.UI
         public void LateUpdate()
         {
             _headRect.anchoredPosition = new Vector2(_contentRect.anchoredPosition.x, _headUpPos);
+        }
+
+        public override void OnDestroy()
+        { 
+            EventManager.OnTournamentsUpdated.Del(OnUpdateTournaments);
+            base.OnDestroy();
         }
     }
 }

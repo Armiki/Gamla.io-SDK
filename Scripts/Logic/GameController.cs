@@ -199,10 +199,13 @@ namespace Gamla.Logic
 
         private void OnMatchEnd(int score)
         {
-            if(LocalState.currentMatch != null)
+            if (LocalState.currentMatch != null)
                 ServerCommand.GameFinish(score);
-            if(LocalState.currentTournament != null)
+            if (LocalState.currentTournament != null)
+            {
                 ServerCommand.GameFinishTournament(score);
+                ServerCommand.GetTournaments(null);
+            }
 
             _isInMatch = false;
         }
