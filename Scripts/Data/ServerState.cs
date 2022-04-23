@@ -140,6 +140,11 @@ namespace Gamla.Data
                 }
             }
         }
+
+        public bool IsEmpty()
+        {
+            return id == 0 && string.IsNullOrEmpty(nickname);
+        }
     }
     
     [Serializable]

@@ -22,7 +22,7 @@ namespace Gamla.Data
         
         public static List<PendingWindow> pendingWindows = new List<PendingWindow>();
         public static bool showingPendingWindow;
-        
+
         public static List<Pack> storePacks = new List<Pack>
         {
             new Pack
@@ -115,6 +115,18 @@ namespace Gamla.Data
 
         public static GameAppInfo gameAppInfo;
         public static GameInfo currentGame = new GameInfo();
+
+        public static void ClearState()
+        {
+            token = "";
+            currentUser = null;
+            currentMatch = null;
+            currentTournament = null;
+            newBattleMatches.Clear();
+            tournaments.Clear();
+            pendingWindows.Clear();
+            showingPendingWindow = false;
+        }
     }
 
     public enum PendingWindowType

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Gamla.Data;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,17 +50,27 @@ namespace Gamla.UI
                     _requestFilterGO.SetActive(true);
                 }
             };
+            
+            EventManager.OnFriendsUpdated.Del(UpdateFriends);
+            EventManager.OnFriendsUpdated.Subscribe(UpdateFriends);
         }
 
-        public void InitFriends(ServerFriends friendData)
+        void UpdateFriends()
+        {
+            InitFriends(LocalState.friends, false);
+        }
+        
+        public void InitFriends(ServerFriends friendData, bool resetRoots = true)
         {
             _friendsWidgets.Clear();
             SetData(_friendContent, friendData.friends, false);
             SetData(_requestContent, friendData.friends_out, true);
             SetData(_requestContent, friendData.friends_in, true, false);
-            
-            _friendFilterGO.SetActive(true);
-            _requestFilterGO.SetActive(false);
+
+            if (resetRoots) {
+                _friendFilterGO.SetActive(true);
+                _requestFilterGO.SetActive(false);
+            }
         }
 
         private void SetData(RectTransform content, List<ServerPublicUser> friends, bool isRequestWidget, bool isNeedClearContent = true)
@@ -102,5 +113,10 @@ namespace Gamla.UI
             onSelectFriend?.Invoke(id);
         }
 
+        public override void OnDestroy()
+        {
+            EventManager.OnFriendsUpdated.Del(UpdateFriends);
+            base.OnDestroy();
+        }
     }
 }

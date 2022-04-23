@@ -1,4 +1,5 @@
-﻿using Gamla.Data;
+﻿using System;
+using Gamla.Data;
 using Gamla.Logic;
 using Gamla.UI.Carousel;
 using UnityEngine;
@@ -24,11 +25,11 @@ namespace Gamla.UI
 
         public void Init(AccountBalanceData data)
         {
-            _name.text = LocaliseName(data.game.name);
-            _status.text = data.status;
-            _date.text = data.date;
-            _id.text = data.battleId;
-            _amount.text = data.currency.amount.ToString();
+            _name.text = data.comment;
+            _status.text = LocaliseName(data.status);
+            _date.text = DateTime.Parse(data.date).ToShortDateString();
+            _id.text = data.status;//data.battleId;
+            _amount.text = (data.currency.amount * SignValue(data.type)).ToString();
             
             switch (data.currency.type)
             {
@@ -61,6 +62,18 @@ namespace Gamla.UI
                     return LocalizationManager.Text("gamla.withdraw.debit");
                 default :
                     return status;
+            }
+        }
+
+        int SignValue(string type)
+        {
+            switch (type)
+            {
+                case "replenishment": return 1;
+                case "commission": return -1;
+                case "debit": return -1;
+                default :
+                    return 1;
             }
         }
     }

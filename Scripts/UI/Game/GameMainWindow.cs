@@ -46,6 +46,7 @@ namespace Gamla.UI
             _newGameHeadBtn.onClick.RemoveAllListeners();
             _newGameHeadBtn.onClick.AddListener(() => onOpenBattleList?.Invoke());
             EventManager.OnGameInfoUpdate.Subscribe(UpdateData);
+            EventManager.OnTournamentsUpdated.Subscribe(InitTournaments);
             //ServerCommand.GetOrUpdateMatches();
             if (LocalState.currentGame.history.Count > 0)
             {
@@ -92,7 +93,7 @@ namespace Gamla.UI
                 item.Init(tournament);
                 item.onTournamentClick += () =>
                 {
-                    onOpenTournamentList?.Invoke(tournament);
+                    onOpenTournamentList?.Invoke(tournament);//Use Ids instead of referencess?
                 };
                 _tournamentWidgets.Add(item);
             }
@@ -193,6 +194,7 @@ namespace Gamla.UI
         {
             base.OnDestroy();
             EventManager.OnGameInfoUpdate.Del(UpdateData);
+            EventManager.OnTournamentsUpdated.Del(InitTournaments);
         }
     }
 }

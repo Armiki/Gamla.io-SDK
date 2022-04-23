@@ -224,6 +224,10 @@ namespace Gamla.Logic
         
         static void OpenTicketShop()
         {
+            if (!ValidateUserAccess(false)) {
+                return;
+            }
+            
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TicketShopWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<TicketShopWindow>();
@@ -350,6 +354,10 @@ namespace Gamla.Logic
                         GamlaResourceManager.windowsContainer).GetComponent<TournamentStartWindow>();
                 window.Init(tournament, () =>
                 {
+                    if (!ValidateUserAccess()) {
+                        return;
+                    }
+                    
                     ServerCommand.JoinTournament(tournament.id);
                 });
                 CheckStack(window);
@@ -362,7 +370,7 @@ namespace Gamla.Logic
                         GamlaResourceManager.GamlaResources.GetResource("Windows/TournamentBoardWindow"),
                         GamlaResourceManager.windowsContainer).GetComponent<TournamentBoardWindow>();
 
-                //Workaround for update Play button in board
+                //Try get fresh tournir data
                 var currentTournament = LocalState.tournaments.Find(t => t.id == tournament.id);
                 window.SetData(currentTournament ?? tournament);
                 CheckStack(window);
@@ -395,10 +403,7 @@ namespace Gamla.Logic
 
         static void OpenCreateTournamentWindow()
         {
-            var level = LocalState.currentUser.games.Find(g => g.id == ClientManager.gameId);
-            if (level == null || level.level < 2)
-            {
-                OpenSimpleErrorWindow("Need 2 game level!");
+            if (!ValidateUserAccess()) {
                 return;
             }
             
@@ -409,13 +414,29 @@ namespace Gamla.Logic
             CheckStack(window);
             window.Show();
         }
+
+        public static bool ValidateUserAccess(bool checkLevel = true)
+        {
+            if (LocalState.currentUser.guest) {
+                OpenSimpleWarningWindow(GUIWarningType.GuestsUnavailable, null, () => OpenEditProfile());
+                return false;
+            }
+
+            if (!checkLevel) {
+                return true;
+            }
+            
+            var level = LocalState.currentUser.games?.Find(g => g.id == ClientManager.gameId);
+            if (level == null || level.level < 2) {
+                OpenSimpleWarningWindow(GUIWarningType.LowLevel);
+                return false;
+            }
+            return true;
+        }
         
         static void OpenJoinTournamentWindow()
         {
-            var curGame = LocalState.currentUser.games.Find(g => g.id == ClientManager.gameId);
-            if (curGame == null || curGame.level < 2)
-            {
-                OpenSimpleErrorWindow("Need 2 game level!");
+            if (!ValidateUserAccess()) {
                 return;
             }
             
@@ -484,6 +505,12 @@ namespace Gamla.Logic
         
         public static void OpenChat(long chatId, List<ServerChatMessage> messages)
         {
+            var chat = GamlaResourceManager.windowsContainer.Find("ChatWindow(Clone)");
+            if (chat != null) {
+                Debug.LogError("Prevent spinner double showing");
+                return;
+            }
+            
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/ChatWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<ChatWindow>();
@@ -595,15 +622,13 @@ namespace Gamla.Logic
 
        public static void OpenSearchOpponents(BattleInfo info)
        {
-           var level = LocalState.currentUser.games.Find(g => g.id == ClientManager.gameId);
-            if (info.entry.type == CurrencyType.USD && (level == null || level.level < 2))
-            {
-                OpenSimpleErrorWindow("Need 2 game level!");
-                return;
-            }
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/SearchingOpponentsWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<SearchingOpponentsWindow>();
+           if (info.entry.type == CurrencyType.USD && !ValidateUserAccess()) {
+               return;
+           }
+
+           var window = GameObject.Instantiate(
+               GamlaResourceManager.GamlaResources.GetResource("Windows/SearchingOpponentsWindow"),
+                   GamlaResourceManager.windowsContainer).GetComponent<SearchingOpponentsWindow>();
             window.InitBattleInfo(info);
             window.SetCurrentUser(LocalState.currentUser);
             window.onPlayGameClick += ServerCommand.TryPlayGame;
@@ -685,6 +710,10 @@ namespace Gamla.Logic
 
         static void OpenWithdrawWindow()
         {
+            if (!ValidateUserAccess(false)) {
+                return;
+            }
+            
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/WithdrawWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<WithdrawWindow>();
@@ -818,6 +847,12 @@ namespace Gamla.Logic
 
         public static ValidateWindow OpenValidateWindow(bool withCloseButton)
         {
+            var spinner = GamlaResourceManager.windowsContainer.Find("ValidateWindow(Clone)");
+            if (spinner != null) {
+                Debug.LogError("Prevent spinner double showing");
+                return spinner.GetComponent<ValidateWindow>();
+            }
+            
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/ValidateWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<ValidateWindow>();
@@ -838,6 +873,7 @@ namespace Gamla.Logic
             window.Show();
         }
         
+        #region Pending windows
         public static void OpenRewardWindow(long id, List<Currency> rewards)
         {
             AddPendingWindow(id, PendingWindowType.Reward, rewards);
@@ -937,6 +973,7 @@ namespace Gamla.Logic
             view.onClosed -= OnClosedPendingWindow;
             TryShowingPendingWindow();
         }
+        #endregion
 
         static T InstatiateWindow<T>() where T : GUIView
         {

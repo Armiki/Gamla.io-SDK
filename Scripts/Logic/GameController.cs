@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Gamla.Data;
 using Gamla.UI;
 using UnityEngine;
@@ -204,6 +205,28 @@ namespace Gamla.Logic
                 ServerCommand.GameFinish(score);
             if (LocalState.currentTournament != null)
             {
+                var tournament = LocalState.tournaments.Find(t => t.id == LocalState.currentTournament.id);
+
+                if (tournament != null) {
+                    var match = tournament.matches.Find(m =>
+                        m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
+                    if (match != null) {
+                        var player = match.players.Find(p =>
+                            p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score));
+                        if (player != null) {
+                            player.score = score.ToString();
+                        }
+                    }
+                }
+
+                foreach (var match in  LocalState.currentTournament.matches) {
+                    foreach (var p in match.players) {
+                        if (p.user_id == LocalState.currentUser.uid) {
+                            p.score = score.ToString();
+                        }
+                    }
+                }
+                
                 ServerCommand.GameFinishTournament(score);
                 ServerCommand.GetTournaments(null);
             }

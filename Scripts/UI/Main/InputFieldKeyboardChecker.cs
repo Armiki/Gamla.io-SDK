@@ -65,7 +65,7 @@ namespace Gamla.UI
         int GetKeyboardHeight()
         {
 #if !UNITY_EDITOR && UNITY_ANDROID
-            return (int)(0.4f * Screen.height);
+            return (int)((0.4f * Screen.height) / input.transform.lossyScale.y);
 #endif
             var height = TouchScreenKeyboard.area.height / input.transform.lossyScale.y;
             return (int) height;

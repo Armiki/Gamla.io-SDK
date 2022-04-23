@@ -15,7 +15,9 @@ namespace Gamla.Data
         RematchRequest = 7,
         RematchRequestCallback = 8,
         CheckRegion = 9,
-        LogOutAsk = 10
+        LogOutAsk = 10,
+        LowLevel = 11,
+        GuestsUnavailable = 12
     }
 
     public enum GUIInfoType
@@ -122,6 +124,24 @@ namespace Gamla.Data
                      description = LocalizationManager.Text("gamla.logoutask.description"),
                      closeTitle = LocalizationManager.Text("gamla.logoutask.closetitle"),
                      actionTitle = LocalizationManager.Text("gamla.logoutask.actiontitle") }
+             },
+             {
+                 GUIWarningType.LowLevel,
+                 new GUIInfoWinData {
+                     logo = "smile_state_4",
+                     title = LocalizationManager.Text("gamla.checkplayer.lowlevel.title"),
+                     description = LocalizationManager.Text("gamla.checkplayer.lowlevel.description"),
+                     closeTitle = LocalizationManager.Text("gamla.btn.close"),
+                     actionTitle = "" }
+             },             
+             {
+                 GUIWarningType.GuestsUnavailable,
+                 new GUIInfoWinData {
+                     logo = "smile_state_4",
+                     title = LocalizationManager.Text("gamla.checkplayer.guest.title"),
+                     description = LocalizationManager.Text("gamla.checkplayer.guest.description"),
+                     closeTitle = LocalizationManager.Text("gamla.btn.close"),
+                     actionTitle = LocalizationManager.Text("gamla.btn.signup") }
              },
         };
 

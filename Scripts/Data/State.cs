@@ -328,6 +328,8 @@ namespace Gamla.Data
         public GameInfo game;
         public string date;
         public string status;
+        public string comment;
+        public string type;
         public string battleId;
         public Currency currency;
 
@@ -343,6 +345,8 @@ namespace Gamla.Data
                     game = game,
                     date = transaction.created_at,
                     status = transaction.status,
+                    type = transaction.type,
+                    comment = transaction.comment,
                     battleId = transaction.match_id + "",
                     currency = ConvertCurrency(transaction)
                 };

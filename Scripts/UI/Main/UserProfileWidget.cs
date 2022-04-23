@@ -21,7 +21,7 @@ namespace Gamla.UI
                 _button.onClick.RemoveAllListeners();
                 _button.onClick.AddListener(() =>
                 {
-                    if (_id != LocalState.currentUser.uid && _user != null)
+                    if (_id != LocalState.currentUser.uid && _user != null && !_user.IsEmpty())
                     {
                         EventManager.OnUserWidgetClick.Push(_user);   
                     }

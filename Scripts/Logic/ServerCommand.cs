@@ -254,6 +254,7 @@ namespace Gamla.Logic
             ClientManager.GetData<ServerFriends>(token, "friends", friends =>
             {
                 LocalState.friends = friends;
+                EventManager.OnFriendsUpdated.Push();
                 ClientManager.GetData<ServerChatPages>(token, "chats", result =>
                 {
                     LocalState.chats = result;
@@ -350,8 +351,7 @@ namespace Gamla.Logic
             PlayerPrefs.DeleteKey("email");
             PlayerPrefs.DeleteKey("password");
             PlayerPrefs.DeleteKey("battle_saves");
-            LocalState.currentUser = null;
-            LocalState.token = "";
+            LocalState.ClearState();
         }
         
         [Serializable]
@@ -755,7 +755,7 @@ namespace Gamla.Logic
 
             }, e =>
             {
-                Debug.LogError($"Error on finish turnir game: {e.error}");
+                Debug.LogError($"Error on finish turnir game: {e.message}");
             });
             
         }

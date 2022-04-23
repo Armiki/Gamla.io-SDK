@@ -90,9 +90,14 @@ namespace Gamla.UI
 
             tournament.awards.Sort(((a1, a2) => a2.place.CompareTo(a1.place)));
             var currentAwards = new List<ServerTournamentAward>();
-            foreach (var award in tournament.awards)
+            for (int i = tournament.players_count / 2; i >= 1; i /= 2)
             {
-                if (currentAwards.Any(a => a.currency == award.currency && a.amount == award.amount)) continue;
+                var award = tournament.awards.Find(a => a.place == i);
+                if (award == null) {
+                    Debug.LogError($"Can't find award place {i} in tournament");
+                    continue;
+                }
+                
                 var head = Instantiate(_headPref, _headRect);
                 head.SetData(award);
                 var column = Instantiate(_roundColumnPref, _contentRect);
@@ -185,9 +190,7 @@ namespace Gamla.UI
 
         private void OnUpdateTournaments()
         {
-            if (_play.gameObject.activeSelf) {
-                UpdatePlayButton();
-            }
+            UpdatePlayButton();
         }
 
         void UpdatePlayButton()

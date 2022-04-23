@@ -12,7 +12,8 @@ namespace Gamla.Logic
         public static EventTrigger<long> OnFriendChatLoad = new EventTrigger<long>();
         public static EventTrigger<ServerPublicUser> OnUserWidgetClick = new EventTrigger<ServerPublicUser>();
         public static EventTrigger OnLanguageChange = new EventTrigger();
-        public static EventTrigger OnTournamentsUpdated = new EventTrigger();//Update that 
+        public static EventTrigger OnTournamentsUpdated = new EventTrigger();
+        public static EventTrigger OnFriendsUpdated = new EventTrigger();
 
         public static DelayedEventManager DelayEvent = new DelayedEventManager();
     }

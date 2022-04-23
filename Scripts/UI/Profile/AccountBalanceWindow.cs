@@ -43,8 +43,11 @@ namespace Gamla.UI
 
         public void Init(UserInfo current_user)
         {
-            _balanceCount.text = LocalState.currentUser.wallet.hard + "";
-            _bonusCount.text = LocalState.currentUser.wallet.hardBonus + "";
+            if (LocalState.currentUser.wallet != null) {
+                _balanceCount.text = LocalState.currentUser.wallet.hard + "";
+                _bonusCount.text = LocalState.currentUser.wallet.hardBonus + "";
+            }
+
             _ladderContent.ClearChilds();
             _balanceCarouselPresenter = Utils.CreateGridViewPresenter(
                this,

@@ -138,12 +138,9 @@ namespace Gamla.UI
 
             for (int i = 0; i < _topGameLvls.Length; i++)
             {
-                if (current_user.games.Count > i)
-                {
+                if (current_user.games != null && current_user.games.Count > i) {
                     _topGameLvls[i].Init(current_user.games[i]);
-                }
-                else
-                {
+                } else {
                     _topGameLvls[i].gameObject.SetActive(false);
                 }
             }

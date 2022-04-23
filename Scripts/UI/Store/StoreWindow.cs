@@ -71,7 +71,9 @@ namespace Gamla.UI
                 ServerCommand.CollectDailyReward(reward =>
                 {
                     ServerCommand.GetOrUpdateProfile(LocalState.token);
-                    UIMapController.OpenRewardWindow(new Pack(reward.payment));
+                    if (reward.payment.amount > 0) {
+                        UIMapController.OpenRewardWindow(new Pack(reward.payment));
+                    }
                 });
             };
             _freeCoins.onBonusClick += () =>
@@ -79,7 +81,9 @@ namespace Gamla.UI
                 ServerCommand.CollectHourReward(reward =>
                 {
                     ServerCommand.GetOrUpdateProfile(LocalState.token);
-                    UIMapController.OpenRewardWindow(new Pack(reward.payment));
+                    if (reward.payment.amount > 0) {
+                        UIMapController.OpenRewardWindow(new Pack(reward.payment));
+                    }
                 });
             };
             
@@ -109,6 +113,9 @@ namespace Gamla.UI
                 item.Init(pack);
                 item.onBuyClick += (pack) =>
                 {
+                    if (!UIMapController.ValidateUserAccess(false)) {
+                        return;
+                    }
                     var validateWindow = UIMapController.OpenValidateWindow(true);
                     validateWindow.onCloseAction += GamlaResourceManager.tabBar.SelectPlay;
                     ServerCommand.AddPack(pack, validateWindow);
