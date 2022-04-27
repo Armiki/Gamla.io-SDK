@@ -58,11 +58,7 @@ namespace Gamla.UI
             onClosed?.Invoke(this);
             onClosed = null;
             
-            if (_windowMode == WindowMode.Dialog || _windowMode == WindowMode.FullDialog) {
-                UIMapController.DestroyWindowBefore(name);
-            } else {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
 
         protected virtual void Close()
