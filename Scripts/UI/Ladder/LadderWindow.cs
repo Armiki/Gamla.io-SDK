@@ -38,6 +38,7 @@ namespace Gamla.UI
         readonly GridDataSource<LadderInfo> _testDataSource = new GridDataSource<LadderInfo>(200, 1);
         CarouselPresenter _ladderListCarouselPresenter;
         List<LadderInfo> _fullLadder = new List<LadderInfo>();
+        CurrencyType _lastCurrency = CurrencyType.USD;
 
         public void Start()
         {
@@ -78,7 +79,7 @@ namespace Gamla.UI
             time = DateTime.Parse(current_game.leagues.leagues.data[0].end_at);
             _description.text = current_game.leagues.leagues.data[0].name;
             _fullLadder = current_game.ladder;
-            FilterData(CurrencyType.USD);
+            FilterData(_lastCurrency);
             SetUserData(current_user);
         }
 
@@ -109,6 +110,7 @@ namespace Gamla.UI
 
         void FilterData(CurrencyType type)
         {
+            _lastCurrency = type;
             if(_current_game?.leagues?.leagues?.data == null) return;
             if(_current_game?.leagues?.leagues?.data.Count == 0) return;
             

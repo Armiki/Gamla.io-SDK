@@ -41,9 +41,12 @@ namespace Gamla.Scripts.UI
             _eventName.text = model.name;
             var places = gold ? model.places_gold : model.places_silver;
             var meUser = places.Find(p => p.user.id == LocalState.currentUser.uid);
-            _userPlace.text = meUser.place + "";
-            _userPrize.text = meUser.reward_amount + "";
-            _userBadge.Init(meUser.reward_currency);
+            if (meUser != null) {
+                _userPlace.text = meUser.place + "";
+                _userPrize.text = meUser.reward_amount + "";
+                _userBadge.Init(meUser.reward_currency);
+            }
+
             _time.text = model.end_at;
 
             for (int i = 0; i < places.Count; i++)

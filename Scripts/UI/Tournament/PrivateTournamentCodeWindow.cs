@@ -1,4 +1,5 @@
 using System;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,9 @@ namespace Gamla.UI
         public event Action<string> onPromoCodeClick;
 
         [SerializeField] private ValidateInputWidget _promoCodeInput;
+        [SerializeField] private InputField _text; 
         [SerializeField] private Button _enter;
+        [SerializeField] private Button _paste;
 
         public void Start()
         {
@@ -21,6 +24,12 @@ namespace Gamla.UI
                     Close();
                     onPromoCodeClick?.Invoke(_promoCodeInput.text);
                 }
+            });
+            
+            _paste.onClick.RemoveAllListeners();
+            _paste.onClick.AddListener(() =>
+            {
+                _text.text = GUIUtility.systemCopyBuffer;
             });
             
             _promoCodeInput.keyboardChecker.onKeyboardChange.RemoveAllListeners();

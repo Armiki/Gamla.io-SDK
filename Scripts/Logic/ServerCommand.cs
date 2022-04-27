@@ -161,6 +161,7 @@ namespace Gamla.Logic
                 EventManager.OnProfileUpdate.Push();
                 GetOrUpdateMatches();
                 GetOrUpdateFriends(token);
+                GetTournaments(null);
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);

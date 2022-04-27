@@ -15,7 +15,7 @@ namespace Gamla.Logic
         private const long TournamentEndNotifId = 7;
         private const long LeagueNotifId = 5;
         
-        private bool _isInMatch = true;
+        private bool _isInMatch = false;
         private List<ServerNotification> _notifications = new List<ServerNotification>();
 
         public void Start()
@@ -106,7 +106,7 @@ namespace Gamla.Logic
         {
             while (true)
             {
-                if (!_isInMatch || _notifications.Count == 0)
+                if (!_isInMatch && _notifications.Count == 0)
                 {
                     ServerCommand.GetNotification(result =>
                     {
@@ -121,7 +121,7 @@ namespace Gamla.Logic
         {
             while (true)
             {
-                if (_notifications.Count > 0)
+                if (!_isInMatch && _notifications.Count > 0)
                 {
                     for(int i = _notifications.Count - 1; i >= 0; i --)
                     {
