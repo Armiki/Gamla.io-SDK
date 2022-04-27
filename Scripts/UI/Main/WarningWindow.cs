@@ -29,14 +29,17 @@ namespace Gamla.UI
                 onActionClick?.Invoke();
                 Close();
             });
-            
-            _cancelBtn.onClick.RemoveAllListeners();
-            _cancelBtn.onClick.AddListener(() =>
+
+            if (_cancelBtn != null)
             {
-                onCancelClick?.Invoke();
-                Close();
-            });
-            
+                _cancelBtn.onClick.RemoveAllListeners();
+                _cancelBtn.onClick.AddListener(() =>
+                {
+                    onCancelClick?.Invoke();
+                    Close();
+                });
+            }
+
             if (_keyboardChecker != null) {
                 _keyboardChecker.onKeyboardChange.RemoveAllListeners();
                 _keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);
