@@ -63,6 +63,7 @@ MonoBehaviour:
   _description: {fileID: 2496245726041408783}
   _actionTitle: {fileID: 7110032980383716168}
   _actionBtn: {fileID: 7235154094809151634}
+  _cancelBtn: {fileID: 1825387392998373515}
   _cancelTitle: {fileID: 5397113131490842107}
   _uniqText: {fileID: 0}
   _keyboardChecker: {fileID: 0}

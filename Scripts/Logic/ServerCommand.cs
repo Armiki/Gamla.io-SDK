@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gamla.Data;
@@ -209,23 +210,7 @@ namespace Gamla.Logic
                     PlayerPrefs.SetString("battle_saves", battleSaves);
                     PlayerPrefs.Save();
                 }
-
-                //EventManager.OnGameInfoUpdate.Push();
-                ClientManager.GetData<ServerLeagues>(LocalState.token, "leagues" + GameIDJson, leagues =>
-                {
-                    LocalState.currentGame.leagues = leagues;
-                    LocalState.currentGame.ladder = LadderInfo.Convert(leagues);
-                    EventManager.OnGameInfoUpdate.Push();
-                    callback?.Invoke(true);
-                    _isMatchUpdate = false;
-                }, e =>
-                {
-                    EventManager.OnGameInfoUpdate.Push();
-                    //UIMapController.OpenSimpleErrorWindow(e.message);
-                    _isMatchUpdate = false;
-                    callback?.Invoke(false);
-                });
-                
+                GetOrUpdateLeagues(callback);
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);
@@ -236,19 +221,49 @@ namespace Gamla.Logic
             GetTournaments(null);
         }
 
-        public static void GetMatchInfoAndOpenView(long matchId)
+        public static void GetOrUpdateLeagues(Action<bool> callback = null)
+        {
+            //EventManager.OnGameInfoUpdate.Push();
+            ClientManager.GetData<ServerLeagues>(LocalState.token, "leagues" + GameIDJson, leagues =>
+            {
+                LocalState.currentGame.leagues = leagues;
+                LocalState.currentGame.ladder = LadderInfo.Convert(leagues);
+                EventManager.OnGameInfoUpdate.Push();
+                callback?.Invoke(true);
+                _isMatchUpdate = false;
+            }, e =>
+            {
+                EventManager.OnGameInfoUpdate.Push();
+                //UIMapController.OpenSimpleErrorWindow(e.message);
+                _isMatchUpdate = false;
+                callback?.Invoke(false);
+            });
+        }
+
+        public static void GetMatchInfoAndOpenView(long matchId, bool repeat = true)
         {
             ClientManager.GetData<ServerMatchSingleModel>(LocalState.token, "matches/" + matchId, data =>
                 {
-                    UIMapController.OpenGameFinish(HistoryBattleInfo.Convert(data.match));
+                    if (repeat && (data.match.players.Count < 2 ||
+                                    string.IsNullOrEmpty(data.match.players[0].score) ||
+                                    string.IsNullOrEmpty(data.match.players[1].score)))
+                    {
+                        GetMatchInfoAndOpenView(matchId, false);
+                    } else {
+                        UIMapController.OpenGameFinish(HistoryBattleInfo.Convert(data.match));
+                    }
                 },
                 e =>
                 {
-                    UIMapController.OpenSimpleErrorWindow(e.message);
-                    _isMatchUpdate = false;
+                    if (repeat) {
+                        GetMatchInfoAndOpenView(matchId, false);
+                    } else {
+                        UIMapController.OpenSimpleErrorWindow(e.message);
+                        _isMatchUpdate = false;
+                    }
                 });
         }
-        
+
         public static void GetOrUpdateFriends(string token)
         {
             ClientManager.GetData<ServerFriends>(token, "friends", friends =>
@@ -1127,12 +1142,12 @@ namespace Gamla.Logic
                 {
                     match = new ServerMatchInfo()
                     {
-                        id = result.match_request.game_id
+                        id = result.payment.match_id
                     }
                 };
                 LocalState.currentTournament = null;
                 //UIMapController.Clear();
-                GamlaService.OnMatchStarted.Push(result.match_request.game_id + "", "", false);
+                GamlaService.OnMatchStarted.Push(result.payment.match_id + "", "", false);
             }, e => { });
         }
 

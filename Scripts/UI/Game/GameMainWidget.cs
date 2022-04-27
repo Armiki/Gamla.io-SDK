@@ -196,8 +196,9 @@ namespace Gamla.UI
                 if (toUser)
                 {
                     UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequestCallback,
-                        () => { ServerCommand.RejectRequest(request.id); },
-                        () => { ServerCommand.AcceptRequest(request.id); });
+                        null,
+                        () => { ServerCommand.AcceptRequest(request.id); },
+                        () => { ServerCommand.RejectRequest(request.id); });
                 }
             });
             _rematchApply.gameObject.SetActive(toUser);
@@ -212,8 +213,9 @@ namespace Gamla.UI
                 if (toUser)
                 {
                     UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequestCallback,
-                        () => { ServerCommand.RejectRequest(request.id); },
-                        () => { ServerCommand.AcceptRequest(request.id); });
+                        null,
+                        () => { ServerCommand.AcceptRequest(request.id); },
+                        () => { ServerCommand.RejectRequest(request.id); });
                 }
             });
 

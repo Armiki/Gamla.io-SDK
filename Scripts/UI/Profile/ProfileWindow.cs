@@ -59,6 +59,7 @@ namespace Gamla.UI
 
         [SerializeField] private Text _matchesCountWin;
         [SerializeField] private Text _matchesCountTotal;
+        [SerializeField] private RefreshScroll _refreshScroll;
 
         public void Start()
         {
@@ -121,6 +122,13 @@ namespace Gamla.UI
             }
 
             EventManager.OnProfileUpdate.Subscribe(onRequestNewData);
+
+            _refreshScroll.onRefresh += OnrefreshScroll;
+        }
+
+        private void OnrefreshScroll()
+        {
+            ServerCommand.GetOrUpdateProfile(LocalState.token);
         }
 
         private bool isDestroy;
@@ -136,6 +144,13 @@ namespace Gamla.UI
             topbarGame.Init(current_game);
             _user.Init(current_user);
 
+            ServerCommand.GetTrophies(UpdateTrophies);
+
+            if (current_user == null) {
+                Debug.LogError("ProfileWindow.Init: Current user is null");
+                return;
+            }
+            
             for (int i = 0; i < _topGameLvls.Length; i++)
             {
                 if (current_user.games != null && current_user.games.Count > i) {
@@ -150,7 +165,6 @@ namespace Gamla.UI
 
             _signUpGO.SetActive(current_user.guest);
             
-            ServerCommand.GetTrophies(UpdateTrophies);
         }
 
         private void UpdateTrophies(ServerTrophies source)

@@ -16,6 +16,7 @@ namespace Gamla.UI
         
         [SerializeField] private TopbarGame _topbarGame;
         [SerializeField] private ScrollRectCarouselView _carouselView;
+        [SerializeField] private RefreshScroll _refreshScroll;
 
         [SerializeField] private GameObject _tournamentTitleGO;
         [SerializeField] private GameObject _tournamentGO;
@@ -45,6 +46,7 @@ namespace Gamla.UI
             _newGameBtn.onClick.AddListener(() => onOpenBattleList?.Invoke());
             _newGameHeadBtn.onClick.RemoveAllListeners();
             _newGameHeadBtn.onClick.AddListener(() => onOpenBattleList?.Invoke());
+            _refreshScroll.onRefresh += OnRefrereshScroll;
             EventManager.OnGameInfoUpdate.Subscribe(UpdateData);
             EventManager.OnTournamentsUpdated.Subscribe(InitTournaments);
             //ServerCommand.GetOrUpdateMatches();
@@ -55,6 +57,11 @@ namespace Gamla.UI
             
             InvokeRepeating("UpdateProfile", 10, 10);
             UIMapController.CloseSpinner();
+        }
+
+        private void OnRefrereshScroll()
+        {
+            UpdateProfile();
         }
 
         private void UpdateProfile()
@@ -195,6 +202,7 @@ namespace Gamla.UI
             base.OnDestroy();
             EventManager.OnGameInfoUpdate.Del(UpdateData);
             EventManager.OnTournamentsUpdated.Del(InitTournaments);
+            _refreshScroll.onRefresh -= OnRefrereshScroll;
         }
     }
 }

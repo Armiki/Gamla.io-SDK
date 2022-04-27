@@ -607,6 +607,7 @@ namespace Gamla.Logic
                     GamlaResourceManager.windowsContainer).GetComponent<LadderWindow>();
             CheckStack(window);
             window.Init(LocalState.currentGame, LocalState.currentUser);
+            window.Show();
         }
         
         static void OpenStore()
@@ -622,6 +623,11 @@ namespace Gamla.Logic
 
        public static void OpenSearchOpponents(BattleInfo info)
        {
+           if (info.entry == null) {
+               Debug.LogError("UIMapController.OpenSearchOpponents: entry is empty");
+               return;
+           }
+           
            if (info.entry.type == CurrencyType.USD && !ValidateUserAccess()) {
                return;
            }
@@ -782,13 +788,14 @@ namespace Gamla.Logic
             window.Show();
         }
         
-        public static void OpenSimpleWarningWindow(GUIWarningType info, Action onClose = null, Action onAction = null)
+        public static void OpenSimpleWarningWindow(GUIWarningType info, Action onClose = null, Action onAction = null, Action onCancel = null)
         {
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/WarningWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<WarningWindow>();
             window.onActionClick += () => onAction?.Invoke();
             window.onClosed += (_) => onClose?.Invoke();
+            window.onCancelClick += () => onCancel?.Invoke();
             window.Init(info, onAction != null);
             CheckStack(window);
             window.Show();

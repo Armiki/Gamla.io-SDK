@@ -91,6 +91,11 @@ namespace Gamla.UI
 
         public void SetSimpleData(List<AccountBalanceData> balanceData)
         {
+            if (balanceData == null) {
+                Debug.LogError("AccountBalanceWindow.SetSimpleData: Empty balance data list");
+                return;
+            }
+
             foreach (var existTournament in _accountBalanceWidgets)
             {
                 Destroy(existTournament.gameObject);
@@ -100,11 +105,15 @@ namespace Gamla.UI
             _ladderContent.sizeDelta = new Vector2(_ladderContent.sizeDelta.x, (balanceData.Count * _balancePrefab.rect.sizeDelta.y + balanceData.Count * 30));
             foreach (var data in balanceData)
             {
+                if (data == null) {
+                    Debug.LogError("AccountBalanceWindow.SetSimpleData: Empty balance data item");
+                    return;
+                }
+                
                 var item = Instantiate(_balancePrefab, _ladderContent);
                 item.Init(data);
                 _accountBalanceWidgets.Add(item);
             }
-            
         }
     }
 }

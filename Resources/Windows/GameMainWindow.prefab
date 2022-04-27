@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 43, y: 0}
-  m_SizeDelta: {x: 994, y: 1314.9609}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1314.9609}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &120528995013826989
 MonoBehaviour:
@@ -649,6 +649,7 @@ GameObject:
   - component: {fileID: 7360964746176695614}
   - component: {fileID: 3991251322766217282}
   - component: {fileID: 7717511858944564754}
+  - component: {fileID: 5664171399023380983}
   m_Layer: 31
   m_Name: Scroll View
   m_TagString: Untagged
@@ -759,6 +760,18 @@ MonoBehaviour:
   _scroll: {fileID: 4871440341328575917}
   _unscrollItems:
   - {fileID: 3636945316960902539}
+--- !u!114 &5664171399023380983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4670270739725856468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cb78c0ab821489ba24133495e62f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4836678554559426588
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1030,7 @@ MonoBehaviour:
   _close: {fileID: 0}
   _topbarGame: {fileID: 195843992831201088}
   _carouselView: {fileID: 0}
+  _refreshScroll: {fileID: 5664171399023380983}
   _tournamentTitleGO: {fileID: 4836678556196239765}
   _tournamentGO: {fileID: 4836678555034773852}
   _notificationGO: {fileID: 3391310849067638090}

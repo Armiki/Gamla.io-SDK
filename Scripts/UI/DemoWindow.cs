@@ -220,6 +220,7 @@ namespace Demo
                 Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/LadderWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<LadderWindow>();
             window.Init( LocalState.currentGame, LocalState.currentUser);
+            window.Show();
         }
 
         void OpenHelpWindow()

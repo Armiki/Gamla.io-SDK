@@ -23,6 +23,7 @@ namespace Gamla.UI
         [SerializeField] private Text _description;
         [SerializeField] private Text _timeLeft;
         [SerializeField] private LadderWidget _userLadderWidget;
+        [SerializeField] private RefreshScroll _refreshScroll;
         
         //temp
         [SerializeField] private RectTransform _ladderContent;
@@ -45,8 +46,15 @@ namespace Gamla.UI
             
             _currencyFilter.onUpdateEvent += _currencyFilterHead.ForceUpdateView;
             _currencyFilterHead.onUpdateEvent += _currencyFilter.ForceUpdateView;
+
+            _refreshScroll.onRefresh += OnRefreshScroll;
             
             EventManager.OnGameInfoUpdate.Subscribe(UpdateData);
+        }
+
+        private void OnRefreshScroll()
+        {
+            ServerCommand.GetOrUpdateLeagues();
         }
 
         private void UpdateData()
@@ -69,15 +77,6 @@ namespace Gamla.UI
 
             time = DateTime.Parse(current_game.leagues.leagues.data[0].end_at);
             _description.text = current_game.leagues.leagues.data[0].name;
-
-            /*_ladderListCarouselPresenter = Utils.CreateGridViewPresenter(
-                this,
-                _testDataSource,
-                LadderWidget.LoadPath,
-                GridLineParams.@default,
-                InitLadderWidget
-            );*/
-            Show();
             _fullLadder = current_game.ladder;
             FilterData(CurrencyType.USD);
             SetUserData(current_user);
@@ -165,7 +164,8 @@ namespace Gamla.UI
         {
             base.OnDestroy();
             EventManager.OnGameInfoUpdate.Del(UpdateData);
+            
+            _refreshScroll.onRefresh -= OnRefreshScroll;
         }
-
     }
 }

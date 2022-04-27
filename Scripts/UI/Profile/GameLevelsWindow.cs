@@ -16,6 +16,11 @@ namespace Gamla.UI
         
         public void InitGameProgress(List<UserGames> games)
         {
+            if (games == null) {
+                Debug.LogError("GameLevelsWindow.InitGameProgress: Empty games list");
+                return;
+            }
+            
             foreach (var existGame in _gameWidgets)
             {
                 Destroy(existGame.gameObject);
@@ -25,6 +30,11 @@ namespace Gamla.UI
             _gamesContent.sizeDelta = new Vector2(_gamesContent.sizeDelta.x, (games.Count * _gameLvlWidgetExtra.rect.sizeDelta.y + games.Count * 30));
             foreach (var data in games)
             {
+                if (data == null) {
+                    Debug.LogError("GameLevelsWindow.InitGameProgress: game item data is null");
+                    continue;
+                }
+                
                 var item = Instantiate(_gameLvlWidgetExtra, _gamesContent);
                 item.Init(data);
                 item.onPlayGame += onPlayGame;

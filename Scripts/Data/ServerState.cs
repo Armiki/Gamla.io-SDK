@@ -658,6 +658,7 @@ namespace Gamla.Data
     public class ServerRequestAccept
     {
         public ServerRequestMatch match_request;
+        public ServerPaymentTransactionModel payment;
     }
     
     [Serializable]

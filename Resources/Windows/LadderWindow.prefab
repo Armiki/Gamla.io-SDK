@@ -502,6 +502,7 @@ MonoBehaviour:
   _description: {fileID: 2458515034676168168}
   _timeLeft: {fileID: 9168209928701328821}
   _userLadderWidget: {fileID: 7406156370350879725}
+  _refreshScroll: {fileID: 8757415372312295670}
   _ladderContent: {fileID: 9007220342893304662}
   _ladderPrefab: {fileID: 4207968104441105339, guid: f12f70e53855c4f519bd9168a54ba3ca, type: 3}
 --- !u!1 &4836678556198383021
@@ -773,7 +774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 633, y: 0}
+  m_AnchoredPosition: {x: 531, y: 0}
   m_SizeDelta: {x: 0, y: 46.72}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &2359290029734664423
@@ -980,6 +981,7 @@ GameObject:
   - component: {fileID: 1336426083395929569}
   - component: {fileID: 6311666272914859967}
   - component: {fileID: 1450735817504968034}
+  - component: {fileID: 8757415372312295670}
   m_Layer: 31
   m_Name: Scroll View
   m_TagString: Untagged
@@ -1075,6 +1077,18 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8757415372312295670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5918065477535291119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2cb78c0ab821489ba24133495e62f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5925088816453520426
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,7 +1126,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 445, y: 0}
+  m_AnchoredPosition: {x: 343, y: 0}
   m_SizeDelta: {x: 0, y: 47.6151}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &2619803753345649247
@@ -1298,7 +1312,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1301, y: 0}
+  m_SizeDelta: {x: 1097, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6683017487527064427
 MonoBehaviour:
@@ -1910,7 +1924,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3001670039971844180, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650.5
+      value: 548.5
       objectReference: {fileID: 0}
     - target: {fileID: 3001670039971844180, guid: 376740924ec3e43e6b4dc879999dce62, type: 3}
       propertyPath: m_AnchoredPosition.y

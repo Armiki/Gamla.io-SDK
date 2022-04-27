@@ -27,10 +27,21 @@ namespace Gamla.UI
         }
         public void Init(ServerTournamentModel tournamentInfo)
         {
+            if (tournamentInfo == null) {
+                Debug.LogError("TournamentMainWidget.Init: Empty tournament model");
+                return;
+            }
+
             _playersCount.text = tournamentInfo.players_count.ToString();
             _newLable.SetActive(!tournamentInfo.isJoined);
 
             tournamentInfo.awards.Sort(((a1, a2) => a2.place.CompareTo(a1.place)));
+
+            if (tournamentInfo.awards.Count == 0) {
+                Debug.LogError("TournamentMainWidget.Init: empty awards collection");
+                return;
+            }
+            
             var award = tournamentInfo.awards[tournamentInfo.awards.Count - 1];
             
             if (award.currency == CurrencyType.USD.ToString())

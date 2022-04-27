@@ -9,12 +9,14 @@ namespace Gamla.UI
     public class WarningWindow : GUIView
     {
         public event Action onActionClick;
+        public event Action onCancelClick;
 
         [SerializeField] private Image _logo;
         [SerializeField] private Text _title;
         [SerializeField] private Text _description;
         [SerializeField] private Text _actionTitle;
         [SerializeField] private Button _actionBtn;
+        [SerializeField] private Button _cancelBtn;
         [SerializeField] private Text _cancelTitle;
         [SerializeField] private InputField _uniqText;
         [SerializeField] private InputFieldKeyboardChecker _keyboardChecker;
@@ -27,7 +29,14 @@ namespace Gamla.UI
                 onActionClick?.Invoke();
                 Close();
             });
-
+            
+            _cancelBtn.onClick.RemoveAllListeners();
+            _cancelBtn.onClick.AddListener(() =>
+            {
+                onCancelClick?.Invoke();
+                Close();
+            });
+            
             if (_keyboardChecker != null) {
                 _keyboardChecker.onKeyboardChange.RemoveAllListeners();
                 _keyboardChecker.onKeyboardChange.AddListener(RefreshKeyboardSafeZone);

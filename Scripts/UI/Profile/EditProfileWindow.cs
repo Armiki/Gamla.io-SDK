@@ -38,7 +38,6 @@ namespace Gamla.UI
         [SerializeField] private Button _saveBtn;
         
         [SerializeField] private RecolorItem _agreeText;
-        
 
         private UserInfo _userData;
         private string _changedName;
@@ -65,6 +64,8 @@ namespace Gamla.UI
             {
                 if (_isAgree)
                 {
+                    EventManager.OnProfileUpdate.Del(OnProfileUpdated);
+                    EventManager.OnProfileUpdate.Subscribe(OnProfileUpdated);
                     onSaveClick?.Invoke(new UserInfo
                     {
                         name = _changedName,
@@ -124,8 +125,6 @@ namespace Gamla.UI
             _phoneInput.keyboardChecker.onKeyboardChange.RemoveAllListeners();
             _phoneInput.keyboardChecker.onKeyboardChange.AddListener(RefreshSafeZone);
 
-            EventManager.OnProfileUpdate.Subscribe(onRequestNewData);
-            
             _publicUserName.onInputChange += s =>
             {
                 if (_publicUserName.Validate())
@@ -269,7 +268,13 @@ namespace Gamla.UI
         public override void OnDestroy()
         {
             base.OnDestroy();
-            EventManager.OnProfileUpdate.Del(onRequestNewData);
+            EventManager.OnProfileUpdate.Del(OnProfileUpdated);
+        }
+
+        void OnProfileUpdated()
+        {
+            onRequestNewData?.Invoke();
+            CheckChanges();
         }
 
         public void Init(UserInfo user)
