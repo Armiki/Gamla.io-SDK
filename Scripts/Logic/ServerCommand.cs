@@ -212,18 +212,19 @@ namespace Gamla.Logic
                     PlayerPrefs.Save();
                 }
                 GetOrUpdateLeagues(callback);
-                
+
+                if (!string.IsNullOrEmpty(ClientManager.GetTempMatch()))
+                {
+                    ClientManager.SaveMatchScore(ClientManager.GetTempMatch());
+                    ClientManager.ClearTempMatch();
+                }
+
                 var matchScore = ClientManager.GetMatchScore();
                 foreach (var data in matchScore)
                 {
                     SendScore(data);
                 }
-
-                if (!string.IsNullOrEmpty(ClientManager.GetTempMatch()))
-                {
-                    SendScore(ClientManager.GetTempMatch());
-                    ClientManager.ClearTempMatch();
-                }
+                
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);

@@ -248,6 +248,7 @@ namespace Gamla.Logic
         public static void SaveRematchInfo(string matchId)
         {
             PlayerPrefs.SetInt("rematch_" + matchId, 1);
+            PlayerPrefs.Save();
         }
 
         public static void SaveMatchScore(string data)
@@ -256,6 +257,7 @@ namespace Gamla.Logic
             Matches matches = JsonUtility.FromJson<Matches>(source);
             matches.datas.Add(data);
             PlayerPrefs.SetString("matches", JsonUtility.ToJson(matches));
+            PlayerPrefs.Save();
         }
 
         public static void RemoveMatchScore(string data)
@@ -264,6 +266,7 @@ namespace Gamla.Logic
             Matches matches = JsonUtility.FromJson<Matches>(source);
             matches.datas.Remove(data);
             PlayerPrefs.SetString("matches", JsonUtility.ToJson(matches));
+            PlayerPrefs.Save();
         }
 
         public static List<string> GetMatchScore()
@@ -288,6 +291,7 @@ namespace Gamla.Logic
             });
             
             PlayerPrefs.SetString("temp", data);
+            PlayerPrefs.Save();
         }
 
         public static string GetTempMatch()
@@ -298,6 +302,7 @@ namespace Gamla.Logic
         public static void ClearTempMatch()
         {
             PlayerPrefs.SetString("temp", "");
+            PlayerPrefs.Save();
         }
     }
 
