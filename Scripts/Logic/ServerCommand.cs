@@ -124,6 +124,12 @@ namespace Gamla.Logic
                 spinner.ClosePublic();
             });
         }
+
+        public static void RegisterGuest(string name, string email, string password)
+        {
+            ChangeEmail(email, false);
+            ResetPassword(password, password);
+        }
         
         public static void LoginProfile(string token)
         {

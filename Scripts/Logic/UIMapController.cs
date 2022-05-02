@@ -179,6 +179,16 @@ namespace Gamla.Logic
             window.onLogInClick += OpenLogin;
             window.Show();
         }
+
+        static void OpenInGameSignUp()
+        {
+            var window =
+                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/InGameSignUpWindow"),
+                    GamlaResourceManager.windowsContainer).GetComponent<InGameSignUpWindow>();
+            CheckStack(window);
+            window.onSignUpClick += ServerCommand.RegisterGuest;
+            window.Show();
+        }
         
         public static void OpenLogin()
         {
@@ -388,7 +398,7 @@ namespace Gamla.Logic
             window.onFriendsClick += OpenFriends;
             window.onAccountBalanceClick += OpenAccountBalanceWindow;
             window.onInfoClick += OpenInfoPanelWindow;
-            window.onSignUpClick += OpenEditProfile;
+            window.onSignUpClick += OpenInGameSignUp;
             window.onShowMoreGameLvlsClick += OpenGameProgressList;
             window.onShowMoreTrophieClick += OpenTrophiesList;
             window.onCreateTournamentClick += OpenCreateTournamentWindow;
@@ -418,7 +428,7 @@ namespace Gamla.Logic
         public static bool ValidateUserAccess(bool checkLevel = true)
         {
             if (LocalState.currentUser.guest) {
-                OpenSimpleWarningWindow(GUIWarningType.GuestsUnavailable, null, () => OpenEditProfile());
+                OpenSimpleWarningWindow(GUIWarningType.GuestsUnavailable, null, () => OpenInGameSignUp());
                 return false;
             }
 

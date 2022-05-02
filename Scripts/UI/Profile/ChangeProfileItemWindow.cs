@@ -1,4 +1,5 @@
 using System;
+using Gamla.Data;
 using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -30,7 +31,7 @@ namespace Gamla.UI
             {
                 var isValid0 = _item0.Validate(_item0.text);
                 var isValid1 = _item1.Validate(_item1.text);
-                var isValid2 = _item2.Validate(_item2.text);
+                var isValid2 = LocalState.currentUser.guest || _item2.Validate(_item2.text);
                 var isValidAddition = _additionValidation == null || _additionValidation();
                 if (isValid0 && isValid1 && isValid2 && isValidAddition)
                 {
@@ -38,6 +39,8 @@ namespace Gamla.UI
                     Close();
                 }
             });
+            
+            _item2.gameObject.SetActive(!LocalState.currentUser.guest);
         }
 
         public void ChangePassword(string oldPassword)
@@ -55,6 +58,9 @@ namespace Gamla.UI
                 if (!valid) {
                     return false;
                 }
+
+                if (LocalState.currentUser.guest)
+                    return true;
 
                 valid = _item2.text == oldPassword;
                 if (!valid) {
