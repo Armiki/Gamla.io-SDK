@@ -1,47 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4090981517305919934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062663429061193}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.store.btn
---- !u!114 &5021759691340408340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062664173848938}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.profile.btn
---- !u!114 &4032789969432915553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 71062664191630723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.top.btn
 --- !u!1 &1042114864860323578
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,6 +26,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1392351765448387585}
   m_RootOrder: 3
@@ -77,20 +36,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8958310308998687393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2904479077211493335}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textField: {fileID: 0}
-  _localeKey: gamla.tabbar.play.btn
 --- !u!1 &2904479077702352291
 GameObject:
   m_ObjectHideFlags: 0
@@ -119,6 +64,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2904479077766937526}
   m_RootOrder: 0
@@ -179,6 +125,7 @@ GameObject:
   - component: {fileID: 2904479077757712123}
   - component: {fileID: 3824292524797720000}
   - component: {fileID: 4138641495430907606}
+  - component: {fileID: 6030052904386324259}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -196,6 +143,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 2
@@ -248,6 +196,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40796b41e7cb7ef41a12fe4a76bbe3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6030052904386324259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904479077757712120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7d3dabdc531441b2a061efaf97f20ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CheckInterval: 30
+  Timeout: 30
 --- !u!1 &2904479077766937546
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,6 +240,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479077702352300}
   - {fileID: 1392351765448387585}
@@ -389,6 +352,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 1
@@ -432,6 +396,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1392351765448387585}
   m_RootOrder: 0
@@ -476,6 +441,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5536422123587124023}
   m_RootOrder: 3
@@ -551,6 +517,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 85118dd02bc994fa8a494c1f61965fdf, type: 3}
   - {fileID: 21300000, guid: 841f6e4e435b44b81a9bb4ba1710edad, type: 3}
   - {fileID: 21300000, guid: 2955764cda6db441389999cabc160716, type: 3}
+  _netChecker: {fileID: 6030052904386324259}
 --- !u!1 &4991987056988256116
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +545,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1000, y: -1000, z: -1000}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479077766937526}
   - {fileID: 2904479078716918849}
@@ -626,6 +594,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2904479078748559144}
   - {fileID: 2904479077698246035}
@@ -1087,19 +1056,85 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7c5a0b9f0c3644b65bd0e7e4bf40af44, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
---- !u!1 &71062664191630723 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1132145289752401714, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
-  m_PrefabInstance: {fileID: 1101771370363980465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &71062663429061193 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1132145291672613112, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
   m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4090981517305919934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062663429061193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.store.btn
 --- !u!1 &71062664173848938 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1132145289736324059, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
+  m_PrefabInstance: {fileID: 1101771370363980465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5021759691340408340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062664173848938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.profile.btn
+--- !u!1 &71062664191630723 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1132145289752401714, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
+  m_PrefabInstance: {fileID: 1101771370363980465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4032789969432915553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 71062664191630723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.top.btn
+--- !u!1 &2904479077211493335 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2811529762823166310, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
+  m_PrefabInstance: {fileID: 1101771370363980465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8958310308998687393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2904479077211493335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 322f3d8d4b19841e1b716639c63b5f92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textField: {fileID: 0}
+  _localeKey: gamla.tabbar.play.btn
+--- !u!224 &2904479077843725181 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
   m_PrefabInstance: {fileID: 1101771370363980465}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &2904479077843725182 stripped
@@ -1113,16 +1148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5433d9c97f3874b519a35522689262e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &2904479077843725181 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 2811529763524469196, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
-  m_PrefabInstance: {fileID: 1101771370363980465}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &2904479077211493335 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2811529762823166310, guid: 57bdad822dd5d4c84a0ea5cf381bf373, type: 3}
-  m_PrefabInstance: {fileID: 1101771370363980465}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1580404935388267943
 PrefabInstance:
   m_ObjectHideFlags: 0

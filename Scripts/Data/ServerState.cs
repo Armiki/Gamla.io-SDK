@@ -92,6 +92,7 @@ namespace Gamla.Data
         public string flag;
         public long count_all_win;
         public long count_all_lose;
+        public long win_in_row;
         public string referral_code;
         public ServerProfileExp experience;
         public List<ServerTrophiesModel> trophies;
@@ -223,6 +224,7 @@ namespace Gamla.Data
         public long timer_hours_bonus;
         public long count_all_win;
         public long count_all_lose;
+        public long win_in_row = 0;
         public string referral_code;
         public string referral_link;
     }

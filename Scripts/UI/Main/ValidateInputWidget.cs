@@ -11,7 +11,8 @@ namespace Gamla.UI
         Email,
         Password,
         Simple,
-        Phone
+        Phone,
+        Name
     }
     
     public class ValidateInputWidget : MonoBehaviour
@@ -68,6 +69,9 @@ namespace Gamla.UI
                 case ValidateInputType.Phone:
                     isValid = PhoneValidate();
                     break;
+                case ValidateInputType.Name:
+                    isValid = NameValidate();
+                    break;
             }
             return isValid;
         }
@@ -103,6 +107,16 @@ namespace Gamla.UI
             return false;
         }
 
+        bool NameValidate()
+        {
+            if (_input.text.Contains(" "))
+            {
+                ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.namewhitespace.error"));
+                return false;
+            }
+            return true;
+        }
+
         bool PasswordValidate(string otherText)
         {
             //if (Utils.IsValidPassword(_input.text))
@@ -128,7 +142,7 @@ namespace Gamla.UI
             return false;
         }
 
-        void ChangeCorrectStatus(bool isCorrect, string msg)
+        public void ChangeCorrectStatus(bool isCorrect, string msg)
         {
             if (_unCorrectGO != null) 
             {

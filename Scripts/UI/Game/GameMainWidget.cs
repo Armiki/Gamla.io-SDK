@@ -74,7 +74,7 @@ namespace Gamla.UI
         public HistoryBattleInfo data => _data;
         public GameObject gift => _gift;
 
-        public void Init(HistoryBattleInfo data, bool isGift = false)
+        public void Init(HistoryBattleInfo data, bool isGift = false, bool rematchAvailable = true)
         {
             if(_battleInfoIdTemp == data.matchId) return;
             _data = data;
@@ -91,7 +91,10 @@ namespace Gamla.UI
             _rematch.onClick.RemoveAllListeners();
             _rematch.onClick.AddListener(() =>
             {
-                UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequest, () => {}, () =>
+                UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequest, () =>
+                {
+                    
+                }, () =>
                 {
                     ServerCommand.CreateMatchRequest(data.battleInfo.entry.amount, data.battleInfo.entry.type.ToString(), data.opponent.id);
                     UIMapController.OpenNotification(new ServerNotification()
@@ -100,6 +103,15 @@ namespace Gamla.UI
                         notification_id = -1,
                         short_text = LocalizationManager.Text("gamla.notification.rematch.request") //
                     });
+
+                    SetContentHeight(false);
+                    if (_rematch != null) {
+                        _rematch.gameObject.SetActive(false);
+                    }
+
+                    //For update battles list to hide rematch buttons on other battles with the opponent
+                    EventManager.OnGameInfoUpdate.Push();
+                    ClientManager.SaveRematchInfo(data.matchId);
                 });
             });
             _userName.text = data.opponent.nickname;
@@ -127,6 +139,11 @@ namespace Gamla.UI
             _winBadge.Init(data.battleInfo.win.type, 2);
             
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, GameSkinHeight);
+
+            if (rematchAvailable)
+            {
+                rematchAvailable = PlayerPrefs.GetInt("rematch_" + data.matchId, 0) == 0;
+            }
             
             switch (data.status)
             {
@@ -161,13 +178,22 @@ namespace Gamla.UI
                     _rematch.gameObject.SetActive(false);
                     _status.text = LocalizationManager.Text("gamla.battle.win.status");
                     break;
+                case BattleStatus.Draw:
+                    _vsUserGO.SetActive(true);
+                    _winGO.SetActive(false);
+                    _timeLeftGO.SetActive(false);
+                    _returnGO.SetActive(false);
+                    _rematch.gameObject.SetActive(false);
+                    SetContentHeight(false);
+                    _status.text = LocalizationManager.Text("gamla.battle.draw.status");
+                    break;
                 case BattleStatus.Lost:
                     _vsUserGO.SetActive(true);
                     _winGO.SetActive(false);
                     _timeLeftGO.SetActive(false);
                     _returnGO.SetActive(false);
-                    _rematch.gameObject.SetActive(true);
-                    rect.sizeDelta = new Vector2(rect.sizeDelta.x, GameRematchSkinHeight);
+                    _rematch.gameObject.SetActive(rematchAvailable);
+                    SetContentHeight(rematchAvailable);
                     _status.text = LocalizationManager.Text("gamla.battle.lost.status");
                     break;
                 case BattleStatus.NoOpponent:
@@ -187,6 +213,15 @@ namespace Gamla.UI
             }
         }
 
+        void SetContentHeight(bool rematchAvailable)
+        {
+            if (rect == null) {
+                return;
+            }
+        
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, rematchAvailable? GameRematchSkinHeight: GameSkinHeight);
+        }
+        
         public void Init(ServerRequestMatch request, bool toUser)
         {
             _status.text = LocalizationManager.Text("gamla.widget.rematch.request");
@@ -198,7 +233,11 @@ namespace Gamla.UI
                     UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequestCallback,
                         null,
                         () => { ServerCommand.AcceptRequest(request.id); },
-                        () => { ServerCommand.RejectRequest(request.id); });
+                        () =>
+                        {
+                            ServerCommand.RejectRequest(request.id);
+                            Destroy(gameObject);
+                        });
                 }
             });
             _rematchApply.gameObject.SetActive(toUser);
@@ -215,7 +254,7 @@ namespace Gamla.UI
                     UIMapController.OpenSimpleWarningWindow(GUIWarningType.RematchRequestCallback,
                         null,
                         () => { ServerCommand.AcceptRequest(request.id); },
-                        () => { ServerCommand.RejectRequest(request.id); });
+                        () => { ServerCommand.RejectRequest(request.id); Destroy(gameObject); });
                 }
             });
 

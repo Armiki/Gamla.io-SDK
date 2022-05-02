@@ -23,6 +23,8 @@ namespace Gamla.Data
         public static List<PendingWindow> pendingWindows = new List<PendingWindow>();
         public static bool showingPendingWindow;
 
+        public static bool isInMatch = false;
+
         public static List<Pack> storePacks = new List<Pack>
         {
             new Pack

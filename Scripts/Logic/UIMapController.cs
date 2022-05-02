@@ -286,7 +286,7 @@ namespace Gamla.Logic
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/ChangeProfileItemWindow"),
                     GamlaResourceManager.windowsContainer).GetComponent<ChangeProfileItemWindow>();
             CheckStack(window);
-            window.ChangePassword();
+            window.ChangePassword(PlayerPrefs.GetString("password"));
             window.onChangeProfileItem += ServerCommand.ResetPassword;
             window.Show();
         }
@@ -562,7 +562,10 @@ namespace Gamla.Logic
             window.onPasswordChangeClick += OpenResetPassword;
             window.onLogOutClick += () =>
             {
-                OpenSimpleWarningWindow(GUIWarningType.LogOutAsk, null,ServerCommand.LogOut);
+
+                OpenSimpleWarningWindow(
+                    LocalState.currentUser.guest ? GUIWarningType.LogOutGuestAsk : GUIWarningType.LogOutAsk, null,
+                    ServerCommand.LogOut);
             };
             window.onRequestNewData += () => window.Init(LocalState.currentUser);
             window.Show();
@@ -815,7 +818,7 @@ namespace Gamla.Logic
                 title = LocalizationManager.Text("gamla.main.error")
             });
             CheckStack(window);
-            window.Show();
+            window.Show(!LocalState.isInMatch);
         }
         
         public static void OpenPopupWindow(string title, string description, string closeTitle, string code, Action onClose = null)

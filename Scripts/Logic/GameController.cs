@@ -15,7 +15,6 @@ namespace Gamla.Logic
         private const long TournamentEndNotifId = 7;
         private const long LeagueNotifId = 5;
         
-        private bool _isInMatch = false;
         private List<ServerNotification> _notifications = new List<ServerNotification>();
 
         public void Start()
@@ -32,8 +31,9 @@ namespace Gamla.Logic
                 ServerCommand.GetOrUpdateProfile(LocalState.token);
                 GamlaResourceManager.tabBar.SelectPlay();
                 Application.targetFrameRate = 60;
-                _isInMatch = false;
+                LocalState.isInMatch = false;
             });
+            GamlaService.UpdateMatchScore.Subscribe(ClientManager.SaveTempMatchScore);
             Debug.Log($"simple test random: {GamlaRandom.Range(0, 10)}");
             
             RemoteResourceManager.Init();
@@ -48,11 +48,36 @@ namespace Gamla.Logic
             try
             {
                 UIMapController.OpenLoading();
-                LocalizationManager.Init(PlayerPrefs.GetString("locale", "english"), () => { Load(); });
-                if (EventSystem.current == null)
+
+                GamlaResourceManager.NetChecker.OnCheckFinished += OpenAfterCheckConnection;
+                GamlaResourceManager.NetChecker.CheckConnection();
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
+            Application.targetFrameRate = 60;
+        }
+        
+        void OpenAfterCheckConnection(NetChecker.Status status)
+        {
+            try
+            {
+                if (status == NetChecker.Status.CONNECTED)
                 {
-                    Debug.LogWarning("EventSystem not find! Create some one");
-                    var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+                    LocalizationManager.Init(PlayerPrefs.GetString("locale", "english"), () => { Load(); });
+                    if (EventSystem.current == null)
+                    {
+                        Debug.LogWarning("EventSystem not find! Create some one");
+                        var eventSystem = new GameObject("EventSystem", typeof(EventSystem), typeof(StandaloneInputModule));
+                    }
+                    GamlaResourceManager.NetChecker.OnCheckFinished -= OpenAfterCheckConnection;
+                }
+                else
+                {
+                    GamlaResourceManager.NetChecker.OnCheckFinished -= OpenAfterCheckConnection;
+                    UIMapController.OpenSimpleErrorWindow("NO INTERNET CONNECTION", () => Open(LocalState.pushToken));
                 }
             }
             catch (Exception e)
@@ -60,6 +85,14 @@ namespace Gamla.Logic
                 Debug.LogError(e.Message);
             }
             Application.targetFrameRate = 60;
+        }
+
+        void OnNetUpdate(NetChecker.Status status)
+        {
+            if (status != NetChecker.Status.CONNECTED)
+            {
+                UIMapController.OpenSimpleErrorWindow("NO INTERNET CONNECTION", () => Open(LocalState.pushToken));
+            }
         }
 
         void Load()
@@ -80,6 +113,7 @@ namespace Gamla.Logic
                 HomeThreadHelper.homeThread.ExecuteCoroutine(Step1(window, 0.1f));
             }
 
+            ClientManager.isInited = true;
         }
 
         IEnumerator Step1(LoadingWindow loading, float amount)
@@ -106,7 +140,7 @@ namespace Gamla.Logic
         {
             while (true)
             {
-                if (!_isInMatch && _notifications.Count == 0)
+                if (!LocalState.isInMatch && _notifications.Count == 0)
                 {
                     ServerCommand.GetNotification(result =>
                     {
@@ -121,7 +155,7 @@ namespace Gamla.Logic
         {
             while (true)
             {
-                if (!_isInMatch && _notifications.Count > 0)
+                if (!LocalState.isInMatch && _notifications.Count > 0)
                 {
                     for(int i = _notifications.Count - 1; i >= 0; i --)
                     {
@@ -196,7 +230,7 @@ namespace Gamla.Logic
 
         private void OnMatchStarted(string matchId, string data, bool isTournament)
         {
-            _isInMatch = true;
+            LocalState.isInMatch = true;
         }
 
         private void OnMatchEnd(int score)
@@ -231,7 +265,8 @@ namespace Gamla.Logic
                 ServerCommand.GetTournaments(null);
             }
 
-            _isInMatch = false;
+            ClientManager.ClearTempMatch();
+            LocalState.isInMatch = false;
         }
 
         private void Update()

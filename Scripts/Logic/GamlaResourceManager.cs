@@ -16,6 +16,7 @@ namespace Gamla.Logic
         [SerializeField] private Sprite _defaultTrophie;
         [SerializeField] private Texture _rematchIcon;
         [SerializeField] private List<Sprite> _smiles;
+        [SerializeField] private NetChecker _netChecker;
         
         public static Transform windowsContainer => GameObject.FindGameObjectWithTag("Windows").transform;
         public static Transform tutorialContainer => GameObject.FindGameObjectWithTag("Tutorial").transform;
@@ -28,6 +29,8 @@ namespace Gamla.Logic
         public static TopBar topBar => _gamlaResources._topBar;
         public static TabBar tabBar => _gamlaResources._tabBar;
         public static Texture RematchIcon => _gamlaResources._rematchIcon;
+
+        public static NetChecker NetChecker => _gamlaResources._netChecker;
 
         public static bool BackView
         {

@@ -92,6 +92,10 @@ namespace Gamla.UI
                     _resultImage.sprite = _winSmile;
                     _resultStatus.text = LocalizationManager.Text("gamla.battle.win.status");
                     break;
+                case BattleStatus.Draw:
+                    _resultImage.sprite = _lostSmile;
+                    _resultStatus.text = LocalizationManager.Text("gamla.battle.draw.status");
+                    break;
                 case BattleStatus.Lost:
                     _resultImage.sprite = _lostSmile;
                     _resultStatus.text = LocalizationManager.Text("gamla.battle.lost.status");
@@ -103,9 +107,9 @@ namespace Gamla.UI
             }
             
             _user1.Init(current_user.ToPublic());
-            _pointUser1.text = historyBattleInfo.me.score + "";
+            _pointUser1.text = historyBattleInfo.status == BattleStatus.Draw ? (historyBattleInfo.drawScore  + "") : historyBattleInfo.me.score + "";
             _user2.Init(historyBattleInfo.opponent);
-            _pointUser2.text = historyBattleInfo.opponent.score + "";
+            _pointUser2.text = historyBattleInfo.status == BattleStatus.Draw ? (historyBattleInfo.drawScore  + "") : historyBattleInfo.opponent.score + "";
 
             _trophieCount.text = historyBattleInfo.status == BattleStatus.Win ? "2" : "0";// historyBattleInfo.battleInfo.trophie.ToString();
             _expCount.text = historyBattleInfo.battleInfo.exp.ToString();

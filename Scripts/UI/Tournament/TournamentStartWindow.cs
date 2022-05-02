@@ -41,7 +41,13 @@ namespace Gamla.UI
             _playBtn.onClick.AddListener(playBtn.Invoke);
             
             _entryCurrencyBadge.Init(tournament.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
-            _finalistCurrencyValue.text = "" + tournament.entry_cost;
+            _entryCurrencyValue.text = tournament.entry_cost.ToString();
+            if (tournament.awards != null) {
+                var finalist = tournament.awards.Find(a => a.place == 2);
+                if (finalist != null) {
+                    _finalistCurrencyValue.text = "" + finalist.amount;
+                }
+            }
         }
     }
 }

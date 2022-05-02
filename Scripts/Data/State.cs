@@ -15,7 +15,8 @@ namespace Gamla.Data
         Lost = 1,
         Waiting = 2,
         Searching = 3,
-        NoOpponent = 4
+        NoOpponent = 4,
+        Draw = 5
     }
     
     public enum BattleType
@@ -77,7 +78,7 @@ namespace Gamla.Data
     {
         public string matchId;
         public BattleStatus status;
-
+        public int drawScore;
         public ServerPublicUser opponent;
         public ServerPublicUser me;
         public int timeLeft;
@@ -102,10 +103,14 @@ namespace Gamla.Data
 
         public static HistoryBattleInfo Convert(ServerMatchInfo match)
         {
+            BattleStatus _status = match.status == "finished" ? (match.winner_id == LocalState.currentUser.uid ? BattleStatus.Win : BattleStatus.Lost) : BattleStatus.Waiting;
+            if (match.status == "draw")
+                _status = BattleStatus.Draw;
+            
             return new HistoryBattleInfo()
             {
                 matchId = match.id + "",
-                status = match.status == "finished" ? (match.winner_id == LocalState.currentUser.uid ? BattleStatus.Win : BattleStatus.Lost) : BattleStatus.Waiting,
+                status = _status,
                 opponent = new ServerPublicUser(match.players, false),
                 me = new ServerPublicUser(match.players, true),
                 date = DateTime.Parse(match.updated_at),
@@ -116,7 +121,8 @@ namespace Gamla.Data
                     tickets = (int)match.matchResult.bonus.amount,
                     trophie = 2,// match.matchResult?.medals ?? 0,
                     win = new Currency(){type = match.currency == "Z" ? CurrencyType.Z : CurrencyType.USD, amount = (match.bet * 2) },
-                }
+                },
+                drawScore = match.draw_score
             };
         }
     }
@@ -139,6 +145,7 @@ namespace Gamla.Data
         //public long exp_cur;
         //public long exp_next_level;
 
+        public long countWinInRow;
         public long countAllWins;
         public long countAllLoses;
 
@@ -215,6 +222,7 @@ namespace Gamla.Data
             accountBalanceHistory = new List<AccountBalanceData>();
             countAllWins = profile.count_all_win;
             countAllLoses = profile.count_all_lose;
+            countWinInRow = profile.win_in_row;
             guest = innerUserInfo.email.Contains("guest.io");
             promoCode = profile.referral_code;
             promoCodeUrl = profile.referral_link;
@@ -419,7 +427,16 @@ namespace Gamla.Data
         public Pack(ServerRewardModel rewardModel)
         {
             name = rewardModel.comment;
-            main = new Currency(){type = rewardModel.currency == "Z" ? CurrencyType.Z : CurrencyType.USD, amount = rewardModel.amount };
+            if(CurrencyType.TryParse(rewardModel.currency, true, out CurrencyType type))
+            {
+                main = new Currency()
+                {
+                    type = type,
+                    amount = rewardModel.amount
+                };
+            }
+            else
+                main = new Currency(){type = rewardModel.currency == "Z" ? CurrencyType.Z : CurrencyType.USD, amount = rewardModel.amount };
         }
     }
 }

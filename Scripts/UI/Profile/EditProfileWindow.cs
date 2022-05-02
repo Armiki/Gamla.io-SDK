@@ -132,6 +132,10 @@ namespace Gamla.UI
                     _changedName = s;
                     CheckChanges();
                 }
+                else
+                {
+                    DisableChangeButton();
+                }
             };
 
             _firstNameInput.onInputChange += s =>
@@ -140,6 +144,10 @@ namespace Gamla.UI
                 {
                     _changedFirstName = s;
                     CheckChanges();
+                }
+                else
+                {
+                    DisableChangeButton();
                 }
             };
             
@@ -150,6 +158,10 @@ namespace Gamla.UI
                     _changedLastName = s;
                     CheckChanges();
                 }
+                else
+                {
+                    DisableChangeButton();
+                }
             };
             
             _emailInput.onInputChange += s =>
@@ -159,6 +171,10 @@ namespace Gamla.UI
                     _changedEmail = s;
                     CheckChanges();
                 }
+                else
+                {
+                    DisableChangeButton();
+                }
             };
             
             _phoneInput.onInputChange += s =>
@@ -167,6 +183,10 @@ namespace Gamla.UI
                 {
                    _changedPhone = s;
                     CheckChanges();
+                }
+                else
+                {
+                    DisableChangeButton();
                 }
             };
             
@@ -336,6 +356,11 @@ namespace Gamla.UI
             }
             _saveBtn.gameObject.SetActive(isChange);
             return isChange;
+        }
+
+        void DisableChangeButton()
+        {
+            _saveBtn.gameObject.SetActive(false);
         }
     }
 }

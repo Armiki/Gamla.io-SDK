@@ -16,8 +16,14 @@ namespace Gamla
         public static EventTrigger<string, string, bool> OnMatchStarted = new EventTrigger<string, string, bool>();
         
         /// <summary>
+        /// Push update match score event
+        /// SEND: score(int) bigger better
+        /// </summary>
+        public static EventTrigger<int> UpdateMatchScore = new EventTrigger<int>();
+        
+        /// <summary>
         /// Push end match event
-        /// SEND: matchId(string), score(int) bigger better
+        /// SEND: score(int) bigger better
         /// </summary>
         public static EventTrigger<int> MatchEnd = new EventTrigger<int>();
         

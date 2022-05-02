@@ -96,9 +96,9 @@ namespace Gamla.UI
             UIMapController.DestroyWindowBefore(name);
         }
 
-        public void Show()
+        public void Show(bool isShowBack = true)
         {
-            GamlaResourceManager.BackView = true;
+            GamlaResourceManager.BackView = isShowBack;
             onShow?.Invoke(this);
             if (_animationContent != null)
             {

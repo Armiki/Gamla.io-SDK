@@ -17,7 +17,8 @@ namespace Gamla.Data
         CheckRegion = 9,
         LogOutAsk = 10,
         LowLevel = 11,
-        GuestsUnavailable = 12
+        GuestsUnavailable = 12,
+        LogOutGuestAsk = 13
     }
 
     public enum GUIInfoType
@@ -122,6 +123,15 @@ namespace Gamla.Data
                      logo = "smile_state_4",
                      title = LocalizationManager.Text("gamla.logoutask.title"),
                      description = LocalizationManager.Text("gamla.logoutask.description"),
+                     closeTitle = LocalizationManager.Text("gamla.logoutask.closetitle"),
+                     actionTitle = LocalizationManager.Text("gamla.logoutask.actiontitle") }
+             },
+             {
+                 GUIWarningType.LogOutGuestAsk,
+                 new GUIInfoWinData {
+                     logo = "smile_state_4",
+                     title = LocalizationManager.Text("gamla.logoutask.title"),
+                     description = LocalizationManager.Text("gamla.logoutask.description.guest"),
                      closeTitle = LocalizationManager.Text("gamla.logoutask.closetitle"),
                      actionTitle = LocalizationManager.Text("gamla.logoutask.actiontitle") }
              },

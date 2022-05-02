@@ -212,6 +212,18 @@ namespace Gamla.Logic
                     PlayerPrefs.Save();
                 }
                 GetOrUpdateLeagues(callback);
+                
+                var matchScore = ClientManager.GetMatchScore();
+                foreach (var data in matchScore)
+                {
+                    SendScore(data);
+                }
+
+                if (!string.IsNullOrEmpty(ClientManager.GetTempMatch()))
+                {
+                    SendScore(ClientManager.GetTempMatch());
+                    ClientManager.ClearTempMatch();
+                }
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);
@@ -338,6 +350,17 @@ namespace Gamla.Logic
             {
                 LocalState.gameApplist = result;
             }, e => {});
+        }
+
+        public static void GetGameInfo(string gameId, Action<GameAppInfo> callback)
+        {
+            ClientManager.GetData<GameAppResult>(LocalState.token, "games/" + gameId, result =>
+            {
+                callback?.Invoke(result.game);
+            }, e =>
+            {
+                callback?.Invoke(null);
+            });
         }
 
         public static void GetMyGame()
@@ -734,21 +757,40 @@ namespace Gamla.Logic
 
         public static void GameFinish(int score)
         {
+            long matchId = LocalState.currentMatch != null ? LocalState.currentMatch.match.id : 0;
             string data = JsonUtility.ToJson(new ServerMatchResult()
             {
-                match_id = LocalState.currentMatch != null ? LocalState.currentMatch.match.id : 0,
+                match_id = matchId,
                 score = score
             });
+
+            var match = LocalState.currentGame.history.Find(info => info.matchId == (matchId + ""));
+            if (match != null)
+            {
+                match.me.score = score + "";
+            }
+
+            ClientManager.SaveMatchScore(data);
             
             ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/play", data, matches =>
             {
-//                GameResourceManager.tabBar.SelectPlay();
+                ClientManager.RemoveMatchScore(data);
             }, e =>
             {
 //                GameResourceManager.tabBar.SelectPlay();
 //                UIMapController.OpenSimpleErrorWindow(e.message);
             });
-            
+        }
+
+        public static void SendScore(string data)
+        {
+            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/play", data, matches =>
+            {
+                ClientManager.RemoveMatchScore(data);
+                GetOrUpdateMatches();
+            }, e =>
+            {
+            });
         }
         
         [Serializable]
@@ -1074,6 +1116,8 @@ namespace Gamla.Logic
             
             ClientManager.InvokeEvent<ServerCreateTournamentResult>(LocalState.token, "tournaments/addPrivate", data, result =>
             {
+                result.tournament.isMy = true;
+                LocalState.tournaments.Add(result.tournament);
                 callback?.Invoke(result);
             }, e =>
             {
@@ -1149,7 +1193,10 @@ namespace Gamla.Logic
                 LocalState.currentTournament = null;
                 //UIMapController.Clear();
                 GamlaService.OnMatchStarted.Push(result.payment.match_id + "", "", false);
-            }, e => { });
+            }, e =>
+            {
+                UIMapController.OpenSimpleErrorWindow(e.message);
+            });
         }
 
         public class ReferralModel

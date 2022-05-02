@@ -11,6 +11,7 @@ namespace Gamla.Logic
 {
     public static class Utils
     {
+        const string _emailRegex = "([a-zA-Z0-9]{1,20})[@]([a-zA-Z0-9]{2,10})[.]([a-zA-Z0-9]{2,10})";
 
         public static string GenerateRandomStr()
         {
@@ -29,10 +30,9 @@ namespace Gamla.Logic
         public static bool IsValidEmail(string email)
         {
             try {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == email;
-            }
-            catch {
+                var addr =  Regex.Match(email,_emailRegex);
+                return addr.Value == email;
+            } catch {
                 return false;
             }
         }

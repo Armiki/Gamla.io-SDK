@@ -159,19 +159,19 @@ namespace Gamla.UI
 
                     var sortedData = LocalState.currentGame.history.OrderByDescending(x => string.IsNullOrEmpty(x.me.score) && x.status == BattleStatus.Waiting).ThenByDescending(x => x.date).ToList();
 
+                    var to = requests.to.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
+                    var from = requests.from.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
                     foreach (var data in sortedData)
                     {
                         var item = Instantiate(_battlePrefab, _battleContent);
-                        item.Init(data);
+                        bool rematchAvailable = from.All(r => r.to_user != data.opponent.id);
+                        item.Init(data, false, rematchAvailable);
                         _battleWidgets.Add(item);
                         size += item.rect.sizeDelta.y;
                     }
                 
                     _battleContent.sizeDelta = new Vector2(_battleContent.sizeDelta.x,
                         (size + sortedData.Count * 30) + 30) ;
-                    
-                    var to = requests.to.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
-                    var from = requests.from.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
                     
                     foreach (var request in from)
                     {

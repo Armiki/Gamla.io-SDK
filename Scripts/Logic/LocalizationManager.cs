@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Gamla.Data;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -31,7 +32,10 @@ namespace Gamla.Logic
                 if (!string.IsNullOrEmpty(webRequest.error))
                 {
                     UIMapController.OpenSimpleErrorWindow("NO INTERNET CONNECTION",
-                        () => { Debug.Log("do re load config"); });
+                        () =>
+                        {
+                            GamlaService.Open.Push(LocalState.pushToken);
+                        });
                     callback?.Invoke(false);
                     yield break;
                 }

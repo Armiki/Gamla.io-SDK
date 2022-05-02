@@ -61,6 +61,8 @@ namespace Gamla.UI
         [SerializeField] private Text _matchesCountTotal;
         [SerializeField] private RefreshScroll _refreshScroll;
 
+        [SerializeField] private GameObject _trophiesObject;
+
         public void Start()
         {
             var flag = GUIConstants.guiSettings.GetFlagByCurrentCulture();
@@ -160,7 +162,7 @@ namespace Gamla.UI
                 }
             }
 
-            _matchesCountWin.text = "" + current_user.countAllWins;
+            _matchesCountWin.text = "" + current_user.countWinInRow;
             _matchesCountTotal.text = "" + current_user.countTotalPlays;
 
             _signUpGO.SetActive(current_user.guest);
@@ -211,6 +213,8 @@ namespace Gamla.UI
             int total = trophies.Count;
             _trophiesProgress.fillAmount = readyCount / (float) total;
             _trophiesCount.text = readyCount + "/" + total;
+            
+            _trophiesObject.SetActive(true);
         }
     }
 }

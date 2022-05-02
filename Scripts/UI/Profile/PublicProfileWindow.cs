@@ -89,7 +89,7 @@ namespace Gamla.UI
                 if(gameObject == null || transform == null) return;
                 
                 _user.Init(profile);
-                _matchesCountWin.text = profile.count_all_win.ToString();
+                _matchesCountWin.text = profile.win_in_row.ToString();
                 _matchesCountTotal.text = (profile.count_all_win + profile.count_all_lose).ToString();
                 _flag.Load(profile.flag);
 
