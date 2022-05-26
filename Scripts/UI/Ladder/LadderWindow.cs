@@ -24,6 +24,9 @@ namespace Gamla.UI
         [SerializeField] private Text _timeLeft;
         [SerializeField] private LadderWidget _userLadderWidget;
         [SerializeField] private RefreshScroll _refreshScroll;
+
+        [SerializeField] private List<GameObject> _noLadderGo = new List<GameObject>();
+        [SerializeField] private Text _noLadderText;
         
         //temp
         [SerializeField] private RectTransform _ladderContent;
@@ -71,8 +74,8 @@ namespace Gamla.UI
             
             if (current_game?.leagues?.leagues?.data == null || current_game.leagues.leagues.data.Count == 0)
             {
-                //NO LEAGUE
-                Debug.LogError("NO LEAGUE");
+                _noLadderText.text = LocalizationManager.Text("gamla.window.ladder.launchsoon");
+                _noLadderGo.ForEach(go => go.SetActive(false));
                 return;
             }
 

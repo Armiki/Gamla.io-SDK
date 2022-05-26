@@ -36,7 +36,8 @@ namespace Gamla.Logic
                     token = LocalState.pushToken
                 },
                 version_sdk = ClientManager.version,
-                version = Application.version
+                version = Application.version,
+                geo = LocationManager.GetCashedLocation()
             });
 
             ClientManager.InvokeEvent<TokenClear>("login", data,
@@ -72,7 +73,8 @@ namespace Gamla.Logic
                     token = LocalState.pushToken
                 },
                 version_sdk = ClientManager.version,
-                version = Application.version
+                version = Application.version,
+                geo = LocationManager.GetCashedLocation()
             });
 
             ClientManager.InvokeEvent<TokenClear>("login", data,
@@ -134,12 +136,14 @@ namespace Gamla.Logic
         public static void LoginProfile(string token)
         {
             LocalState.token = token;
+            LocalState.currentGame = new GameInfo();
             GetGameAppList();
             ClientManager.GetData<ServerProfile>(token, "profile", profile =>
             {
                 PlayerPrefs.SetString("email", profile.email);
                 LocalState.currentUser = new UserInfo(profile);
                 EventManager.OnProfileUpdate.Push();
+                GetOrUpdateFullMatches();
                 GetOrUpdateMatches(result =>
                 {
                     UIMapController.CloseSpinner();
@@ -185,7 +189,7 @@ namespace Gamla.Logic
             List<HistoryBattleInfo> winBattles = new List<HistoryBattleInfo>();
             foreach (var battle in battles.battles)
             {
-                var history = LocalState.currentGame.history.Find(b => b.matchId == battle);
+                var history = LocalState.battleHistoryList.Find(b => b.matchId == battle);
                 if (history != null && history.status == BattleStatus.Win)
                 {
                     winBattles.Add(history);
@@ -195,6 +199,52 @@ namespace Gamla.Logic
             UIMapController.OpenPreStarReward(winBattles);
             return result;
         }
+
+        public static void GetOrUpdateFullMatches()
+        {
+            if(_isMatchUpdate)
+                return;
+            ClientManager.GetData<ServerMatches>(LocalState.token, "matches" + GameIDJson, matches =>
+            {
+                LocalState.battleHistoryList = HistoryBattleInfo.Convert(matches);
+                _isMatchUpdate = false;
+                if(matches.matches.last_page > 1)
+                    LoadNextMatchesPage(++matches.matches.current_page);
+            }, e =>
+            {
+                _isMatchUpdate = false;
+            });
+        }
+
+        public static void LoadNextMatchesPage(long page)
+        {
+            if(_isMatchUpdate)
+                return;
+            ClientManager.GetData<ServerMatches>(LocalState.token, $"matches{GameIDJson}&page={page}", matches =>
+            {
+                var _matches = HistoryBattleInfo.Convert(matches);
+                foreach (var vMatch in _matches)
+                {
+                    var historyMatch = LocalState.battleHistoryList.Find(m => m.matchId == vMatch.matchId);
+                    if (historyMatch == null)
+                    {
+                        LocalState.battleHistoryList.Add(vMatch);
+                    }
+                    else
+                    {
+                        historyMatch.Update(vMatch);
+                    }
+                }
+
+                _isMatchUpdate = false;
+                
+                if(matches.matches.last_page < page)
+                    LoadNextMatchesPage(++page);
+            }, e =>
+            {
+                _isMatchUpdate = false;
+            });
+        }
         
         public static void GetOrUpdateMatches(Action<bool> callback = null)
         {
@@ -203,11 +253,23 @@ namespace Gamla.Logic
             
             ClientManager.GetData<ServerMatches>(LocalState.token, "matches" + GameIDJson, matches =>
             {
-                LocalState.currentGame = new GameInfo(matches);
+                var historyBattleInfos = HistoryBattleInfo.Convert(matches);
+                foreach (var vMatch in historyBattleInfos)
+                {
+                    var historyMatch = LocalState.battleHistoryList.Find(m => m.matchId == vMatch.matchId);
+                    if (historyMatch == null)
+                    {
+                        LocalState.battleHistoryList.Add(vMatch);
+                    }
+                    else
+                    {
+                        historyMatch.Update(vMatch);
+                    }
+                }
                 if (callback == null)
                 {
                     LocalState.saveBattleModel.battles.Clear();
-                    foreach (var battle in LocalState.currentGame.history)
+                    foreach (var battle in LocalState.battleHistoryList)
                     {
                         if (battle.status == BattleStatus.Searching || battle.status == BattleStatus.Waiting)
                             LocalState.saveBattleModel.battles.Add(battle.matchId);
@@ -230,7 +292,7 @@ namespace Gamla.Logic
                 {
                     SendScore(data);
                 }
-                
+                _isMatchUpdate = false;
             }, e =>
             {
                 UIMapController.OpenSimpleErrorWindow(e.message);
@@ -487,6 +549,28 @@ namespace Gamla.Logic
         }
         
         [Serializable]
+        public class ResetBirthdayModel
+        {
+            public string birthday;
+        }
+        public static void SetBirthday(string birthday)
+        {
+            string data = JsonUtility.ToJson(new ResetBirthdayModel()
+            {
+                birthday = birthday
+            });
+            
+            Debug.Log($"birthday {birthday}");
+            ClientManager.PutData<EmptyModel>("profile", LocalState.token, data, result =>
+            {
+                GetOrUpdateProfile(LocalState.token);
+            }, e =>
+            {
+                UIMapController.OpenSimpleErrorWindow(e.message);
+            });
+        }
+        
+        [Serializable]
         public class ResetNotificationModel
         {
             public int notify;
@@ -658,11 +742,56 @@ namespace Gamla.Logic
                 }
                 else
                 {
-                    //Send to server () => 
-                    result?.Invoke(true);
+                    SendCheckGeo(info, result);
                 }
             }));
 
+        }
+
+        [Serializable]
+        public class LocationModel
+        {
+            public float latitude;
+            public float longitude;
+            public float altitude;
+            public float horizontalAccuracy;
+            public float verticalAccuracy;
+            public double timestamp;
+
+            public LocationModel(){}
+            public LocationModel(LocationInfo info)
+            {
+                latitude = info.latitude;
+                longitude = info.longitude;
+                altitude = info.altitude;
+                horizontalAccuracy = info.horizontalAccuracy;
+                verticalAccuracy = info.verticalAccuracy;
+                timestamp = info.timestamp;
+            }
+        }
+        
+        [Serializable]
+        public class LocationSendModel
+        {
+            public LocationModel geo;
+
+            public LocationSendModel(LocationModel data)
+            {
+                geo = data;
+            }
+        }
+        public static void SendCheckGeo(LocationInfo info, Action<bool> callback)
+        {
+            string data = JsonUtility.ToJson(new LocationSendModel(new LocationModel(info)));
+            Debug.Log("SendCheckGeo" + data);
+            ClientManager.InvokeEvent<GeoResult>(LocalState.token, "geo", data, result =>
+            {
+                //callback?.Invoke(true);
+                callback?.Invoke(result is {result: true});
+            }, e =>
+            {
+                callback?.Invoke(false);
+            });
         }
 
         public static void AddPack(Pack pack, ValidateWindow window)
@@ -714,7 +843,7 @@ namespace Gamla.Logic
             });
         }
 
-        public static void TryPlayGame(BattleInfo info)
+        public static void CreateMatch(BattleInfo info, Action<ServerMatchStart> callback)
         {
             string data = JsonUtility.ToJson(new ServerStartMatchInfo()
             {
@@ -727,14 +856,44 @@ namespace Gamla.Logic
             {
                 LocalState.currentMatch = match.newUserMatch;
                 LocalState.currentTournament = null;
-                GamlaService.OnMatchStarted.Push(LocalState.currentMatch.match.id + "", "", false);
+                //GamlaService.OnMatchStarted.Push(LocalState.currentMatch.match.id + "", "", false);
                 //UIMapController.Clear();
+                callback?.Invoke(match.newUserMatch);
             }, e =>
             {
+                callback?.Invoke(null);
                 UIMapController.Clear();
                 GamlaResourceManager.tabBar.SelectPlay();
                 UIMapController.OpenSimpleErrorWindow(e.message + " " + e.error);
             });
+        }
+
+        public static void TryPlayGame(BattleInfo info)
+        {
+            // string data = JsonUtility.ToJson(new ServerStartMatchInfo()
+            // {
+            //     game_id = ClientManager.gameId + "",
+            //     bet = (int)info.entry.amount + "",
+            //     currency = info.entry.type.ToString()
+            // });
+            //
+            // ClientManager.InvokeEvent<ServerMatchStartContainer>(LocalState.token, "matches/add", data, match =>
+            // {
+            //     LocalState.currentMatch = match.newUserMatch;
+            //     LocalState.currentTournament = null;
+            //     GamlaService.OnMatchStarted.Push(LocalState.currentMatch.match.id + "", "", false);
+            //     //UIMapController.Clear();
+            // }, e =>
+            // {
+            //     UIMapController.Clear();
+            //     GamlaResourceManager.tabBar.SelectPlay();
+            //     UIMapController.OpenSimpleErrorWindow(e.message + " " + e.error);
+            // });
+            
+            // LocalState.currentMatch = match.newUserMatch;
+            // LocalState.currentTournament = null;
+            if(LocalState.currentMatch != null)
+                GamlaService.OnMatchStarted.Push(LocalState.currentMatch.match.id + "", "", false);
         }
 
         public static void TryPlayTournament(long matchId, ServerTournamentModel tournament)
@@ -771,7 +930,7 @@ namespace Gamla.Logic
                 score = score
             });
 
-            var match = LocalState.currentGame.history.Find(info => info.matchId == (matchId + ""));
+            var match = LocalState.battleHistoryList.Find(info => info.matchId == (matchId + ""));
             if (match != null)
             {
                 match.me.score = score + "";
@@ -797,6 +956,8 @@ namespace Gamla.Logic
                 GetOrUpdateMatches();
             }, e =>
             {
+                if(e.code == 500)
+                    ClientManager.RemoveMatchScore(data);
             });
         }
         
@@ -996,10 +1157,10 @@ namespace Gamla.Logic
             ClientManager.GetData<ServerTournament>(LocalState.token, "tournaments" + GameIDJson, result =>
             {
                 LocalState.tournaments.Clear();
-                var all_tournaments = result.all_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId && t.status != "finished" && t.status != "cancelled");
-                var user_tournaments = result.user_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId && t.status != "finished" && t.status != "cancelled");
+                var all_tournaments = result.all_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId);// && t.status != "finished" && t.status != "cancelled");
+                var user_tournaments = result.user_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId);// && t.status != "finished" && t.status != "cancelled");
                 user_tournaments.ForEach(t => t.isMy = true);
-                var participates = result.participate_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId && t.status != "finished" && t.status != "cancelled");
+                var participates = result.participate_tournaments.data.FindAll(t => t.game_id == ClientManager.gameId);// && t.status != "finished" && t.status != "cancelled");
                 participates.ForEach(t => t.isJoined = true);
                 
                 LocalState.tournaments.AddRange(participates);

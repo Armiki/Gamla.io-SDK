@@ -204,9 +204,11 @@ namespace Gamla.UI
                 _play.gameObject.SetActive(false);
                 return;
             }
-            
-            bool isCanPlay = updatedTournament.matches.Any(m =>
-                m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
+
+            bool isCanPlay = _tournament.status != "cancelled" &&
+                             _tournament.status != "finished" &&
+                             updatedTournament.matches.Any(m => m.players.Any(p =>
+                                 p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
             _play.gameObject.SetActive(isCanPlay);
         }
 

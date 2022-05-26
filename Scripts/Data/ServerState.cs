@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Gamla.Logic;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -21,6 +22,7 @@ namespace Gamla.Data
         public ServerLoginPush push_token;
         public string version;
         public string version_sdk;
+        public ServerCommand.LocationModel geo;
     }
 
     [Serializable]
@@ -227,6 +229,7 @@ namespace Gamla.Data
         public long win_in_row = 0;
         public string referral_code;
         public string referral_link;
+        public string birthday;
     }
 
     [Serializable]
@@ -369,6 +372,12 @@ namespace Gamla.Data
     public class PayPalLinkResult
     {
         public string payment_link;
+    }
+
+    [Serializable]
+    public class GeoResult
+    {
+        public bool result = false;
     }
 
     [Serializable]
@@ -534,14 +543,13 @@ namespace Gamla.Data
     }
 
     [Serializable]
-    public class ServerTournamentModel
+    public class ServerTournamentModel : MatchStory
     {
         public long id;
         public string name;
-        public string status; //created | 
+        public string status; //created | cancelled | finished
         public int players_count;
         public string start_at;
-        public string end_at;
         public long game_id;
         public long owner_id;
         public float entry_cost;
@@ -734,6 +742,7 @@ namespace Gamla.Data
         public List<T> data;
         public string first_page_url;
         public long from;
+        public long current_page;
         public long last_page;
         public string last_page_url;
         public string path;

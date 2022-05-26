@@ -10,8 +10,11 @@ namespace Gamla.UI
         [SerializeField] private AvatarComponent _avatarUser;
         [SerializeField] private Text _nameUser;
         [SerializeField] private Button _button;
+        [SerializeField] private RawImage _flag;
 
         private ServerPublicUser _user;
+        private ServerPublicProfile _profile;
+        private string _flagUrl;
 
         private long _id;
         public void Start()
@@ -27,6 +30,8 @@ namespace Gamla.UI
                     }
                 });
             }
+
+            ReLoadFlag();
         }
 
         public void Init(ServerPublicUser user)
@@ -38,16 +43,18 @@ namespace Gamla.UI
                 _nameUser.text = LocaliseName(user.nickname);
                 _avatarUser.Load(user.image);
                 _avatarUser.gameObject.SetActive(true);
-                //_avatarUser.sprite = GUIConstants.guiSettings.avatars.FirstOrDefault(x => x.name == user.avatar);
+                _flagUrl = user.flag;
             }
         }
         
         public void Init(ServerPublicProfile profile)
         {
+            _profile = profile;
             _id = profile.id;
             _nameUser.text = LocaliseName(profile.nickname);
             _avatarUser.Load(profile.image);
             _avatarUser.gameObject.SetActive(true);
+            _flagUrl = profile.flag;
         }
         
         public void Init(ServerPlayerMatch user)
@@ -58,7 +65,7 @@ namespace Gamla.UI
                 _nameUser.text = LocaliseName(user.nickname);
                 _avatarUser.Load(user.image);
                 _avatarUser.gameObject.SetActive(true);
-                //_avatarUser.sprite = GUIConstants.guiSettings.avatars.FirstOrDefault(x => x.name == user.avatar);
+                _flagUrl = "";
             }
         }
 
@@ -75,6 +82,33 @@ namespace Gamla.UI
             {
                 _nameUser.text = LocaliseName(user.name);
                 _avatarUser.Load(user.avatarUrl);
+                _flagUrl = user.flagUrl;
+            }
+        }
+        
+        void OnEnable()
+        {
+            //Todo: Load on init, and reload when language changed 
+            ReLoadFlag();
+        }
+        
+        void ReLoadFlag()
+        {
+            if (_flag != null)
+            {
+                if (_flagUrl != null && _flagUrl.Contains("gamla"))
+                {
+                    RemoteResourceManager.LoadToRawImage(_flag, _flagUrl);
+                    return;
+                }
+
+                string code = "us";
+                if (LocalizationManager.CurrentLanguage == "russian") {
+                    code = "ru";
+                }
+                
+                var flagUrl = $"https://gamla.io/assets/img/flugs/{code}.png";
+                RemoteResourceManager.LoadToRawImage(_flag, flagUrl);
             }
         }
         

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Gamla.Data;
 using Gamla.Logic;
 using Gamla.UI.Carousel;
@@ -53,7 +54,7 @@ namespace Gamla.UI
         [SerializeField] private Text _tournamentEntryFee;
         [SerializeField] private Image _tournamentEntryFeeIcon;
         [SerializeField] private Text _tournamentWinnerGet;
-        [SerializeField] private Image _tournamentWinnerGetIcon;
+        [SerializeField] private CurrencyBadge _tournamentWinnerGetIcon;
         
         [SerializeField] private Text _tournamentWinCount;
         [SerializeField] private CurrencyBadge _touenamentWinBadge;
@@ -68,17 +69,17 @@ namespace Gamla.UI
         [SerializeField] private Image _pvpWinnerGetIcon;
 
         private string _battleInfoIdTemp = "";
-
         public RectTransform rect;
         private HistoryBattleInfo _data;
         public HistoryBattleInfo data => _data;
         public GameObject gift => _gift;
-
+        public GameObject winGO => _winGO;
+        
         public void Init(HistoryBattleInfo data, bool isGift = false, bool rematchAvailable = true)
         {
             if(_battleInfoIdTemp == data.matchId) return;
             _data = data;
-            
+
             _battleInfoIdTemp = data.matchId;
             _matchInfo.onClick.RemoveAllListeners();
             _matchInfo.onClick.AddListener(() =>
@@ -211,6 +212,55 @@ namespace Gamla.UI
                 _gift.SetActive(true);
                 _winGO.SetActive(false);
             }
+        }
+
+        public void Init(ServerTournamentModel data)
+        {
+            _matchInfo.onClick.AddListener(() => UIMapController.OpenTournamentList(data));
+            _tournamentPlay.onClick.AddListener(() => UIMapController.OpenTournamentList(data));
+            _tournamentStatus.text = LocalizeTournamentStatus(data.status);
+            _tournamentSubStatus.text = data.name;
+            
+            var _winner = data.awards.Find(a => a.place == 1);
+            _tournamentWinnerGetIcon.Init(_winner.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
+            _tournamentWinnerGet.text = "" + _winner.amount;
+
+            bool isCanPlay = data.status != "cancelled" && 
+                             data.status != "finished" &&
+                             data.matches.Any(m =>
+                m.players.Any(p => p.user_id == LocalState.currentUser.uid && string.IsNullOrEmpty(p.score)));
+            _tournamentPlay.gameObject.SetActive(isCanPlay);
+
+            for (int i = 0; i < _tournamentPlayers.Length; i++)
+            {
+                if (data.participants.Count > i)
+                {
+                    _tournamentPlayers[i].Load(data.participants[i].image);
+                }
+            }
+            
+
+            _gameSkin.SetActive(false);
+            _pvpSkin.SetActive(false);
+            _tournamentSkin.SetActive(true);
+            rect.sizeDelta = new Vector2(rect.sizeDelta.x, isCanPlay? TournamentStartSkinHeight: TournamentSkinHeight);
+        }
+
+        string LocalizeTournamentStatus(string status)
+        {
+            switch (status)
+            {
+                case "created":
+                    return LocalizationManager.Text("gamla.window.tournamentwidget.status.created");
+                case "cancelled":
+                    return LocalizationManager.Text("gamla.window.tournamentwidget.status.cancelled");
+                case "finished":
+                    return LocalizationManager.Text("gamla.window.tournamentwidget.status.finished");
+                case "started":
+                    return LocalizationManager.Text("gamla.window.tournamentwidget.status.started");
+            }
+
+            return status;
         }
 
         void SetContentHeight(bool rematchAvailable)

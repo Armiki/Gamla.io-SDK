@@ -64,6 +64,11 @@ namespace Gamla.Logic
         {
             return Regex.Match(number, @"^[1-9]+([0-9]+){0,1}$").Success;
         }
+        
+        public static bool IsValidAge(string age)
+        {
+            return Regex.Match(age, @"(^[1-9]?[0-9]{0,1}$)").Success;
+        }
 
         public static GridCarouselPresenter CreateGridViewPresenter(
             ICarouselRootView carouselRootView,

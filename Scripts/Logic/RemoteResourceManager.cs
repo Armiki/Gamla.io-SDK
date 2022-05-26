@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Gamla.Logic
 {
@@ -79,6 +80,22 @@ namespace Gamla.Logic
 				{
 					RemoveOld();
 				}
+			}
+		}
+
+		public static void LoadToRawImage(RawImage avatar, string _tempUrl) //Todo: to RawImage extension
+		{
+			if (_tempUrl != String.Empty)
+			{
+				GetContent(_tempUrl, texture2D =>
+				{
+					if (texture2D != null)
+					{
+						var _temp = texture2D;
+						if (avatar != null && avatar != null && avatar.gameObject != null)
+							avatar.texture = _temp;
+					}
+				}, avatar.gameObject);
 			}
 		}
 

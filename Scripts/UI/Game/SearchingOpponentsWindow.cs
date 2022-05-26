@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Gamla.Data;
+using Gamla.Logic;
 
 namespace Gamla.UI
 {
@@ -23,19 +24,51 @@ namespace Gamla.UI
         [SerializeField] private GameObject[] _backBtn;
 
         private float _timeToStart = 10;
+        private bool _matchStarted = false;
+        private bool _matchClicked = false;
         private BattleInfo _battleInfo;
         public void Start()
         {
             _beginMatch.onClick.RemoveAllListeners();
             _beginMatch.onClick.AddListener(() =>
             {
+                StartMatch();
                 onPlayGameClick?.Invoke(_battleInfo);
                 _beginMatch.interactable = false;
                 foreach (var btn in _backBtn)
                 {
                     btn.SetActive(false);
                 }
+                _matchClicked = true;
             });
+        }
+
+        private void StartMatch()
+        {
+            if(_matchStarted) 
+                return;
+            _matchStarted = true;
+            ServerCommand.CreateMatch(_battleInfo, OnCreateMatch);
+        }
+
+        private void OnCreateMatch(ServerMatchStart match)
+        {
+            if (match != null)
+            {
+                if (match.match.players.Count > 1)
+                {
+                    var opponent = match.match.players.Find(p => p.id != LocalState.currentUser.uid);
+                    if (opponent != null)
+                    {
+                        _user2.Init(opponent);
+                    }
+                }
+
+                if (_matchClicked)
+                {
+                    onPlayGameClick?.Invoke(_battleInfo);
+                }
+            }
         }
 
         public void SetCurrentUser(UserInfo current_user)
@@ -58,6 +91,11 @@ namespace Gamla.UI
                 {
                     onPlayGameClick?.Invoke(_battleInfo);
                     _beginMatch.interactable = false;
+                }
+
+                if (_timeToStart < 3)
+                {
+                    StartMatch();
                 }
                 foreach (var btn in _backBtn)
                 {

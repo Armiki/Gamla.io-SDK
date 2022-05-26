@@ -1,4 +1,5 @@
 using System;
+using Gamla.Logic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,7 +45,7 @@ namespace Gamla.UI
         {
             if (timer == -1)
             {
-                _timer.text = "Not available";
+                _timer.text = LocalizationManager.Text("gamla.main.notavailable");
             }
             
             TimeSpan time = TimeSpan.FromSeconds(timer);

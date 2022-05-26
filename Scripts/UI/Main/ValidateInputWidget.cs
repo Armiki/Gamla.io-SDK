@@ -12,7 +12,8 @@ namespace Gamla.UI
         Password,
         Simple,
         Phone,
-        Name
+        Name,
+        Age
     }
     
     public class ValidateInputWidget : MonoBehaviour
@@ -72,6 +73,9 @@ namespace Gamla.UI
                 case ValidateInputType.Name:
                     isValid = NameValidate();
                     break;
+                case ValidateInputType.Age:
+                    isValid = AgeValidate();
+                    break;
             }
             return isValid;
         }
@@ -115,6 +119,16 @@ namespace Gamla.UI
                 return false;
             }
             return true;
+        }
+
+        bool AgeValidate()
+        {
+            if (Utils.IsValidAge(_input.text))
+            {
+                return true;
+            }
+            ChangeCorrectStatus(false, LocalizationManager.Text("gamla.widget.validateinput.incorrectage.error"));
+            return false;
         }
 
         bool PasswordValidate(string otherText)

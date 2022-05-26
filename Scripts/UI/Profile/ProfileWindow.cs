@@ -29,7 +29,6 @@ namespace Gamla.UI
         
         [SerializeField] private TopbarGame topbarGame;
         [SerializeField] private UserProfileWidget _user;
-        [SerializeField] private Image _flag;
         [SerializeField] private Button _editProfileBtn;
 
         [SerializeField] private GameObject _signUpGO;
@@ -65,11 +64,6 @@ namespace Gamla.UI
 
         public void Start()
         {
-            var flag = GUIConstants.guiSettings.GetFlagByCurrentCulture();
-            if (flag != null)
-            {
-                _flag.sprite = flag;
-            }
             _editProfileBtn.onClick.RemoveAllListeners();
             _editProfileBtn.onClick.AddListener(() => onEditProfileClick?.Invoke());
             

@@ -25,19 +25,10 @@ namespace Gamla.UI
             LoadAva();
         }
 
-        private void LoadAva()
+        void LoadAva()
         {
-            if (_tempUrl != String.Empty)
-            {
-                RemoteResourceManager.GetContent(_tempUrl, texture2D =>
-                {
-                    if (texture2D != null)
-                    {
-                        _temp = texture2D;
-                        if (avatar != null && gameObject != null && this != null)
-                            avatar.texture = _temp;
-                    }
-                }, gameObject);
+            if (avatar != null && _tempUrl != null) {
+                RemoteResourceManager.LoadToRawImage(avatar, _tempUrl);
             }
         }
     }

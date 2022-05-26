@@ -64,7 +64,9 @@ namespace Gamla.UI
         {
             foreach (var existTournament in _battleWidgets)
             {
-                Destroy(existTournament.gameObject);
+                if (existTournament != null) {
+                    Destroy(existTournament.gameObject);
+                }
             }
 
             _battleWidgets.Clear();

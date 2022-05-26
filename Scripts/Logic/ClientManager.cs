@@ -12,7 +12,7 @@ namespace Gamla.Logic
     {
         public static bool isInited = false;
         public static int gameId = 0;
-        public static readonly string version = "0.9.20";
+        public static readonly string version = "0.9.21";
         private readonly string _uri = "https://gamla.io/api";
 
         private static ClientManager _instance;
@@ -183,6 +183,7 @@ namespace Gamla.Logic
         IEnumerator ApiGet<T>(string eventName, Action<T> resultJson, Action<ErrorModel> errorJson = null,
             string token = "", string data = "")
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             UnityWebRequest www = UnityWebRequest.Get($"{_uri}/{eventName}");
             if (token != String.Empty)
             {
@@ -196,6 +197,9 @@ namespace Gamla.Logic
 
             yield return www.SendWebRequest();
 
+            watch.Stop();
+            Debug.Log($"request time {eventName} :: {watch.ElapsedMilliseconds} ms");
+            
             if (www.result == UnityWebRequest.Result.Success)
             {
                 string resultText = www.downloadHandler.text;

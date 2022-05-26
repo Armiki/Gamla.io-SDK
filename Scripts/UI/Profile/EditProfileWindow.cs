@@ -21,7 +21,6 @@ namespace Gamla.UI
 
         [SerializeField] private UserProfileWidget _user;
         [SerializeField] private ValidateInputWidget _publicUserName;
-        [SerializeField] private Image _flag;
         [SerializeField] private Button _changeAvatarBtn;
         [SerializeField] private AvatarComponent _avatar;
         [SerializeField] private ValidateInputWidget _firstNameInput;
@@ -50,11 +49,6 @@ namespace Gamla.UI
         
         public void Start()
         {
-            var flag = GUIConstants.guiSettings.GetFlagByCurrentCulture();
-            if (flag != null)
-            {
-                _flag.sprite = flag;
-            }
             _saveBtn.gameObject.SetActive(false);
             _isAgree = true;
             _agreeCheck.SetActive(_isAgree);

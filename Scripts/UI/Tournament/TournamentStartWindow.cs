@@ -20,6 +20,7 @@ namespace Gamla.UI
         [SerializeField] private Text _playerCount;
         [SerializeField] private CurrencyBadge _entryCurrencyBadge;
         [SerializeField] private Text _entryCurrencyValue;
+        [SerializeField] private Text _endTime;
         
 
         public void Init(ServerTournamentModel tournament, Action playBtn)
@@ -48,6 +49,9 @@ namespace Gamla.UI
                     _finalistCurrencyValue.text = "" + finalist.amount;
                 }
             }
+
+            var endAt = DateTime.Parse(tournament.end_at);
+            _endTime.text = endAt.ToShortDateString() + " " + endAt.ToShortTimeString();
         }
     }
 }

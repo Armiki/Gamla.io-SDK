@@ -24,16 +24,17 @@ namespace Gamla.Scripts.UI
             _userPrize.text = meUser.reward_amount + "";
             _userBadge.Init(meUser.reward_currency);
             _time.text = model.end_at;
+            
+            _places.ForEach(pl => pl.gameObject.SetActive(false));
 
             for (int i = 0; i < model.places.Count; i++)
             {
                 if (i  < _places.Count )
                 {
                     _places[i].Init(model.places[i]);
+                    _places[i].gameObject.SetActive(true);
                 }
             }
-            if(model.places.Count <= 3)
-                _places[3].gameObject.SetActive(false);
         }
         
         public void Init(ServerLeagueEndModel model, bool gold)
@@ -49,15 +50,16 @@ namespace Gamla.Scripts.UI
 
             _time.text = model.end_at;
 
+            _places.ForEach(pl => pl.gameObject.SetActive(false));
+            
             for (int i = 0; i < places.Count; i++)
             {
                 if (i < _places.Count)
                 {
                     _places[i].Init(places[i]);
+                    _places[i].gameObject.SetActive(true);
                 }
             }
-            if(places.Count <= 3)
-                _places[3].gameObject.SetActive(false);
         }
     }
 }

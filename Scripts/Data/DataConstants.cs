@@ -18,7 +18,8 @@ namespace Gamla.Data
         LogOutAsk = 10,
         LowLevel = 11,
         GuestsUnavailable = 12,
-        LogOutGuestAsk = 13
+        LogOutGuestAsk = 13,
+        NotOldAnough = 14
     }
 
     public enum GUIInfoType
@@ -152,6 +153,15 @@ namespace Gamla.Data
                      description = LocalizationManager.Text("gamla.checkplayer.guest.description"),
                      closeTitle = LocalizationManager.Text("gamla.btn.close"),
                      actionTitle = LocalizationManager.Text("gamla.btn.signup") }
+             },
+             {
+                 GUIWarningType.NotOldAnough,
+                 new GUIInfoWinData {
+                     logo = "smile_state_4",
+                     title = LocalizationManager.Text("gamla.checkplayer.age.title"),
+                     description = LocalizationManager.Text("gamla.checkplayer.age.description"),
+                     closeTitle = LocalizationManager.Text("gamla.btn.close"),
+                     actionTitle = ""}
              },
         };
 

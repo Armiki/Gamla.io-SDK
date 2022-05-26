@@ -113,12 +113,14 @@ namespace Gamla.UI
                 item.Init(pack);
                 item.onBuyClick += (pack) =>
                 {
-                    if (!UIMapController.ValidateUserAccess(false)) {
-                        return;
-                    }
-                    var validateWindow = UIMapController.OpenValidateWindow(true);
-                    validateWindow.onCloseAction += GamlaResourceManager.tabBar.SelectPlay;
-                    ServerCommand.AddPack(pack, validateWindow);
+                    FeatureValidationManager.ValidateFeature(false, true, true, (validated) =>
+                    {
+                        if (!validated) return;
+                            
+                        var validateWindow = UIMapController.OpenValidateWindow(true);
+                        validateWindow.onCloseAction += GamlaResourceManager.tabBar.SelectPlay;
+                        ServerCommand.AddPack(pack, validateWindow);
+                    });
                 };
                 _storeHardWidgetList.Add(item);
             }

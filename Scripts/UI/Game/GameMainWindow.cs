@@ -50,7 +50,7 @@ namespace Gamla.UI
             EventManager.OnGameInfoUpdate.Subscribe(UpdateData);
             EventManager.OnTournamentsUpdated.Subscribe(InitTournaments);
             //ServerCommand.GetOrUpdateMatches();
-            if (LocalState.currentGame.history.Count > 0)
+            if (LocalState.battleHistoryList.Count > 0)
             {
                 UpdateData();
             }
@@ -85,9 +85,9 @@ namespace Gamla.UI
 
         private void InitTournaments()
         {
-            var existTournaments = LocalState.tournaments != null && LocalState.tournaments.Count > 0;
-            _tournamentTitleGO.SetActive(existTournaments);
-            _tournamentGO.SetActive(existTournaments);
+            // var existTournaments = LocalState.tournaments != null && LocalState.tournaments.Count > 0;
+            // _tournamentTitleGO.SetActive(existTournaments);
+            // _tournamentGO.SetActive(existTournaments);
             foreach (var existTournament in _tournamentWidgets)
             {
                 Destroy(existTournament.gameObject);
@@ -96,14 +96,20 @@ namespace Gamla.UI
 
             foreach (var tournament in LocalState.tournaments)
             {
-                var item = Instantiate(_tournamentPrefab, _tournamenContent);
-                item.Init(tournament);
-                item.onTournamentClick += () =>
+                if (tournament.status != "finished" && tournament.status != "cancelled" && !tournament.isJoined)
                 {
-                    onOpenTournamentList?.Invoke(tournament);//Use Ids instead of referencess?
-                };
-                _tournamentWidgets.Add(item);
+                    var item = Instantiate(_tournamentPrefab, _tournamenContent);
+                    item.Init(tournament);
+                    item.onTournamentClick += () =>
+                    {
+                        onOpenTournamentList?.Invoke(tournament); //Use Ids instead of referencess?
+                    };
+                    _tournamentWidgets.Add(item);
+                }
             }
+            
+            _tournamentTitleGO.SetActive(_tournamentWidgets.Count > 0);
+            _tournamentGO.SetActive(_tournamentWidgets.Count > 0);
         }
 
         readonly GridDataSource<HistoryBattleInfo> _testDataSource = new GridDataSource<HistoryBattleInfo>(200, 1);
@@ -133,7 +139,7 @@ namespace Gamla.UI
 
         void SetData()
         {
-            var sortedData = LocalState.currentGame.history.OrderByDescending(x => x.date).ToList();
+            var sortedData = LocalState.battleHistoryList.OrderByDescending(x => x.date).ToList();
             _testDataSource.UpdateData(sortedData);
             //_testCarouselPresenter?.ReloadData();
             _gameListCarouselPresenter?.Reset();
@@ -157,22 +163,42 @@ namespace Gamla.UI
                     _battleWidgets.Clear();
                     var size = 0f;
 
-                    var sortedData = LocalState.currentGame.history.OrderByDescending(x => string.IsNullOrEmpty(x.me.score) && x.status == BattleStatus.Waiting).ThenByDescending(x => x.date).ToList();
+                    var sortedData = LocalState.battleHistoryList.OrderByDescending(x => string.IsNullOrEmpty(x.me.score) && x.status == BattleStatus.Waiting).ThenByDescending(x => x.date).ToList();
+                    var sortedTournament = LocalState.tournaments.FindAll(t => /*(t.status == "finished" | t.status == "cancelled") &&*/ t.isJoined).OrderByDescending(t => t.end_at);
+                    List<MatchStory> totalSortedData = new List<MatchStory>();
+                    totalSortedData.AddRange(sortedData);
+                    totalSortedData.AddRange(sortedTournament);
+                    totalSortedData = totalSortedData.OrderByDescending(t => t.end_at).ToList();
 
                     var to = requests.to.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
                     var from = requests.from.data.FindAll(r => r.game_id == ClientManager.gameId && r.status == "waiting");
-                    foreach (var data in sortedData)
+                    foreach (var data in totalSortedData)
                     {
-                        var item = Instantiate(_battlePrefab, _battleContent);
-                        bool rematchAvailable = from.All(r => r.to_user != data.opponent.id);
-                        item.Init(data, false, rematchAvailable);
-                        _battleWidgets.Add(item);
-                        size += item.rect.sizeDelta.y;
+                        var valid = data is HistoryBattleInfo;
+                        if (valid)
+                        {
+                            var value = (HistoryBattleInfo) data;
+                            var item = Instantiate(_battlePrefab, _battleContent);
+                            bool rematchAvailable = from.All(r => r.to_user != value.opponent.id);
+                            item.Init(value, false, rematchAvailable);
+                            _battleWidgets.Add(item);
+                            size += item.rect.sizeDelta.y;
+                        }
+                        
+                        valid = data is ServerTournamentModel;
+                        if (valid)
+                        {
+                            var value = (ServerTournamentModel) data;
+                            var item = Instantiate(_battlePrefab, _battleContent);
+                            item.Init(value);
+                            _battleWidgets.Add(item);
+                            size += item.rect.sizeDelta.y;
+                        }
                     }
-                
+
                     _battleContent.sizeDelta = new Vector2(_battleContent.sizeDelta.x,
-                        (size + sortedData.Count * 30) + 30) ;
-                    
+                        (size + totalSortedData.Count * 30) + 30) ;
+
                     foreach (var request in from)
                     {
                         var item = Instantiate(_battlePrefab, _battleContent);
@@ -190,9 +216,9 @@ namespace Gamla.UI
                         _battleWidgets.Add(item);
                         size += item.rect.sizeDelta.y;
                     }
-                    
+
                     _battleContent.sizeDelta = new Vector2(_battleContent.sizeDelta.x,
-                        (size + sortedData.Count * 30));
+                        (size + totalSortedData.Count * 30));
                 });
             }
         }

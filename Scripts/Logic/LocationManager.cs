@@ -7,9 +7,28 @@ namespace Gamla.Logic
 {
     public class LocationManager : MonoBehaviour
     {
+        const string LOCATION_KEY_PREFS = "previos_location";
+        
         private static LocationManager _instance;
 
+        public static ServerCommand.LocationModel GetCashedLocation()
+        {
+            string text = PlayerPrefs.GetString(LOCATION_KEY_PREFS, "");
+            var locationInfo = JsonUtility.FromJson<ServerCommand.LocationModel>(text);
+            return locationInfo;
+        }
+        
         public static void FindLocation(Action<bool, LocationInfo> callback)
+        {
+            FindLocationInternal((b, info) =>
+            {
+                string data = JsonUtility.ToJson(new ServerCommand.LocationModel(info));
+                PlayerPrefs.SetString(LOCATION_KEY_PREFS, data);
+                callback(b, info);
+            });
+        }
+        
+        static void FindLocationInternal(Action<bool, LocationInfo> callback)
         {
 #if UNITY_EDITOR
             callback?.Invoke(true, new LocationInfo());
@@ -43,7 +62,7 @@ namespace Gamla.Logic
             int maxWait = 10;
             while (Input.location.status == LocationServiceStatus.Initializing && maxWait > 0)
             {
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSecondsRealtime(1);
                 Debug.Log("Input.location.status: " + Input.location.status);
                 Debug.Log("Location: " + Input.location.lastData.latitude + " " + Input.location.lastData.longitude +
                           " " + Input.location.lastData.altitude + " " + Input.location.lastData.horizontalAccuracy +

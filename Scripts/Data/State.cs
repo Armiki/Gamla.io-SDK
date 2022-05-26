@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Gamla.Logic;
+using UnityEngine;
 
 namespace Gamla.Data
 {
@@ -39,23 +40,21 @@ namespace Gamla.Data
     {
         public string miniLogo;
         public string backLogo;
-        public string name;
+        public string name = "GameName";
 
         public List<BattleInfo> battles = new List<BattleInfo>();
-        public List<HistoryBattleInfo> history = new List<HistoryBattleInfo>();
+        //public List<HistoryBattleInfo> history = new List<HistoryBattleInfo>();
 
         public ServerLeagues leagues;
-        public List<LadderInfo> ladder;
+        public List<LadderInfo> ladder = new List<LadderInfo>();
         
-        public GameInfo(){}
-
-        public GameInfo(ServerMatches matches)
-        {
-            name = "GameName";
-            battles = LocalState.currentGame.battles;
-            ladder = new List<LadderInfo>();// MockData.currentGame.ladder;
-            history =  HistoryBattleInfo.Convert(matches); //MockData.currentGame.history; //
-        }
+        // public GameInfo()
+        // {
+        //     //name = "GameName";
+        //     //battles = LocalState.currentGame.battles;
+        //     //ladder = new List<LadderInfo>();// MockData.currentGame.ladder;
+        //     //history =  HistoryBattleInfo.Convert(matches); //MockData.currentGame.history; //
+        // }
     }
 
     [Serializable]
@@ -74,7 +73,13 @@ namespace Gamla.Data
     }
 
     [Serializable]
-    public class HistoryBattleInfo
+    public class MatchStory
+    {
+        public string end_at;
+    }
+
+    [Serializable]
+    public class HistoryBattleInfo : MatchStory
     {
         public string matchId;
         public BattleStatus status;
@@ -114,6 +119,7 @@ namespace Gamla.Data
                 opponent = new ServerPublicUser(match.players, false),
                 me = new ServerPublicUser(match.players, true),
                 date = DateTime.Parse(match.updated_at),
+                end_at = match.updated_at,
                 battleInfo = new BattleInfo()
                 {
                     entry = new Currency(){type = match.currency == "Z" ? CurrencyType.Z : CurrencyType.USD, amount = match.bet },
@@ -124,6 +130,16 @@ namespace Gamla.Data
                 },
                 drawScore = match.draw_score
             };
+        }
+
+        public void Update(HistoryBattleInfo data)
+        {
+            status = data.status;
+            opponent = data.opponent;
+            me = data.me;
+            battleInfo = data.battleInfo;
+            drawScore = data.drawScore;
+            date = data.date;
         }
     }
 
@@ -196,7 +212,8 @@ namespace Gamla.Data
                 email = profile.email,
                 firstName = profile.name,
                 lastName = profile.surname,
-                phone = profile.phone
+                phone = profile.phone,
+                birthday = profile.birthday
             };
             games = UserGames.Convert(profile.experience);
             trophie = 10;
@@ -274,6 +291,7 @@ namespace Gamla.Data
         public string lastName;
         public string address;
         public string phone;
+        public string birthday;
     }
 
     [Serializable]

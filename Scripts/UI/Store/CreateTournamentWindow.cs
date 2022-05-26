@@ -34,6 +34,7 @@ namespace Gamla.UI
         [SerializeField] private CurrencyBadge _entryBadge;
         [SerializeField] private Button _copyCode;
         [SerializeField] private Button _share;
+        [SerializeField] private Text _endTime;
 
 
         private float _handleAddictNumMax;
@@ -144,6 +145,9 @@ namespace Gamla.UI
                 _persons.text = myTournament.players_count + "";
                 _entryFee.text = myTournament.entry_cost + "";
                 _entryBadge.Init(myTournament.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
+                
+                var endAt = DateTime.Parse(myTournament.end_at);
+                _endTime.text = endAt.ToShortDateString() + " " + endAt.ToShortTimeString();
                 
                 _existGO.SetActive(true);
                 _createGO.SetActive(false);

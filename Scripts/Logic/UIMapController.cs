@@ -180,7 +180,7 @@ namespace Gamla.Logic
             window.Show();
         }
 
-        static void OpenInGameSignUp()
+        public static void OpenInGameSignUp()
         {
             var window =
                 GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/InGameSignUpWindow"),
@@ -234,16 +234,21 @@ namespace Gamla.Logic
         
         static void OpenTicketShop()
         {
-            if (!ValidateUserAccess(false)) {
-                return;
-            }
-            
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TicketShopWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<TicketShopWindow>();
-            CheckStack(window);
-            
-            window.Show();
+            FeatureValidationManager.ValidateFeature(false, true, true, (validated) =>
+            {
+                if (!validated) return;
+
+                if (_windowStack.Peek().name == "TicketShopWindow(Clone)")
+                    return;
+
+                var window =
+                    GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/TicketShopWindow"),
+                        GamlaResourceManager.windowsContainer).GetComponent<TicketShopWindow>();
+                CheckStack(window);
+
+                window.Show();
+
+            });
         }
         
         static void OpenResetName()
@@ -352,7 +357,7 @@ namespace Gamla.Logic
             window.Init(LocalState.currentGame.battles);
         }
         
-        static void OpenTournamentList(ServerTournamentModel tournament)
+        public static void OpenTournamentList(ServerTournamentModel tournament)
         {
             //TournamentStartWindow
             bool isFirstTournament = !tournament.isJoined;// tournament.participants.Find(p => p.id == LocalState.currentUser.uid) == null;//.matches.Find(m => m.players != null && m.Any(p => p.user_id == LocalState.currentUser.uid)) == null;
@@ -364,11 +369,12 @@ namespace Gamla.Logic
                         GamlaResourceManager.windowsContainer).GetComponent<TournamentStartWindow>();
                 window.Init(tournament, () =>
                 {
-                    if (!ValidateUserAccess()) {
-                        return;
-                    }
-                    
-                    ServerCommand.JoinTournament(tournament.id);
+                    FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
+                    {
+                        if (validated) {
+                            ServerCommand.JoinTournament(tournament.id);
+                        }
+                    });
                 });
                 CheckStack(window);
                 window.Show();
@@ -413,49 +419,45 @@ namespace Gamla.Logic
 
         static void OpenCreateTournamentWindow()
         {
-            if (!ValidateUserAccess()) {
-                return;
-            }
-            
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/CreateTournamentWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<CreateTournamentWindow>();
-            window.onCreateTournament += (model, callback) => ServerCommand.CreateTournament(model, callback);
-            CheckStack(window);
-            window.Show();
+            FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
+            {
+                if (!validated) return;
+
+                var window =
+                    GameObject.Instantiate(
+                        GamlaResourceManager.GamlaResources.GetResource("Windows/CreateTournamentWindow"),
+                        GamlaResourceManager.windowsContainer).GetComponent<CreateTournamentWindow>();
+                window.onCreateTournament += (model, callback) => ServerCommand.CreateTournament(model, callback);
+                CheckStack(window);
+                window.Show();
+            });
         }
 
-        public static bool ValidateUserAccess(bool checkLevel = true)
+        public static void OpenBirthDateWindow(Action<int> result)
         {
-            if (LocalState.currentUser.guest) {
-                OpenSimpleWarningWindow(GUIWarningType.GuestsUnavailable, null, () => OpenInGameSignUp());
-                return false;
-            }
+            var window = InstatiateWindow<BirthDateWindow>();
+            window.Show();
 
-            if (!checkLevel) {
-                return true;
-            }
-            
-            var level = LocalState.currentUser.games?.Find(g => g.id == ClientManager.gameId);
-            if (level == null || level.level < 2) {
-                OpenSimpleWarningWindow(GUIWarningType.LowLevel);
-                return false;
-            }
-            return true;
+            window.OnAgeAccept += (age) =>
+            {
+                result?.Invoke(age);
+            };
         }
-        
+
         static void OpenJoinTournamentWindow()
         {
-            if (!ValidateUserAccess()) {
-                return;
-            }
-            
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/PrivateTournamentCodeWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<PrivateTournamentCodeWindow>();
-            window.onPromoCodeClick += ServerCommand.JoinPrivateTournament;
-            CheckStack(window);
-            window.Show();
+            FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
+            {
+                if (!validated) return;
+
+                var window =
+                    GameObject.Instantiate(
+                        GamlaResourceManager.GamlaResources.GetResource("Windows/PrivateTournamentCodeWindow"),
+                        GamlaResourceManager.windowsContainer).GetComponent<PrivateTournamentCodeWindow>();
+                window.onPromoCodeClick += ServerCommand.JoinPrivateTournament;
+                CheckStack(window);
+                window.Show();
+            });
         }
         
         static void AttachReferralCodeWindow()
@@ -641,13 +643,24 @@ namespace Gamla.Logic
                return;
            }
            
-           if (info.entry.type == CurrencyType.USD && !ValidateUserAccess()) {
+           if (info.entry.type != CurrencyType.USD ) {
+               OpenSearchOpponentsInternal(info);
                return;
            }
 
-           var window = GameObject.Instantiate(
-               GamlaResourceManager.GamlaResources.GetResource("Windows/SearchingOpponentsWindow"),
-                   GamlaResourceManager.windowsContainer).GetComponent<SearchingOpponentsWindow>();
+           FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
+           {
+               if (validated) {
+                   OpenSearchOpponentsInternal(info);
+               }
+           });
+       }
+       
+        static void OpenSearchOpponentsInternal(BattleInfo info)
+        {
+            var window = GameObject.Instantiate(
+                GamlaResourceManager.GamlaResources.GetResource("Windows/SearchingOpponentsWindow"),
+                GamlaResourceManager.windowsContainer).GetComponent<SearchingOpponentsWindow>();
             window.InitBattleInfo(info);
             window.SetCurrentUser(LocalState.currentUser);
             window.onPlayGameClick += ServerCommand.TryPlayGame;
@@ -729,17 +742,19 @@ namespace Gamla.Logic
 
         static void OpenWithdrawWindow()
         {
-            if (!ValidateUserAccess(false)) {
-                return;
-            }
-            
-            var window =
-                GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/WithdrawWindow"),
-                    GamlaResourceManager.windowsContainer).GetComponent<WithdrawWindow>();
-            window.onAddWithdraClick += OpenAddWithdrawWindow;
-            window.onWithdrawClick += ServerCommand.Withdraw;
-            CheckStack(window);
-            window.Show();
+            FeatureValidationManager.ValidateFeature(false, true, true, (validated) =>
+            {
+                if (!validated) return;
+                
+                var window =
+                    GameObject.Instantiate(GamlaResourceManager.GamlaResources.GetResource("Windows/WithdrawWindow"),
+                        GamlaResourceManager.windowsContainer).GetComponent<WithdrawWindow>();
+                window.onAddWithdraClick += OpenAddWithdrawWindow;
+                window.onWithdrawClick += ServerCommand.Withdraw;
+                CheckStack(window);
+                window.Show();
+
+            });
         }
 
         static void OpenAddWithdrawWindow()

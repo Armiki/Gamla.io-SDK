@@ -4809,6 +4809,7 @@ MonoBehaviour:
   _animationPatternType: 2
   _animationContent: {fileID: 5141838698801913355}
   _fitSafeArea: 1
+  _isShowTopBar: 0
   _close: {fileID: 4068755381490545173}
   _user: {fileID: 5926542972122232456}
   _flag: {fileID: 8190677464985437277}
@@ -6923,6 +6924,7 @@ MonoBehaviour:
   _avatarUser: {fileID: 5271008861515076465}
   _nameUser: {fileID: 7924533480338436270}
   _button: {fileID: 0}
+  _flag: {fileID: 0}
 --- !u!114 &5515409646304047057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9349,6 +9351,10 @@ PrefabInstance:
     - target: {fileID: 3497538847143726076, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
       propertyPath: m_Text
       value: Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4938133115526184497, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
+      propertyPath: _localeKey
+      value: gamla.btn.battle
       objectReference: {fileID: 0}
     - target: {fileID: 7664335683942827084, guid: 5a474a023ee3442a39959c35637ff542, type: 3}
       propertyPath: m_Name

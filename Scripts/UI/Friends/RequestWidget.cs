@@ -10,6 +10,7 @@ namespace Gamla.UI
         [SerializeField] private UserProfileWidget _user;
         [SerializeField] private Button _addBtn;
         [SerializeField] private Button _cancelBtn;
+        [SerializeField] private Text _descriptionText;
         
         public RectTransform rect;
         private ServerPublicUser _data;
@@ -18,9 +19,16 @@ namespace Gamla.UI
         {
             _data = user;
             _user.Init(user);
-            if(isOutRequest)
+            if (isOutRequest)
+            {
                 _addBtn.gameObject.SetActive(false);
-            
+                _descriptionText.text = LocalizationManager.Text("gamla.widget.friend.request.to");
+            }
+            else
+            {
+                _descriptionText.text = LocalizationManager.Text("gamla.widget.friend.request.from");
+            }
+
             _addBtn.onClick.RemoveAllListeners();
             _addBtn.onClick.AddListener(() => ServerCommand.FriendsRequestAccept(user.id));
             
@@ -30,6 +38,7 @@ namespace Gamla.UI
                 ServerCommand.FriendsRequestReject(user.id);
                 Destroy(gameObject);
             });
+            
         }
     }
 }

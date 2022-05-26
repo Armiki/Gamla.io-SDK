@@ -117,6 +117,7 @@ namespace Gamla.Data
 
         public static GameAppInfo gameAppInfo;
         public static GameInfo currentGame = new GameInfo();
+        public static List<HistoryBattleInfo> battleHistoryList = new List<HistoryBattleInfo>();
 
         public static void ClearState()
         {
@@ -128,6 +129,8 @@ namespace Gamla.Data
             tournaments.Clear();
             pendingWindows.Clear();
             showingPendingWindow = false;
+            currentGame.battles.Clear();
+            battleHistoryList.Clear();
         }
     }
 

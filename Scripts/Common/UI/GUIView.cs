@@ -15,6 +15,7 @@ namespace Gamla.UI
         [SerializeField] private AnimationPatternType _animationPatternType;
         [SerializeField] private GameObject _animationContent;
         [SerializeField] bool _fitSafeArea = true;
+        [SerializeField] private bool _isShowTopBar = false;
 
         [SerializeField] private Button _close;
 
@@ -39,7 +40,7 @@ namespace Gamla.UI
             if (windowMode != WindowMode.None)
             {
                 GamlaResourceManager.tabBar.gameObject.SetActive(windowMode == WindowMode.Screen);
-                GamlaResourceManager.topBar.gameObject.SetActive(windowMode == WindowMode.Screen);
+                GamlaResourceManager.topBar.gameObject.SetActive(windowMode == WindowMode.Screen || _isShowTopBar);
             }
         }
 

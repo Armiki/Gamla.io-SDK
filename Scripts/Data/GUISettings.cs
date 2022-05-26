@@ -17,7 +17,7 @@ namespace Gamla.Data
 
         public List<FlagItem> storeIcons;
 
-        public List<FlagItem> flags;
+        public List<FlagItem> flags; // Todo: remove later
         
         public Sprite GetFlagByCurrentCulture()
         {

@@ -67,7 +67,7 @@ namespace Gamla.UI
         {
             if (_historyBattleInfo != null)
             {
-                var match = LocalState.currentGame.history.Find(m => m.matchId == _historyBattleInfo.matchId);
+                var match = LocalState.battleHistoryList.Find(m => m.matchId == _historyBattleInfo.matchId);
                 if (match != null)
                 {
                     Init(match, LocalState.currentUser);

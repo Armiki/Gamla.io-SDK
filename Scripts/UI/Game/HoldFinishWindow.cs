@@ -80,6 +80,7 @@ namespace Gamla.UI
                 }
                 
                 item.gift.SetActive(false);
+                item.winGO.SetActive(true);
             }
 
             if (_battleWidgets.FindAll(item => item.gift == null || item.gift.active).Count == 0)
