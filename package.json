@@ -5,6 +5,7 @@
   "unity": "2019.4",
   "description": "Gamla.io new game platform with real prizes. Boost your game. Give your players new multiplayer competition.",
   "dependencies": {
-    "com.unity.modules.unitywebrequest": "1.0.0"
+    "com.unity.modules.unitywebrequest": "1.0.0",
+    "com.unity.nuget.newtonsoft-json": "2.0.0"
   }
 }
