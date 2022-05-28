@@ -49,6 +49,7 @@ namespace Gamla.UI
         [SerializeField] private Text _tournamentSubStatus; // time / place
         [SerializeField] private Text _round; 
         [SerializeField] private AvatarComponent[] _tournamentPlayers;
+        [SerializeField] private Text _tournamentPlayerPlus;
         [SerializeField] private GameObject _morePlayersGO;
         [SerializeField] private Text _morePlayers;
         [SerializeField] private Text _tournamentEntryFee;
@@ -238,6 +239,11 @@ namespace Gamla.UI
                     _tournamentPlayers[i].Load(data.participants[i].image);
                 }
             }
+
+            if (data.players_count > 5)
+                _tournamentPlayerPlus.text = $"{data.players_count - 5}";
+            else 
+                _morePlayersGO.SetActive(false);
             
 
             _gameSkin.SetActive(false);

@@ -75,7 +75,10 @@ namespace Gamla.UI
 
         private void OnDestroy()
         {
-            _closeSequence?.Kill();
+            if (_closeSequence != null && _closeSequence.IsActive())
+            {
+                _closeSequence.Kill();
+            }
         }
     }
 }
