@@ -111,14 +111,13 @@ namespace Gamla.UI
             var columnWinner = Instantiate(_roundColumnPref, _contentRect);
             columnWinner.sizeDelta = new Vector2(994, tournament.players_count * 240);
             var winnerView = Instantiate(_winner, columnWinner);
-            winnerView.SetClear();
 
             _boundX = new Vector2(-994 * currentAwards.Count, 0);
             _contentBoundY = new Vector2(-200 * tournament.players_count + 1, -200);
 
             foreach (var match in tournament.matches)
             {
-                if(match.stage == 0)
+                if (match.stage == 0)
                     return;
 
                 var lastStage = match.stage - 1;
@@ -139,6 +138,19 @@ namespace Gamla.UI
                 }
                 else
                     pair.Clear();
+            }
+            
+            //Setup tournament winner
+            var winnerIndex = tournament.players_count / 2;
+            var winnerStage = tournament.matches.Find(m => m.stage == winnerIndex);
+            if (winnerStage != null && winnerStage.status == "finished")
+            { 
+                var winner = winnerStage.players.Find(p => p.user_id == winnerStage.winner_id); 
+                winnerView.SetWinner(winner);
+            }
+            else
+            {
+                winnerView.SetClear();
             }
 
             int playersInRound = tournament.players_count / 2;

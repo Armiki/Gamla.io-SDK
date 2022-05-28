@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Gamla.Data;
 
 namespace Gamla.UI
 {
@@ -12,6 +13,12 @@ namespace Gamla.UI
         {
             _user.Clear();
             _userPoints.text = "";
+        }
+        
+        public void SetWinner(ServerPlayerMatch user)
+        {
+            _user.Init(user);
+            _userPoints.text = user.score;
         }
     }
 }

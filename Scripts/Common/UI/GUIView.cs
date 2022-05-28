@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using DG.Tweening;
 using Gamla.Logic;
 using UnityEngine.UI;
 
@@ -22,6 +23,9 @@ namespace Gamla.UI
         public WindowMode windowMode { get { return _windowMode; } }
 
         protected CanvasGroup _canvasGroup;
+
+        private Sequence _showTween;
+        
         protected virtual void Awake()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
@@ -47,6 +51,9 @@ namespace Gamla.UI
         public virtual void OnDestroy()
         {
             GamlaService.OnMatchStarted.Del(OnMatchStart);
+            if (_showTween != null && _showTween.active) {
+                _showTween.Kill();
+            }
         }
 
         public void ClosePublic()
@@ -106,10 +113,10 @@ namespace Gamla.UI
                 switch (_animationPatternType)
                 {
                     case AnimationPatternType.WinShiftBottom:
-                        AnimationPattern.WindowShiftFromBottom(_animationContent.transform);
+                        _showTween = AnimationPattern.WindowShiftFromBottom(_animationContent.transform);
                         break;
                     case AnimationPatternType.WinShiftLeft:
-                        AnimationPattern.WindowShiftFromLeft(_animationContent.transform);
+                        _showTween = AnimationPattern.WindowShiftFromLeft(_animationContent.transform);
                         break;
                     default:
                         break;

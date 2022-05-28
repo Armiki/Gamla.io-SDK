@@ -19,6 +19,8 @@ namespace Gamla.UI
         [SerializeField] private float angelMultiply = 1;
         [SerializeField] private RawImage rawImage;
 
+        private Sequence _sequence;
+        
         public string recolorFilter
         {
             set => recolorField = value;
@@ -122,12 +124,17 @@ namespace Gamla.UI
         {
             if (animRect != null)
             {
-                Sequence sequence = DOTween.Sequence();
-                sequence.Append(animRect.transform.DOLocalMoveX(-1 * animRect.rect.width, 2))
+                _sequence = DOTween.Sequence();
+                _sequence.Append(animRect.transform.DOLocalMoveX(-1 * animRect.rect.width, 2))
                     .Append(animRect.transform.DOLocalMoveX(0, 2))
                     .SetLoops(-1);
-                sequence.Play();
+                _sequence.Play();
             }
+        }
+
+        private void OnDestroy()
+        {
+            _sequence?.Kill();
         }
     }
 }

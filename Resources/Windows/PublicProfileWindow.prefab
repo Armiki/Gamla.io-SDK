@@ -6924,7 +6924,7 @@ MonoBehaviour:
   _avatarUser: {fileID: 5271008861515076465}
   _nameUser: {fileID: 7924533480338436270}
   _button: {fileID: 0}
-  _flag: {fileID: 0}
+  _flag: {fileID: 4305551335306710103}
 --- !u!114 &5515409646304047057
 MonoBehaviour:
   m_ObjectHideFlags: 0

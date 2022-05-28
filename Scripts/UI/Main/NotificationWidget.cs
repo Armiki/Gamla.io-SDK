@@ -13,6 +13,7 @@ namespace Gamla.UI
         [SerializeField] private Button _close;
 
         private ServerNotification _notification;
+        private Sequence _closeSequence;
 
         public void Start()
         {
@@ -32,9 +33,9 @@ namespace Gamla.UI
 
         void Close()
         {
-            Sequence sequence = DOTween.Sequence();
-            sequence.AppendInterval(3).OnComplete(() => _anim.DOLocalMoveY(500, 1f).OnComplete(ImmidiatelyClose));
-            sequence.Play();
+            _closeSequence = DOTween.Sequence();
+            _closeSequence.AppendInterval(3).OnComplete(() => _anim.DOLocalMoveY(500, 1f).OnComplete(ImmidiatelyClose));
+            _closeSequence.Play();
         }
 
         void ImmidiatelyClose()
@@ -70,6 +71,11 @@ namespace Gamla.UI
                     case 19: GamlaResourceManager.tabBar.SelectPlay(); break;//  UIMapController.Clear(); break;
                 }
             }
+        }
+
+        private void OnDestroy()
+        {
+            _closeSequence?.Kill();
         }
     }
 }
