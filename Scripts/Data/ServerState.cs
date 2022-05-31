@@ -347,7 +347,6 @@ namespace Gamla.Data
     [Serializable]
     public class ServerStartMatchInfo
     {
-        public long id;
         public string game_id;
         public string bet;
         public string currency;

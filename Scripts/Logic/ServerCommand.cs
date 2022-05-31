@@ -898,12 +898,6 @@ namespace Gamla.Logic
 
         public static void TryPlayTournament(long matchId, ServerTournamentModel tournament)
         {
-            string data = JsonUtility.ToJson(new ServerStartMatchInfo()
-            {
-                id = matchId,
-                game_id = ClientManager.gameId + ""
-            });
-            
             LocalState.currentMatch = null;
             LocalState.currentTournament = tournament;
             GamlaService.OnMatchStarted.Push(matchId + "", "", false);
@@ -945,7 +939,7 @@ namespace Gamla.Logic
             }, e =>
             {
 //                GameResourceManager.tabBar.SelectPlay();
-//                UIMapController.OpenSimpleErrorWindow(e.message);
+                 UIMapController.OpenSimpleErrorWindow(e.message);
             });
         }
 
@@ -957,8 +951,14 @@ namespace Gamla.Logic
                 GetOrUpdateMatches();
             }, e =>
             {
-                if(e.code == 500)
+                if (e.code == 500)
+                {
                     ClientManager.RemoveMatchScore(data);
+                }
+                else
+                {
+                    UIMapController.OpenSimpleErrorWindow(e.message);
+                }
             });
         }
         
@@ -983,6 +983,7 @@ namespace Gamla.Logic
             }, e =>
             {
                 Debug.LogError($"Error on finish turnir game: {e.message}");
+                UIMapController.OpenSimpleErrorWindow(e.message);
             });
             
         }
@@ -1330,7 +1331,10 @@ namespace Gamla.Logic
                 to_user = toUser.ToString()
             });
             
-            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/requests/create", data, result => { }, e => { });
+            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/requests/create", data, result => { }, e =>
+            {
+                UIMapController.OpenSimpleErrorWindow(e.message);
+            });
         }
         
         public static void RejectRequest(long requestId)
@@ -1340,7 +1344,10 @@ namespace Gamla.Logic
                 match_request_id = requestId
             });
             
-            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/requests/reject", data, result => { }, e => { });
+            ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/requests/reject", data, result => { }, e =>
+            {
+                UIMapController.OpenSimpleErrorWindow(e.message);
+            });
         }
 
         public static void AcceptRequest(long requestId)
