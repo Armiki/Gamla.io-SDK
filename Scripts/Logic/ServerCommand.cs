@@ -941,6 +941,7 @@ namespace Gamla.Logic
             ClientManager.InvokeEvent<EmptyModel>(LocalState.token, "matches/play", data, matches =>
             {
                 ClientManager.RemoveMatchScore(data);
+                ClientManager.UpdateMatchesLazy();
             }, e =>
             {
 //                GameResourceManager.tabBar.SelectPlay();

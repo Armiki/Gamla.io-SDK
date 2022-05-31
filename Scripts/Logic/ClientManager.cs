@@ -314,6 +314,16 @@ namespace Gamla.Logic
             PlayerPrefs.SetString("temp", "");
             PlayerPrefs.Save();
         }
+
+        public static void UpdateMatchesLazy()
+        {
+            _instance.Invoke("UpdateMatches", 2);
+        }
+
+        void UpdateMatches()
+        {
+            ServerCommand.GetOrUpdateMatches();
+        }
     }
 
     [Serializable]

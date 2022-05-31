@@ -1052,6 +1052,13 @@ namespace Gamla.Logic
             while (_windowStack.Count > 0)
             {
                 var win = _windowStack.Peek();
+                if (win == null)
+                {
+                    _windowStack.Clear();
+                    Debug.LogError("Windows in stack corrupted");
+                    return;
+                }
+                
                 win.Hide();
                 DestroyCurrentWindow();
             }
