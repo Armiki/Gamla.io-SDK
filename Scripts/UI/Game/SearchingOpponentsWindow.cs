@@ -53,6 +53,10 @@ namespace Gamla.UI
 
         private void OnCreateMatch(ServerMatchStart match)
         {
+            if (this == null) {
+                return;
+            }
+
             if (match != null)
             {
                 if (match.match.players.Count > 1)

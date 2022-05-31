@@ -259,6 +259,9 @@ namespace Gamla.Logic
         {
             var source = PlayerPrefs.GetString("matches", "");
             Matches matches = JsonUtility.FromJson<Matches>(source);
+            if (matches == null) {
+                matches = new Matches();
+            }
             matches.datas.Add(data);
             PlayerPrefs.SetString("matches", JsonUtility.ToJson(matches));
             PlayerPrefs.Save();
@@ -268,6 +271,9 @@ namespace Gamla.Logic
         {
             var source = PlayerPrefs.GetString("matches", "");
             Matches matches = JsonUtility.FromJson<Matches>(source);
+            if (matches == null) {
+                return;
+            }
             matches.datas.Remove(data);
             PlayerPrefs.SetString("matches", JsonUtility.ToJson(matches));
             PlayerPrefs.Save();
