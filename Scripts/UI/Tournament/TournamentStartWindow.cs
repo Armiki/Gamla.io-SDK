@@ -39,7 +39,11 @@ namespace Gamla.UI
             _playerCount.text = tournament.players_count + "";
             
             _playBtn.onClick.RemoveAllListeners();
-            _playBtn.onClick.AddListener(playBtn.Invoke);
+            _playBtn.onClick.AddListener(() =>
+            {
+                playBtn.Invoke();
+                _playBtn.interactable = false;
+            });
             
             _entryCurrencyBadge.Init(tournament.currency == "Z" ? CurrencyType.Z : CurrencyType.USD);
             _entryCurrencyValue.text = tournament.entry_cost.ToString();
