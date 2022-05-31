@@ -1092,7 +1092,16 @@ namespace Gamla.Logic
 
         public static void GetUserPublic(long userId, Action<ServerPublicUser> callback)
         {
-            ClientManager.GetData<ServerPublicUser>(LocalState.token, "users/" + userId, callback, e => { });
+            if (LocalState.localUserData.ContainsKey(userId))
+            {
+                callback?.Invoke(LocalState.localUserData[userId]);
+                return;
+            }
+            ClientManager.GetData<ServerPublicUser>(LocalState.token, "users/" + userId, result =>
+            {
+                LocalState.localUserData.TryAdd(userId, result);
+                callback?.Invoke(result);
+            }, e => { });
         }
         
         public static void GetPublicProfile(long userId, Action<ServerPublicProfile> callback)

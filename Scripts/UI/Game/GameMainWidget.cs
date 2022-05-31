@@ -5,6 +5,7 @@ using Gamla.Logic;
 using Gamla.UI.Carousel;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Gamla.UI
 {
@@ -314,11 +315,24 @@ namespace Gamla.UI
                 }
             });
 
-            ServerCommand.GetUserPublic(toUser ? request.from_user : request.to_user, u =>
-                {
-                    if(_userName != null && _userName.gameObject != null)
-                        _userName.text = u.nickname;
-                });
+
+            var userId = toUser ? request.from_user : request.to_user;
+            _userName.text = "";
+            ServerCommand.GetUserPublic(userId, u =>
+            {
+                if(_userName != null && _userName.gameObject != null)
+                    _userName.text = u.nickname;
+            });
+            
+            // //TODO: remove that shit
+            // EventManager.DelayEvent.Add("loadProfile_" + Random.Range(100,50000), () =>
+            // {
+            //     ServerCommand.GetUserPublic(userId, u =>
+            //     {
+            //         if(_userName != null && _userName.gameObject != null)
+            //             _userName.text = u.nickname;
+            //     });
+            // }, Random.Range(100,500));
             
             _entryFee.text = request.bet + "";// data.battleInfo.entry.amount.ToString();
             _timeLeftCount.text = "";

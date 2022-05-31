@@ -19,7 +19,8 @@ namespace Gamla.Data
         public static List<ServerTournamentModel> tournaments = new List<ServerTournamentModel>();
         public static SaveBattleModel saveBattleModel = new SaveBattleModel();
         public static GameAppListResult gameApplist = new GameAppListResult();
-        
+        public static Dictionary<long, ServerPublicUser> localUserData = new Dictionary<long, ServerPublicUser>();
+
         public static List<PendingWindow> pendingWindows = new List<PendingWindow>();
         public static bool showingPendingWindow;
 
