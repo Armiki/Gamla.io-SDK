@@ -587,6 +587,7 @@ MonoBehaviour:
   _trophieTxt: {fileID: 6460065354637019055}
   _playersTxt: {fileID: 3471121283926887081}
   _playGame: {fileID: 6166448861811073501}
+  _canvasGroup: {fileID: 9034828835350507861}
   rect: {fileID: 1295232090799874921}
 --- !u!114 &3965552907084226913
 MonoBehaviour:

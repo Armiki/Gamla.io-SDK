@@ -25,6 +25,8 @@ namespace Gamla.UI
         [SerializeField] private Text _playersTxt;
         [SerializeField] private Button _playGame;
 
+        [SerializeField] private CanvasGroup _canvasGroup;
+
         public RectTransform rect;
         
         public void Init(BattleInfo data)
@@ -56,6 +58,11 @@ namespace Gamla.UI
                 ? "softBackColorSecondary"
                 : "hardBackColorSecondary";
             _winLogoBack.Recolor();
+        }
+
+        public void SetInteractible(bool interactible)
+        {
+            _canvasGroup.interactable = interactible;
         }
     }
 }

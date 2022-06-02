@@ -456,9 +456,8 @@ namespace Gamla.Logic
             
             //UIMapController.OpenSignUp();
             UIMapController.OpenSignUp();
-            PlayerPrefs.DeleteKey("email");
-            PlayerPrefs.DeleteKey("password");
-            PlayerPrefs.DeleteKey("battle_saves");
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
             LocalState.ClearState();
         }
         
@@ -951,14 +950,19 @@ namespace Gamla.Logic
                 GetOrUpdateMatches();
             }, e =>
             {
-                if (e.code == 500)
+                if (e.code == 500) // Scores already submitted 
                 {
                     ClientManager.RemoveMatchScore(data);
+                    return;
                 }
-                else
+                
+                if (e.code == 422) // Submit scores from another 
                 {
-                    UIMapController.OpenSimpleErrorWindow(e.message);
+                    ClientManager.RemoveMatchScore(data);
+                    return;
                 }
+
+                UIMapController.OpenSimpleErrorWindow(e.message);
             });
         }
         
@@ -1099,7 +1103,9 @@ namespace Gamla.Logic
             }
             ClientManager.GetData<ServerPublicUser>(LocalState.token, "users/" + userId, result =>
             {
-                LocalState.localUserData.TryAdd(userId, result);
+                if (!LocalState.localUserData.ContainsKey(userId)) {
+                    LocalState.localUserData.Add(userId, result);
+                }
                 callback?.Invoke(result);
             }, e => { });
         }

@@ -104,7 +104,7 @@ namespace Gamla.UI
                     {
                         id = -1,
                         notification_id = -1,
-                        short_text = LocalizationManager.Text("gamla.notification.rematch.request") //
+                        short_text = LocalizationManager.Text("gamla.widget.rematch.sended.notification")
                     });
 
                     SetContentHeight(false);

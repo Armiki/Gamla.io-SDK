@@ -653,6 +653,18 @@ namespace Gamla.Logic
                if (validated) {
                    OpenSearchOpponentsInternal(info);
                }
+               else
+               {
+                   var windowObject = GetWindow("NewGameWindow");
+                   if (windowObject != null)
+                   {
+                       var newGameWindow = windowObject as NewGameWindow;
+                       if (newGameWindow != null)
+                       {
+                           newGameWindow.EnableButtons(true);
+                       }
+                   }
+               }
            });
        }
        

@@ -60,6 +60,20 @@ namespace Gamla.UI
             });
         }
 
+        public override void OnEnable()
+        {
+            base.OnEnable();
+            EnableButtons(true);
+        }
+        
+        public void EnableButtons(bool enable)
+        {
+            foreach (var button in _battleWidgets)
+            {
+                button.SetInteractible(enable);
+            }
+        }
+
         void SetSimpleData(List<BattleInfo> battles)
         {
             foreach (var existTournament in _battleWidgets)
@@ -76,6 +90,11 @@ namespace Gamla.UI
             var softBattles = battles.Where(x => x.type == BattleType.SoftPVP).ToList();
 
             //var t = FillContent(_tournamentTitle.gameObject, _tournamentContent, _tournamentLayoutElement, tournaments);
+            if (_hardPvpTitle == null || _softPvpTitle == null || _allContent == null)
+            {
+                return;
+            }
+
             var h = FillContent(_hardPvpTitle.gameObject, _hardPvpContent, _hardPvpLayoutElement, hardBattles);
             var s = FillContent(_softPvpTitle.gameObject, _softPvpContent, _softPvpLayoutElement, softBattles);
 
@@ -103,7 +122,11 @@ namespace Gamla.UI
             {
                 var item = Instantiate(_battlePrefab, content);
                 item.Init(data);
-                item.onPlayGame += () => onPlayGameClick?.Invoke(data);
+                item.onPlayGame += () =>
+                {
+                    EnableButtons(false);
+                    onPlayGameClick?.Invoke(data);
+                };
                 _battleWidgets.Add(item);
 
                 if (TutorialManager.Instance.CurrentStepName == "tutorial-1-2" && data.type == BattleType.SoftPVP && data.entry.type == CurrencyType.Z &&
