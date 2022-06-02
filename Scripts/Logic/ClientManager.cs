@@ -12,7 +12,7 @@ namespace Gamla.Logic
     {
         public static bool isInited = false;
         public static int gameId = 0;
-        public static readonly string version = "0.9.21";
+        public static readonly string version = "0.9.22";
         private readonly string _uri = "https://gamla.io/api";
 
         private static ClientManager _instance;

@@ -60,7 +60,12 @@ namespace Gamla.Logic
                 int birthday = -1;
                 if (LocalState.currentUser.innerUserInfo.birthday != null)
                 {
-                    if (DateTime.TryParse(LocalState.currentUser.innerUserInfo.birthday, out var data))
+                    if (LocalState.currentUser.innerUserInfo.birthday.Length > 0 &&
+                        LocalState.currentUser.innerUserInfo.birthday[0] == '-') //Todo: fix it on server -000001-11-29T21:29:43.000000Z
+                    {
+                        birthday = 88;
+                    }
+                    else if (DateTime.TryParse(LocalState.currentUser.innerUserInfo.birthday, out var data))
                     {
                         birthday = DateTime.Now.Year - data.Year;
                     }

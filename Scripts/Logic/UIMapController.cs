@@ -417,11 +417,28 @@ namespace Gamla.Logic
             window.Show();
         }
 
+        static void ResetProfileButtons()
+        {
+            var windowObject = GetWindow("ProfileWindow");
+            if (windowObject != null)
+            {
+                var newGameWindow = windowObject as ProfileWindow;
+                if (newGameWindow != null)
+                {
+                    newGameWindow.EnableTournamentButtons(true);
+                }
+            }
+        }
+        
         static void OpenCreateTournamentWindow()
         {
             FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
             {
-                if (!validated) return;
+                if (!validated)
+                {
+                    ResetProfileButtons();
+                    return;
+                }
 
                 var window =
                     GameObject.Instantiate(
@@ -448,7 +465,11 @@ namespace Gamla.Logic
         {
             FeatureValidationManager.ValidateFeature(true, true, true, (validated) =>
             {
-                if (!validated) return;
+                if (!validated)
+                {
+                    ResetProfileButtons();
+                    return;
+                }
 
                 var window =
                     GameObject.Instantiate(
@@ -457,6 +478,7 @@ namespace Gamla.Logic
                 window.onPromoCodeClick += ServerCommand.JoinPrivateTournament;
                 CheckStack(window);
                 window.Show();
+                window.onClosed += (view) => { ResetProfileButtons(); };
             });
         }
         

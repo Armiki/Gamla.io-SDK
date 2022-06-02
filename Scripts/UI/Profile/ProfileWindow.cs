@@ -92,10 +92,18 @@ namespace Gamla.UI
             _showMoreTrophies.onClick.AddListener(() => onShowMoreTrophieClick?.Invoke());
             
             _createTournamentBtn.onClick.RemoveAllListeners();
-            _createTournamentBtn.onClick.AddListener(() => onCreateTournamentClick?.Invoke());
+            _createTournamentBtn.onClick.AddListener(() =>
+            {
+                _createTournamentBtn.interactable = false;
+                onCreateTournamentClick?.Invoke();
+            });
             
             _joinTournamentBtn.onClick.RemoveAllListeners();
-            _joinTournamentBtn.onClick.AddListener(() => onJoinTournamentClick?.Invoke());
+            _joinTournamentBtn.onClick.AddListener(() =>
+            {
+                _joinTournamentBtn.interactable = false;
+                onJoinTournamentClick?.Invoke();
+            });
             
             _referralCodeBtn.onClick.RemoveAllListeners();
             _referralCodeBtn.onClick.AddListener(() => onAttachReferral?.Invoke());
@@ -120,6 +128,12 @@ namespace Gamla.UI
             EventManager.OnProfileUpdate.Subscribe(onRequestNewData);
 
             _refreshScroll.onRefresh += OnrefreshScroll;
+        }
+
+        public override void OnEnable()
+        {
+            base.OnEnable();
+            EnableTournamentButtons(true);
         }
 
         private void OnrefreshScroll()
@@ -161,6 +175,12 @@ namespace Gamla.UI
 
             _signUpGO.SetActive(current_user.guest);
             
+        }
+
+        public void EnableTournamentButtons(bool active)
+        {
+            _createTournamentBtn.interactable = active;
+            _joinTournamentBtn.interactable = active;
         }
 
         private void UpdateTrophies(ServerTrophies source)

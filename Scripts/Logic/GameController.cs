@@ -196,6 +196,11 @@ namespace Gamla.Logic
                     
                     for (int i = _notifications.Count - 1; i >= 0; i--)
                     {
+                        while (LocalState.isInMatch)
+                        {
+                            yield return new WaitForSecondsRealtime(1f);
+                        }
+                        
                         if (IsSimpleNotification(_notifications[i].notification_id))
                         {
                             ShowSimpleNotification(i);
